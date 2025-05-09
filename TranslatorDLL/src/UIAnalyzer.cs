@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
+using Debug = UnityEngine.UnityEngine.Debug;
 
 namespace GreyHackTranslator
 {
