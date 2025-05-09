@@ -32,5 +32,6 @@
   <ItemGroup>
     <Compile Include="src\**\*.cs" />
     <Compile Remove="Injector.cs" />
+	<Compile Include="src\DllExports.cs" />
   </ItemGroup>
 </Project>
