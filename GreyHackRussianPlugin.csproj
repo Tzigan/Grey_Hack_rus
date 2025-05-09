@@ -1,34 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GreyHackRussianPlugin</AssemblyName>
     <Description>Русификатор для игры Grey Hack</Description>
     <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>9.0</LangVersion>
-    <RestoreAdditionalProjectSources>
-      https://api.nuget.org/v3/index.json
-    </RestoreAdditionalProjectSources>
+    <LangVersion>latest</LangVersion>
+
+    <!-- Отключение добавления framework к пути -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+
+    <!-- Имя папки плагина -->
+    <PluginFolderName>GreyHackRussian</PluginFolderName>
+
+    <!-- Изменение выходного пути на подпапку с именем плагина -->
+    <OutputPath>bin\$(Configuration)\BepInEx\plugins\</OutputPath>
+    
+    
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- Настройки для атрибутов сборки -->
+    <Authors>Tzygan</Authors>
+    <Copyright>Copyright © 2025</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
-    <PackageReference Include="BepInEx.Core" Version="5.*" />
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
-    <PackageReference Include="UnityEngine.Modules" Version="2022.3.5" IncludeAssets="compile" />
-  </ItemGroup>
-  
-  <ItemGroup>
+    <!-- Обновлено: все BepInEx библиотеки находятся в папке core -->
+    <Reference Include="BepInEx.Core">
+      <HintPath>libs\BepInEx.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.Unity.Common">
+      <HintPath>libs\BepInEx.Unity.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.Unity.Mono">
+      <HintPath>libs\BepInEx.Unity.Mono.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>libs\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>libs\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>libs\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>libs\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>D:\Games\steamapps\common\Grey Hack\Grey Hack_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>libs\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="src\Translation\russian_translation.txt">
+    <None Update="Translation\russian_translation.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <!-- Настраиваем папку назначения -->
+      <DestinationSubDirectory>Translation\</DestinationSubDirectory>
+    </None>
+    <None Include="README.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <!-- Обновляем целевую папку для копирования файлов -->
+  <Target Name="CopyPlugin" AfterTargets="Build" Condition="'$(GamePath)' != ''">
+    <Message Text="Copying plugin to game directory..." Importance="high" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)\BepInEx\plugins\$(PluginFolderName)" />
+    <Copy SourceFiles="$(ProjectDir)README.md" DestinationFolder="$(GamePath)\BepInEx\plugins\$(PluginFolderName)" />
+  </Target>
 </Project>
