@@ -5,7 +5,7 @@
     <Description>Русификатор для игры Grey Hack</Description>
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <!-- Выходной путь сборки -->
     <OutputPath>bin\$(Configuration)\BepInEx\plugins\</OutputPath>
   </PropertyGroup>
