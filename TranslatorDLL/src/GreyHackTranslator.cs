@@ -1,9 +1,8 @@
-﻿using HarmonyLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
+using HarmonyLib;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -15,79 +14,138 @@ namespace GreyHackTranslator
         private static bool isInitialized = false;
         private static string translationFilePath = "russian_translation.txt";
         private static string logPath = "translator_log.txt";
-
-        // Добавим константу для отладки
+        private static readonly string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private const string DEBUG_PREFIX = "[GH_RUS] ";
 
-        // Точка входа для инжектора
+        // Добавляем метод для экстренного логирования на рабочий стол
+        public static void EmergencyLog(string message)
+        {
+            try
+            {
+                File.AppendAllText(Path.Combine(desktopPath, "greyhack_injector_debug.log"),
+                    $"[{DateTime.Now}] {message}\n");
+            }
+            catch (Exception ex)
+            {
+                // Если даже это не работает, попробуем создать файл в папке с игрой
+                try
+                {
+                    File.AppendAllText("emergency_debug.log",
+                        $"[{DateTime.Now}] FAILED TO WRITE TO DESKTOP: {ex.Message}\n" +
+                        $"[{DateTime.Now}] ORIGINAL MESSAGE: {message}\n");
+                }
+                catch { }
+            }
+        }
+
+        // Точка входа для инжектора с публичным модификатором и атрибутом
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        // Публичный метод инициализации для упрощения вызова
         public static void Init()
+        {
+            EmergencyLog($"DLL загружена в процесс в {DateTime.Now}");
+            InitializeTranslator();
+        }
+
+        // Основной метод инициализации
+        private static void InitializeTranslator()
         {
             if (isInitialized) return;
 
             try
             {
-                // Добавляем отладочный вывод
-                Debug.Log($"{DEBUG_PREFIX}Инициализация переводчика...");
+                EmergencyLog("Начало инициализации переводчика");
                 Log("Инициализация переводчика...");
+
+                // Информация о среде
+                EmergencyLog($"Текущая директория: {Directory.GetCurrentDirectory()}");
+                EmergencyLog($"Путь к сборке: {Assembly.GetExecutingAssembly().Location}");
 
                 // Получаем информацию о версии Harmony
                 string harmonyVersion = typeof(Harmony).Assembly.GetName().Version.ToString();
-                Debug.Log($"{DEBUG_PREFIX}Версия Harmony: {harmonyVersion}");
+                EmergencyLog($"Версия Harmony: {harmonyVersion}");
                 Log($"Версия Harmony: {harmonyVersion}");
 
                 // Выводим текущую директорию и путь к файлу перевода
                 string currentDir = Directory.GetCurrentDirectory();
-                Debug.Log($"{DEBUG_PREFIX}Текущая директория: {currentDir}");
-                Debug.Log($"{DEBUG_PREFIX}Путь к файлу перевода: {Path.GetFullPath(translationFilePath)}");
-                Log($"Текущая директория: {currentDir}");
+                EmergencyLog($"Текущая директория: {currentDir}");
+                EmergencyLog($"Путь к файлу перевода: {Path.GetFullPath(translationFilePath)}");
+
+                try
+                {
+                    // Попытка использовать Debug.Log
+                    Debug.Log($"{DEBUG_PREFIX}DLL загружена и инициализируется");
+                    EmergencyLog("Debug.Log успешно вызван");
+                }
+                catch (Exception ex)
+                {
+                    EmergencyLog($"Ошибка при вызове Debug.Log: {ex.Message}");
+                }
 
                 // Загружаем переводы из имеющегося файла переводов
                 LoadTranslations();
 
                 // Информация о загруженных сборках
-                Debug.Log($"{DEBUG_PREFIX}Загруженные сборки:");
+                EmergencyLog("Загруженные сборки:");
                 foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    Debug.Log($"{DEBUG_PREFIX}  - {assembly.GetName().Name} v{assembly.GetName().Version}");
+                    EmergencyLog($"  - {assembly.GetName().Name} v{assembly.GetName().Version}");
                 }
 
                 // Создаем экземпляр Harmony для патчинга
-                Debug.Log($"{DEBUG_PREFIX}Создаем экземпляр Harmony...");
+                EmergencyLog("Создаем экземпляр Harmony...");
                 var harmony = new Harmony("com.tzigan.greyhack.rus");
 
                 // Применяем все патчи в этой сборке
-                Debug.Log($"{DEBUG_PREFIX}Применяем патчи...");
-                harmony.PatchAll(Assembly.GetExecutingAssembly());
-                Debug.Log($"{DEBUG_PREFIX}Патчи успешно применены");
-                Log("Патчи успешно применены");
-
-                // Альтернативно, можно получить информацию о патчах через другой API
-                var patchedMethods = Harmony.GetAllPatchedMethods().ToList();
-                Debug.Log($"{DEBUG_PREFIX}Применено патчей к {patchedMethods.Count} методам");
-                Log($"Применено патчей к {patchedMethods.Count} методам");
-
-                foreach (var method in patchedMethods)
+                EmergencyLog("Применяем патчи...");
+                try
                 {
-                    Debug.Log($"{DEBUG_PREFIX}Патч к методу: {method.DeclaringType.Name}.{method.Name}");
-                    Log($"Патч к методу: {method.DeclaringType.Name}.{method.Name}");
+                    harmony.PatchAll(Assembly.GetExecutingAssembly());
+                    EmergencyLog("Патчи успешно применены");
+                }
+                catch (Exception ex)
+                {
+                    EmergencyLog($"Ошибка при применении патчей: {ex.Message}\n{ex.StackTrace}");
+                    if (ex.InnerException != null)
+                    {
+                        EmergencyLog($"Inner exception: {ex.InnerException.Message}\n{ex.InnerException.StackTrace}");
+                    }
                 }
 
-                Debug.Log($"{DEBUG_PREFIX}Переводчик успешно инициализирован");
+                // Анализ UI для отладки
+                try
+                {
+                    EmergencyLog("Поиск UI компонентов...");
+                    var allTexts = UnityEngine.Object.FindObjectsOfType<UnityEngine.UI.Text>();
+                    EmergencyLog($"Найдено {allTexts.Length} текстовых компонентов");
+
+                    int count = 0;
+                    foreach (var text in allTexts)
+                    {
+                        if (count++ < 10)
+                        {
+                            EmergencyLog($"Text[{count}]: '{text.text}' на объекте '{text.gameObject.name}'");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    EmergencyLog($"Ошибка при поиске UI компонентов: {ex.Message}");
+                }
+
+                EmergencyLog("Переводчик успешно инициализирован");
                 Log("Переводчик успешно инициализирован");
                 isInitialized = true;
             }
             catch (Exception ex)
             {
-                // Выводим ошибку в консоль Unity
-                Debug.LogError($"{DEBUG_PREFIX}Ошибка инициализации: {ex.Message}");
-                Debug.LogError($"{DEBUG_PREFIX}Stack trace: {ex.StackTrace}");
-
+                EmergencyLog($"Критическая ошибка инициализации: {ex.Message}\n{ex.StackTrace}");
                 if (ex.InnerException != null)
                 {
-                    Debug.LogError($"{DEBUG_PREFIX}InnerException: {ex.InnerException.Message}");
-                    Debug.LogError($"{DEBUG_PREFIX}InnerException stack trace: {ex.InnerException.StackTrace}");
+                    EmergencyLog($"Inner exception: {ex.InnerException.Message}\n{ex.InnerException.StackTrace}");
                 }
-
                 Log($"Ошибка инициализации: {ex.Message}\n{ex.StackTrace}");
             }
         }
@@ -99,7 +157,7 @@ namespace GreyHackTranslator
             {
                 if (File.Exists(translationFilePath))
                 {
-                    Debug.Log($"{DEBUG_PREFIX}Загрузка переводов из {translationFilePath}...");
+                    EmergencyLog($"Загрузка переводов из {translationFilePath}...");
                     string[] lines = File.ReadAllLines(translationFilePath);
                     int count = 0;
 
@@ -115,58 +173,62 @@ namespace GreyHackTranslator
                             translationDictionary[key] = value;
                             count++;
 
-                            // Выводим первые 10 переводов для отладки
-                            if (count <= 10)
+                            // Выводим первые 5 переводов для отладки
+                            if (count <= 5)
                             {
-                                Debug.Log($"{DEBUG_PREFIX}Загружен перевод: '{key}' -> '{value}'");
+                                EmergencyLog($"Загружен перевод: '{key}' -> '{value}'");
                             }
                         }
                     }
 
-                    Debug.Log($"{DEBUG_PREFIX}Загружено {count} строк перевода");
+                    EmergencyLog($"Загружено {count} строк перевода");
                     Log($"Загружено {count} строк перевода из {translationFilePath}");
                 }
                 else
                 {
-                    Debug.LogWarning($"{DEBUG_PREFIX}Файл перевода не найден: {Path.GetFullPath(translationFilePath)}");
+                    EmergencyLog($"Файл перевода не найден: {Path.GetFullPath(translationFilePath)}");
                     Log($"Файл перевода не найден: {Path.GetFullPath(translationFilePath)}");
 
                     // Создаем пустой файл перевода
                     File.WriteAllText(translationFilePath, "# Формат: оригинальный текст=переведенный текст\n");
-                    Debug.Log($"{DEBUG_PREFIX}Создан пустой файл перевода");
+                    EmergencyLog($"Создан пустой файл перевода");
                     Log("Создан пустой файл перевода");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"{DEBUG_PREFIX}Ошибка загрузки переводов: {ex.Message}");
-                Debug.LogError($"{DEBUG_PREFIX}Stack trace: {ex.StackTrace}");
+                EmergencyLog($"Ошибка загрузки переводов: {ex.Message}\n{ex.StackTrace}");
                 Log($"Ошибка загрузки переводов: {ex.Message}");
             }
         }
 
-        // Метод для перевода текста
+        // Метод для перевода текста - изменяем для наглядной отладки
         public static string TranslateText(string original)
         {
             if (string.IsNullOrEmpty(original)) return original;
 
+            // Добавляем префикс для визуального отслеживания работы патчей
+            string modifiedText = "[RUS] " + original;
+
+            // Если есть перевод в словаре, используем его
             if (translationDictionary.TryGetValue(original, out string translation))
             {
-                // Добавим сообщение, только если не слишком часто вызывается
-                // для часто используемых строк (каждый 100-й раз)
+                modifiedText = translation;
+
+                // Логируем успешный перевод
                 int hashCode = original.GetHashCode();
-                if (Math.Abs(hashCode % 100) == 0)
+                if (Math.Abs(hashCode % 100) == 0) // Ограничиваем количество логов
                 {
-                    Debug.Log($"{DEBUG_PREFIX}Перевод: '{original}' -> '{translation}'");
+                    EmergencyLog($"Перевод: '{original}' -> '{translation}'");
                 }
-                return translation;
+                return modifiedText;
             }
 
             // Записываем непереведенные строки в отдельный файл
             try
             {
                 // Не логируем слишком короткие строки (скорее всего одиночные символы)
-                if (original.Length > 2 && !IsNumeric(original))
+                if (original.Length > 2)
                 {
                     File.AppendAllText("untranslated.txt", original + "\n");
 
@@ -174,23 +236,16 @@ namespace GreyHackTranslator
                     int hashCode = original.GetHashCode();
                     if (Math.Abs(hashCode % 50) == 0)
                     {
-                        Debug.LogWarning($"{DEBUG_PREFIX}Не найден перевод: '{original}'");
+                        EmergencyLog($"Не найден перевод: '{original}'");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"{DEBUG_PREFIX}Ошибка записи непереведенной строки: {ex.Message}");
+                EmergencyLog($"Ошибка записи непереведенной строки: {ex.Message}");
             }
 
-            return original;
-        }
-
-        // Проверка, является ли строка числом
-        private static bool IsNumeric(string text)
-        {
-            double number;
-            return double.TryParse(text, out number);
+            return modifiedText; // Возвращаем текст с префиксом для отладки
         }
 
         // Вспомогательный метод для логирования
