@@ -54,9 +54,6 @@ namespace GreyHackTranslator.Patches
             catch (System.Exception ex)
             {
                 TranslatorPlugin.EmergencyLog($"Ошибка в TextPatch: {ex.Message}\n{ex.StackTrace}");
-
-                // В случае ошибки не меняем оригинальное значение
-                value = value;
             }
         }
     }
