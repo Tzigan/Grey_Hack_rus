@@ -11,6 +11,12 @@
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- Настройки для атрибутов сборки -->
+    <Authors>Tzygan</Authors>
+    <Copyright>Copyright © 2025</Copyright>
+  </PropertyGroup>
 
   <ItemGroup>
     <!-- Обновлено: все BepInEx библиотеки находятся в папке core -->
