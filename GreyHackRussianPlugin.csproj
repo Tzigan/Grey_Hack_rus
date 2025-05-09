@@ -4,6 +4,7 @@
     <AssemblyName>GreyHackRussianPlugin</AssemblyName>
     <Description>Русификатор для игры Grey Hack</Description>
     <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <OutputPath>bin\$(Configuration)\BepInEx\plugins\</OutputPath>
