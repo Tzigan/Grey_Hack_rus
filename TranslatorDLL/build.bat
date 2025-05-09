@@ -2,15 +2,7 @@
 chcp 1251 >nul
 echo Сборка Grey Hack Translator DLL...
 
-REM Проверка наличия MSBuild
-where msbuild >nul 2>&1
-if %ERRORLEVEL% NEQ 0 (
-    echo MSBuild не найден. Убедитесь, что Visual Studio установлена.
-    pause
-    exit /b 1
-)
-
-REM Создаем файл проекта для DLL
+REM Создаем файлы проекта (такие же как и раньше)
 echo ^<Project Sdk="Microsoft.NET.Sdk"^> > GreyHackTranslator.csproj
 echo   ^<PropertyGroup^> >> GreyHackTranslator.csproj
 echo     ^<TargetFramework^>net46^</TargetFramework^> >> GreyHackTranslator.csproj
@@ -21,16 +13,16 @@ echo     ^<PackageReference Include="HarmonyX" Version="2.5.5" /^> >> GreyHackTr
 echo   ^</ItemGroup^> >> GreyHackTranslator.csproj
 echo   ^<ItemGroup^> >> GreyHackTranslator.csproj
 echo     ^<Reference Include="UnityEngine"^> >> GreyHackTranslator.csproj
-echo       ^<HintPath^>lib\UnityEngine.dll^</HintPath^> >> GreyHackTranslator.csproj
+echo       ^<HintPath^>$(ProjectDir)lib\UnityEngine.dll^</HintPath^> >> GreyHackTranslator.csproj
 echo     ^</Reference^> >> GreyHackTranslator.csproj
 echo     ^<Reference Include="UnityEngine.UI"^> >> GreyHackTranslator.csproj
-echo       ^<HintPath^>lib\UnityEngine.UI.dll^</HintPath^> >> GreyHackTranslator.csproj
+echo       ^<HintPath^>$(ProjectDir)lib\UnityEngine.UI.dll^</HintPath^> >> GreyHackTranslator.csproj
 echo     ^</Reference^> >> GreyHackTranslator.csproj
 echo     ^<Reference Include="Assembly-CSharp"^> >> GreyHackTranslator.csproj
-echo       ^<HintPath^>lib\Assembly-CSharp.dll^</HintPath^> >> GreyHackTranslator.csproj
+echo       ^<HintPath^>$(ProjectDir)lib\Assembly-CSharp.dll^</HintPath^> >> GreyHackTranslator.csproj
 echo     ^</Reference^> >> GreyHackTranslator.csproj
 echo     ^<Reference Include="TextMeshPro-1.0.55.56.0b12"^> >> GreyHackTranslator.csproj
-echo       ^<HintPath^>lib\TextMeshPro-1.0.55.56.0b12.dll^</HintPath^> >> GreyHackTranslator.csproj
+echo       ^<HintPath^>$(ProjectDir)lib\TextMeshPro-1.0.55.56.0b12.dll^</HintPath^> >> GreyHackTranslator.csproj
 echo     ^</Reference^> >> GreyHackTranslator.csproj
 echo   ^</ItemGroup^> >> GreyHackTranslator.csproj
 echo ^</Project^> >> GreyHackTranslator.csproj
@@ -57,13 +49,13 @@ if not exist lib\UnityEngine.dll (
     exit /b 1
 )
 
-REM Сборка DLL
+REM Сборка DLL с помощью dotnet CLI
 echo Сборка DLL...
-msbuild GreyHackTranslator.csproj /p:Configuration=Release
+dotnet build GreyHackTranslator.csproj -c Release
 
 REM Сборка инжектора
 echo Сборка инжектора...
-msbuild GreyHackInjector.csproj /p:Configuration=Release
+dotnet build GreyHackInjector.csproj -c Release
 
 REM Копирование файлов в выходную папку
 echo Копирование файлов...
