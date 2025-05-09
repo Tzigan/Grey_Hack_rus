@@ -2,10 +2,11 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputType>Library</OutputType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="HarmonyX" Version="2.5.5" />
+    <PackageReference Include="HarmonyX" Version="2.14.0" />
   </ItemGroup>
   
   <ItemGroup>
@@ -23,13 +24,8 @@
     </Reference>
   </ItemGroup>
   
-  <!-- Явно указываем файлы для сборки -->
   <ItemGroup>
     <Compile Include="src\**\*.cs" />
-  </ItemGroup>
-  
-  <!-- Исключаем инжектор -->
-  <ItemGroup>
     <Compile Remove="Injector.cs" />
   </ItemGroup>
 </Project>

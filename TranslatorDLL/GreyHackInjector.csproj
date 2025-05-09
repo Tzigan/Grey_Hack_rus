@@ -2,14 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputType>Exe</OutputType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   
   <ItemGroup>
     <Compile Include="Injector.cs" />
-  </ItemGroup>
-  
-  <!-- Явно исключаем файлы библиотеки переводчика -->
-  <ItemGroup>
-    <Compile Remove="src\**\*.cs" />
   </ItemGroup>
 </Project>
