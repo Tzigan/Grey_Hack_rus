@@ -7,9 +7,18 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
+
+    <!-- Отключение добавления framework к пути -->
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+
+    <!-- Имя папки плагина -->
+    <PluginFolderName>GreyHackRussian</PluginFolderName>
+
+    <!-- Изменение выходного пути на подпапку с именем плагина -->
     <OutputPath>bin\$(Configuration)\BepInEx\plugins\</OutputPath>
+    
+    
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
@@ -67,8 +76,10 @@
     </None>
   </ItemGroup>
 
-  <!-- Добавьте этот Target для создания подпапки Translation при сборке -->
-  <Target Name="CreateDirectories" BeforeTargets="BeforeBuild">
-    <MakeDir Directories="$(OutputPath)\Translation" />
+  <!-- Обновляем целевую папку для копирования файлов -->
+  <Target Name="CopyPlugin" AfterTargets="Build" Condition="'$(GamePath)' != ''">
+    <Message Text="Copying plugin to game directory..." Importance="high" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)\BepInEx\plugins\$(PluginFolderName)" />
+    <Copy SourceFiles="$(ProjectDir)README.md" DestinationFolder="$(GamePath)\BepInEx\plugins\$(PluginFolderName)" />
   </Target>
 </Project>

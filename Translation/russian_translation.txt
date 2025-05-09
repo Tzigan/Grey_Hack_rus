@@ -1,0 +1,42 @@
+Browser=Браузер 
+Grant access to the file /etc/passwd and decipher its contents.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.=Необходимо иметь программу расшифровки, установленную на компьютере, запускающем эксплойт.
+<b>Remote use.</b>=<b>Удаленное использование.</b>
+
+<b>Permissions obtained: </b>guest=<b>Полученные разрешения: </b>guest
+<b>Target: </b> libssh.so >= v1.0.0=<b>Цель: </b> libssh.so >= v1.0.0
+
+<b>Required:</b>=<b>Требуется:</b>
+- Guest user logged in the computer.=- Гостевой пользователь, авторизованный на компьютере.
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to inject a new password to a registered user.=Использует уязвимость в сервисе <color=#0FABFFFF>ssh</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Remote use.</b>=<b>Удаленное использование.</b>
+
+<b>Permissions obtained: </b>Non root user=<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Target: </b> libssh.so >= v1.0.0=<b>Цель: </b> libssh.so >= v1.0.0
+
+Search all the Bank credentials files in the computer to decipher all passwords.=Ищет все файлы банковских учетных данных в компьютере для расшифровки всех паролей.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.=Необходимо иметь программу расшифровки, установленную на компьютере, запускающем эксплойт.
+<b>Remote use.</b>=<b>Удаленное использование.</b>
+
+<b>Permissions obtained: </b>Non root user=<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Target: </b> libssh.so >= v1.0.0=<b>Цель: </b> libssh.so >= v1.0.0
+
+<b>Required:</b>=<b>Требуется:</b>
+- Any user logged in the computer.=- Любой пользователь, авторизованный на компьютере.
+
+Search all the Bank credentials files in the computer to decipher all passwords.=Ищет все файлы банковских учетных данных в компьютере для расшифровки всех паролей.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.=Необходимо иметь программу расшифровки, установленную на компьютере, запускающем эксплойт.
+<b>Remote use.</b>=<b>Удаленное использование.</b>
+
+<b>Permissions obtained: </b>guest=<b>Полученные разрешения: </b>guest
+<b>Target: </b> libssh.so >= v1.0.0=<b>Цель: </b> libssh.so >= v1.0.0
+
+<b>Required:</b>=<b>Требуется:</b>
+- Any user logged in the computer.=- Любой пользователь, авторизованный на компьютере.
+- /Public exists in the file system=- /Public существует в файловой системе
+
+Details=Подробности

@@ -11,17 +11,15 @@ namespace GreyHackRussian
 
         public static void LoadTranslations()
         {
-            // Путь к файлу переводов в подпапке Translation
-            string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
+            // Путь к файлу переводов теперь непосредственно в папке плагина
+            translationFilePath = Path.Combine(GreyHackRussianPlugin.PluginPath, "russian_translation.txt");
 
-            // Создаем директорию, если она отсутствует
+            // Создаем директорию Translation, если нужно
+            string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
             if (!Directory.Exists(translationDirectory))
             {
                 Directory.CreateDirectory(translationDirectory);
-                GreyHackRussianPlugin.Log.LogInfo($"Создана директория для переводов: {translationDirectory}");
             }
-
-            translationFilePath = Path.Combine(translationDirectory, "russian_translation.txt");
 
             GreyHackRussianPlugin.Log.LogInfo($"Загрузка переводов из {translationFilePath}");
 
@@ -56,10 +54,9 @@ namespace GreyHackRussian
             // Записываем непереведенные строки в отдельный файл в подпапке Translation
             try
             {
-                // Не логируем слишком короткие строки
                 if (original.Length > 2)
                 {
-                    // Создаем директорию Translation, если она не существует
+                    // Путь к непереведенным строкам в подпапке Translation
                     string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
                     if (!Directory.Exists(translationDirectory))
                     {
