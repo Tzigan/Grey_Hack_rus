@@ -6,15 +6,13 @@
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
-    <!-- Выходной путь сборки -->
     <OutputPath>bin\$(Configuration)\BepInEx\plugins\</OutputPath>
-    <!-- Добавьте эти строки для совместимости с preview версией SDK -->
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Подключаем библиотеки BepInEx 6.0 и Unity как ссылки -->
+    <!-- Обновлено: все BepInEx библиотеки находятся в папке core -->
     <Reference Include="BepInEx.Core">
       <HintPath>libs\BepInEx.Core.dll</HintPath>
       <Private>False</Private>
