@@ -1,4 +1,5 @@
 @echo off
+chcp 1251 >nul
 echo Сборка Grey Hack Translator DLL...
 
 REM Проверка наличия MSBuild
