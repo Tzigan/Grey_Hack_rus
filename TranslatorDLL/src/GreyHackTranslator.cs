@@ -17,6 +17,29 @@ namespace GreyHackTranslator
         private static readonly string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private const string DEBUG_PREFIX = "[GH_RUS] ";
 
+        // Статический конструктор - вызывается автоматически при загрузке класса
+        static TranslatorPlugin()
+        {
+            try
+            {
+                // Запускаем инициализацию при загрузке DLL
+                EmergencyLog("DLL загружена, автоматический запуск инициализации из статического конструктора");
+                Init();
+
+                // Также проверяем наличие файла-флага
+                string flagFile = "init_translator.flag";
+                if (File.Exists(flagFile))
+                {
+                    EmergencyLog($"Обнаружен файл-флаг {Path.GetFullPath(flagFile)}, запуск дополнительной инициализации...");
+                    // Дополнительная инициализация при необходимости
+                }
+            }
+            catch (Exception ex)
+            {
+                EmergencyLog($"Ошибка в статическом конструкторе: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
         // Добавляем метод для экстренного логирования на рабочий стол
         public static void EmergencyLog(string message)
         {

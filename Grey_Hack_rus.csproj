@@ -91,6 +91,7 @@
     <Compile Include="TranslatorDLL\src\GreyHackTranslator.cs" />
     <Compile Include="TranslatorDLL\Injector.cs" />
     <Compile Include="TranslatorDLL\src\Patches\DialogPatch.cs" />
+    <Compile Include="TranslatorDLL\src\Patches\ExploitPatch.cs" />
     <Compile Include="TranslatorDLL\src\Patches\TextPatch.cs" />
     <Compile Include="TranslatorDLL\src\UIAnalyzer.cs" />
   </ItemGroup>
