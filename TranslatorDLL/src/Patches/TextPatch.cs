@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
 using GreyHackTranslator;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace GreyHackTranslator.Patches
 {
