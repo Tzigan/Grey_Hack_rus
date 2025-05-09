@@ -112,5 +112,53 @@ namespace GreyHackRussian
 
             return original; // Возвращаем оригинальный текст, если перевода нет
         }
+
+        // Новый метод для поиска перевода без учета регистра и пробелов
+        public static string TranslateTextIgnoreCase(string original)
+        {
+            if (string.IsNullOrEmpty(original)) return original;
+
+            // Сначала ищем точное соответствие через стандартный метод
+            if (TranslationDictionary.TryGetValue(original, out string translation))
+            {
+                return translation;
+            }
+
+            // Затем ищем без учета регистра и пробелов
+            foreach (var kvp in TranslationDictionary)
+            {
+                // Проверка без учета регистра
+                if (string.Equals(kvp.Key, original, StringComparison.OrdinalIgnoreCase))
+                {
+                    GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета регистра: '{original}' -> '{kvp.Value}'");
+                    return kvp.Value;
+                }
+
+                // Проверка без учета пробелов в начале/конце и регистра
+                if (string.Equals(kvp.Key.Trim(), original.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета пробелов: '{original}' -> '{kvp.Value}'");
+                    return kvp.Value;
+                }
+            }
+
+            // Если перевод не найден, записываем в лог и в файлы
+            try
+            {
+                // Сохранение для отладки
+                string debugPath = Path.Combine(GreyHackRussianPlugin.PluginPath, "debug_untranslated.txt");
+                File.AppendAllText(debugPath, original + "\n\n---\n\n");
+
+                // Сохранение в формате для файла переводов
+                string exportPath = Path.Combine(GreyHackRussianPlugin.PluginPath, "export_translations.txt");
+                File.AppendAllText(exportPath, original + "=" + original + "\n\n");
+            }
+            catch (Exception ex)
+            {
+                GreyHackRussianPlugin.Log.LogError($"Ошибка при сохранении непереведенного текста: {ex.Message}");
+            }
+
+            return original;
+        }
     }
 }
