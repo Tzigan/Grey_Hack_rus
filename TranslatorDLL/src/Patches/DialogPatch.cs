@@ -1,9 +1,9 @@
 ﻿using GreyHackTranslator;
 using HarmonyLib;
 using System;
-using System.Diagnostics;
 using System.Reflection;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace GreyHackTranslator.Patches
 {

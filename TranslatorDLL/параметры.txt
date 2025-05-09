@@ -1,0 +1,3 @@
+В ОС Windows логи Unity обычно находятся в:
+•	%USERPROFILE%\AppData\LocalLow\[Developer Name]\Grey Hack\Player.log
+Если есть возможность запустить игру с параметром -logfile output.log, то все отладочные сообщения будут записаны в этот файл.

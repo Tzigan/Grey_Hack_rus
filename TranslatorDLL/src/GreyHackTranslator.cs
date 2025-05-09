@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using UnityEngine; // Добавляем импорт UnityEngine
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace GreyHackTranslator
 {
