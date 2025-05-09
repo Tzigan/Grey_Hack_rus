@@ -48,3 +48,10 @@ Grey Hack/
 	cp "путь_к_игре/Grey Hack_Data/Managed/UnityEngine.UI.dll" libs/ 
 	cp "путь_к_игре/Grey Hack_Data/Managed/Assembly-CSharp.dll" libs/
 3. Соберите проект командой: `dotnet build`
+=======
+
+## Настройка переводов
+Переводы находятся в файле `BepInEx\plugins\russian_translation.txt` и имеют формат:
+оригинальная строка=переведенная строка
+### Список отсутствующих переводов
+Строки, которые требуют перевода, автоматически сохраняются в файл `BepInEx\plugins\untranslated.txt`.
