@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Grey_Hack_rus.src.Patches
+namespace GreyHackRussianPlugin.Translation
 {
-    internal class DialogPatch
+    internal class Translator
     {
     }
 }
