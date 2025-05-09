@@ -31,22 +31,19 @@ Grey Hack/
 Строки, которые требуют перевода, автоматически сохраняются в файл `BepInEx\plugins\GreyHackRussian\Translation\untranslated.txt`.
 ## Разработка
 Для настройки среды разработки:
-
 1. Установите BepInEx 6.0 pre-2 в игру Grey Hack
 2. Скопируйте следующие библиотеки:
-
-2.1 Создайте папку libs, если её нет
-	mkdir -p libs
-2.2 Скопируйте BepInEx библиотеки
-	cp "путь_к_игре/BepInEx/core/BepInEx.Core.dll" libs/ 
-	cp "путь_к_игре/BepInEx/core/BepInEx.Unity.Common.dll" libs/ 
-	cp "путь_к_игре/BepInEx/core/BepInEx.Unity.Mono.dll" libs/ 
-	cp "путь_к_игре/BepInEx/core/0Harmony.dll" libs/
-2.3 Скопируйте библиотеки Unity/игры
-	cp "путь_к_игре/Grey Hack_Data/Managed/UnityEngine.dll" libs/ 
-	cp "путь_к_игре/Grey Hack_Data/Managed/UnityEngine.CoreModule.dll" libs/ 
-	cp "путь_к_игре/Grey Hack_Data/Managed/UnityEngine.UI.dll" libs/ 
-	cp "путь_к_игре/Grey Hack_Data/Managed/Assembly-CSharp.dll" libs/
+- Создайте папку libs, если её нет mkdir -p libs
+- Скопируйте BepInEx библиотеки
+- cp "путь_к_игре/BepInEx/core/BepInEx.Core.dll" libs/ 
+- cp "путь_к_игре/BepInEx/core/BepInEx.Unity.Common.dll" libs/ 
+- cp "путь_к_игре/BepInEx/core/BepInEx.Unity.Mono.dll" libs/ 
+- cp "путь_к_игре/BepInEx/core/0Harmony.dll" libs/
+- Скопируйте библиотеки Unity/игры
+- cp "путь_к_игре/Grey Hack_Data/Managed/UnityEngine.dll" libs/ 
+- cp "путь_к_игре/Grey Hack_Data/Managed/UnityEngine.CoreModule.dll" libs/ 
+- cp "путь_к_игре/Grey Hack_Data/Managed/UnityEngine.UI.dll" libs/ 
+- cp "путь_к_игре/Grey Hack_Data/Managed/Assembly-CSharp.dll" libs/
 3. Соберите проект командой: `dotnet build`
 =======
 
