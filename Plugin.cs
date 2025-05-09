@@ -1,14 +1,11 @@
-﻿using AwesomeCharts;
-using BepInEx;
-using BepInEx.Logging;
+﻿using BepInEx;
 using BepInEx.Unity.Mono;
-using GreyHackRussianPlugin.Translation;
 using HarmonyLib;
-using HarmonyLib.Tools;
 using System;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GreyHackRussian
 {
