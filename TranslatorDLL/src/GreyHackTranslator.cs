@@ -22,21 +22,31 @@ namespace GreyHackTranslator
         {
             try
             {
-                // Запускаем инициализацию при загрузке DLL
-                EmergencyLog("DLL загружена, автоматический запуск инициализации из статического конструктора");
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                File.AppendAllText(
+                    Path.Combine(desktopPath, "greyhack_autoload.log"),
+                    $"[{DateTime.Now}] Автоматическая инициализация TranslatorPlugin\n");
+
+                // Небольшая задержка для уверенности, что все необходимые библиотеки загружены
+                System.Threading.Thread.Sleep(500);
+
+                // Вызываем метод инициализации
                 Init();
 
-                // Также проверяем наличие файла-флага
-                string flagFile = "init_translator.flag";
-                if (File.Exists(flagFile))
-                {
-                    EmergencyLog($"Обнаружен файл-флаг {Path.GetFullPath(flagFile)}, запуск дополнительной инициализации...");
-                    // Дополнительная инициализация при необходимости
-                }
+                File.AppendAllText(
+                    Path.Combine(desktopPath, "greyhack_autoload.log"),
+                    $"[{DateTime.Now}] Инициализация выполнена успешно\n");
             }
             catch (Exception ex)
             {
-                EmergencyLog($"Ошибка в статическом конструкторе: {ex.Message}\n{ex.StackTrace}");
+                try
+                {
+                    string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    File.AppendAllText(
+                        Path.Combine(desktopPath, "greyhack_autoload_error.log"),
+                        $"[{DateTime.Now}] Ошибка: {ex.Message}\n{ex.StackTrace}\n");
+                }
+                catch { }
             }
         }
 
