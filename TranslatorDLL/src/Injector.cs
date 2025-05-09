@@ -77,14 +77,32 @@ namespace GreyHackInjector
                     }
                     else
                     {
-                        // Название в Unity Editor
-                        processes = Process.GetProcessesByName("Unity");
-                        foreach (var proc in processes)
+                        // Название с расширением (Windows 11)
+                        processes = Process.GetProcessesByName("Grey Hack.exe");
+                        if (processes.Length > 0)
                         {
-                            if (proc.MainWindowTitle.Contains("Grey Hack"))
+                            gameProcess = processes[0];
+                        }
+                        else
+                        {
+                            // Название с пробелом (Windows 11)
+                            processes = Process.GetProcessesByName("Grey Hack");
+                            if (processes.Length > 0)
                             {
-                                gameProcess = proc;
-                                break;
+                                gameProcess = processes[0];
+                            }
+                            else
+                            {
+                                // Название в Unity Editor
+                                processes = Process.GetProcessesByName("Unity");
+                                foreach (var proc in processes)
+                                {
+                                    if (proc.MainWindowTitle.Contains("Grey Hack"))
+                                    {
+                                        gameProcess = proc;
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -110,6 +128,24 @@ namespace GreyHackInjector
                         }
                         
                         processes = Process.GetProcessesByName("Grey_Hack");
+                        if (processes.Length > 0)
+                        {
+                            gameProcess = processes[0];
+                            gameFound = true;
+                            break;
+                        }
+                        
+                        // Проверка на название в Windows 11
+                        processes = Process.GetProcessesByName("Grey Hack.exe");
+                        if (processes.Length > 0)
+                        {
+                            gameProcess = processes[0];
+                            gameFound = true;
+                            break;
+                        }
+                        
+                        // Проверка на название с пробелом
+                        processes = Process.GetProcessesByName("Grey Hack");
                         if (processes.Length > 0)
                         {
                             gameProcess = processes[0];
