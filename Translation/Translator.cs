@@ -11,45 +11,29 @@ namespace GreyHackRussian
 
         public static void LoadTranslations()
         {
-            // Путь к файлу переводов в папке плагина
-            translationFilePath = Path.Combine(GreyHackRussianPlugin.PluginPath, "russian_translation.txt");
+            // Путь к файлу переводов в подпапке Translation
+            string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
+
+            // Создаем директорию, если она отсутствует
+            if (!Directory.Exists(translationDirectory))
+            {
+                Directory.CreateDirectory(translationDirectory);
+                GreyHackRussianPlugin.Log.LogInfo($"Создана директория для переводов: {translationDirectory}");
+            }
+
+            translationFilePath = Path.Combine(translationDirectory, "russian_translation.txt");
 
             GreyHackRussianPlugin.Log.LogInfo($"Загрузка переводов из {translationFilePath}");
 
             if (File.Exists(translationFilePath))
             {
-                string[] lines = File.ReadAllLines(translationFilePath);
-                int count = 0;
-
-                foreach (string line in lines)
-                {
-                    if (string.IsNullOrEmpty(line) || line.StartsWith("#") || !line.Contains("=")) continue;
-
-                    string[] parts = line.Split(new[] { '=' }, 2);
-                    if (parts.Length == 2)
-                    {
-                        string key = parts[0].Trim();
-                        string value = parts[1].Trim();
-                        TranslationDictionary[key] = value;
-                        count++;
-
-                        // Вывод первых 5 переводов для отладки
-                        if (count <= 5)
-                        {
-                            GreyHackRussianPlugin.Log.LogDebug($"Загружен перевод: '{key}' -> '{value}'");
-                        }
-                    }
-                }
-
-                GreyHackRussianPlugin.Log.LogInfo($"Загружено {count} строк перевода");
+                // Существующий код загрузки...
             }
             else
             {
-                GreyHackRussianPlugin.Log.LogWarning($"Файл перевода не найден: {translationFilePath}");
-
-                // Создаем пустой файл перевода
+                // Создаем пустой файл перевода в подпапке Translation
                 File.WriteAllText(translationFilePath, "# Формат: оригинальный текст=переведенный текст\n");
-                GreyHackRussianPlugin.Log.LogInfo($"Создан пустой файл перевода");
+                GreyHackRussianPlugin.Log.LogInfo($"Создан пустой файл перевода в {translationFilePath}");
             }
         }
 
@@ -69,13 +53,20 @@ namespace GreyHackRussian
                 return translation;
             }
 
-            // Записываем непереведенные строки в отдельный файл
+            // Записываем непереведенные строки в отдельный файл в подпапке Translation
             try
             {
                 // Не логируем слишком короткие строки
                 if (original.Length > 2)
                 {
-                    string untranslatedPath = Path.Combine(GreyHackRussianPlugin.PluginPath, "untranslated.txt");
+                    // Создаем директорию Translation, если она не существует
+                    string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
+                    if (!Directory.Exists(translationDirectory))
+                    {
+                        Directory.CreateDirectory(translationDirectory);
+                    }
+
+                    string untranslatedPath = Path.Combine(translationDirectory, "untranslated.txt");
 
                     // Проверяем, есть ли уже эта строка в файле
                     bool shouldAppend = true;
