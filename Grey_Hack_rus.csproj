@@ -69,10 +69,10 @@
     <Reference Include="UnityEngine">
       <HintPath>$(ProjectDir)TranslatorDLL\lib\UnityEngine.dll</HintPath>
       <Private>False</Private>
-	</Reference>
-	<Reference Include="UnityEngine.UI">
-		<HintPath>$(ProjectDir)TranslatorDLL\lib\UnityEngine.UI.dll</HintPath>
-	</Reference>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(ProjectDir)TranslatorDLL\lib\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -88,6 +88,7 @@
     <Compile Include="TranslatorDLL\Injector.cs" />
     <Compile Include="TranslatorDLL\src\Patches\DialogPatch.cs" />
     <Compile Include="TranslatorDLL\src\Patches\TextPatch.cs" />
+    <Compile Include="TranslatorDLL\src\UIAnalyzer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
