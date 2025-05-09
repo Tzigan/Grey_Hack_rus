@@ -1,8 +1,9 @@
-﻿using System;
+﻿using HarmonyLib;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using HarmonyLib;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -240,45 +241,26 @@ namespace GreyHackTranslator
         {
             if (string.IsNullOrEmpty(original)) return original;
 
-            // Добавляем префикс для визуального отслеживания работы патчей
-            string modifiedText = "[RUS] " + original;
+            // Очень заметная маркировка текста для отладки - будет заметно даже без логов
+            string modifiedText = "[ПЕРЕВОД] " + original;
+
+            try
+            {
+                // Запись в файл в папке с игрой
+                string gamePath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+                File.AppendAllText(
+                    Path.Combine(gamePath, "greyhack_translator_text.log"),
+                    $"Оригинал: {original}\nПеревод: {modifiedText}\n\n");
+            }
+            catch { }
 
             // Если есть перевод в словаре, используем его
             if (translationDictionary.TryGetValue(original, out string translation))
             {
-                modifiedText = translation;
-
-                // Логируем успешный перевод
-                int hashCode = original.GetHashCode();
-                if (Math.Abs(hashCode % 100) == 0) // Ограничиваем количество логов
-                {
-                    EmergencyLog($"Перевод: '{original}' -> '{translation}'");
-                }
-                return modifiedText;
+                modifiedText = "[Р] " + translation;
             }
 
-            // Записываем непереведенные строки в отдельный файл
-            try
-            {
-                // Не логируем слишком короткие строки (скорее всего одиночные символы)
-                if (original.Length > 2)
-                {
-                    File.AppendAllText("untranslated.txt", original + "\n");
-
-                    // Выводим информацию о непереведенной строке не слишком часто
-                    int hashCode = original.GetHashCode();
-                    if (Math.Abs(hashCode % 50) == 0)
-                    {
-                        EmergencyLog($"Не найден перевод: '{original}'");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                EmergencyLog($"Ошибка записи непереведенной строки: {ex.Message}");
-            }
-
-            return modifiedText; // Возвращаем текст с префиксом для отладки
+            return modifiedText;
         }
 
         // Вспомогательный метод для логирования
