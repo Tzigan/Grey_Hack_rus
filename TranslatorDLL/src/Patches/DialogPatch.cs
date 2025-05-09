@@ -1,18 +1,17 @@
 ﻿using HarmonyLib;
 using System.Reflection;
+using GreyHackTranslator;
 
 namespace GreyHackTranslator.Patches
 {
-    // Поиск и патч методов, связанных с диалогами
-    // Примечание: эти методы нужно будет адаптировать под конкретные классы в игре Grey Hack
+    // Здесь нужно будет адаптировать патчи под конкретные классы в игре Grey Hack
     
     [HarmonyPatch]
     public class DialogPatch
     {
         static MethodBase TargetMethod()
         {
-            // В этом месте нужно найти конкретный класс и метод в игре
-            // Пример для метода ShowDialog в классе DialogManager:
+            // Пример для класса и метода отображения диалога
             var type = AccessTools.TypeByName("DialogManager");
             if (type != null)
             {
