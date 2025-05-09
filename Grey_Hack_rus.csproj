@@ -110,7 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DllExports.cs" />
+    <Compile Include="TranslatorDLL\DllExports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslatorDLL\src\GreyHackTranslator.cs" />
     <Compile Include="TranslatorDLL\Injector.cs" />
