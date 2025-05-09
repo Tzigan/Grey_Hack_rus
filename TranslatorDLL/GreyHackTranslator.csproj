@@ -1,23 +1,35 @@
-<Project Sdk="Microsoft.NET.Sdk"> 
-  <PropertyGroup> 
-    <TargetFramework>net46</TargetFramework> 
-    <OutputType>Library</OutputType> 
-  </PropertyGroup> 
-  <ItemGroup> 
-    <PackageReference Include="HarmonyX" Version="2.5.5" /> 
-  </ItemGroup> 
-  <ItemGroup> 
-    <Reference Include="UnityEngine"> 
-      <HintPath>$(ProjectDir)lib\UnityEngine.dll</HintPath> 
-    </Reference> 
-    <Reference Include="UnityEngine.UI"> 
-      <HintPath>$(ProjectDir)lib\UnityEngine.UI.dll</HintPath> 
-    </Reference> 
-    <Reference Include="Assembly-CSharp"> 
-      <HintPath>$(ProjectDir)lib\Assembly-CSharp.dll</HintPath> 
-    </Reference> 
-    <Reference Include="TextMeshPro-1.0.55.56.0b12"> 
-      <HintPath>$(ProjectDir)lib\TextMeshPro-1.0.55.56.0b12.dll</HintPath> 
-    </Reference> 
-  </ItemGroup> 
-</Project> 
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net46</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="HarmonyX" Version="2.5.5" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>$(ProjectDir)lib\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(ProjectDir)lib\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(ProjectDir)lib\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  
+  <!-- Явно указываем файлы для сборки -->
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+  </ItemGroup>
+  
+  <!-- Исключаем инжектор -->
+  <ItemGroup>
+    <Compile Remove="Injector.cs" />
+  </ItemGroup>
+</Project>
