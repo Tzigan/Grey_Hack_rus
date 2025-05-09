@@ -69,10 +69,10 @@
     <Reference Include="UnityEngine">
       <HintPath>$(ProjectDir)TranslatorDLL\lib\UnityEngine.dll</HintPath>
       <Private>False</Private>
+	</Reference>
 	<Reference Include="UnityEngine.UI">
 		<HintPath>$(ProjectDir)TranslatorDLL\lib\UnityEngine.UI.dll</HintPath>
 	</Reference>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
