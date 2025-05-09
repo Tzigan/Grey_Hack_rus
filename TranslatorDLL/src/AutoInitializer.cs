@@ -2,19 +2,12 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace GreyHackTranslator
 {
     // Класс, который гарантированно загрузится при загрузке сборки
     public static class AutoInitializer
     {
-        // Для .NET 4.0+
-        [ModuleInitializer]
-        internal static void Initialize()
-        {
-            SafeInitialize();
-        }
 
         // Статический конструктор (если ModuleInitializer не сработает)
         static AutoInitializer()
