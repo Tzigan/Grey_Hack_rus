@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -56,15 +57,19 @@ namespace GreyHackTranslator
 
                 // Применяем все патчи в этой сборке
                 Debug.Log($"{DEBUG_PREFIX}Применяем патчи...");
-                var patchedMethods = harmony.PatchAll(Assembly.GetExecutingAssembly());
-                Debug.Log($"{DEBUG_PREFIX}Применено патчей: {patchedMethods.Count()}");
-                Log($"Применено патчей: {patchedMethods.Count()}");
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
+                Debug.Log($"{DEBUG_PREFIX}Патчи успешно применены");
+                Log("Патчи успешно применены");
 
-                // Выведем детали о патчах
+                // Альтернативно, можно получить информацию о патчах через другой API
+                var patchedMethods = Harmony.GetAllPatchedMethods().ToList();
+                Debug.Log($"{DEBUG_PREFIX}Применено патчей к {patchedMethods.Count} методам");
+                Log($"Применено патчей к {patchedMethods.Count} методам");
+
                 foreach (var method in patchedMethods)
                 {
-                    Debug.Log($"{DEBUG_PREFIX}Патч: {method.DeclaringType.Name}.{method.Name}");
-                    Log($"Патч: {method.DeclaringType.Name}.{method.Name}");
+                    Debug.Log($"{DEBUG_PREFIX}Патч к методу: {method.DeclaringType.Name}.{method.Name}");
+                    Log($"Патч к методу: {method.DeclaringType.Name}.{method.Name}");
                 }
 
                 Debug.Log($"{DEBUG_PREFIX}Переводчик успешно инициализирован");
