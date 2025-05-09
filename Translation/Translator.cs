@@ -11,21 +11,40 @@ namespace GreyHackRussian
 
         public static void LoadTranslations()
         {
-            // Путь к файлу переводов теперь непосредственно в папке плагина
-            translationFilePath = Path.Combine(GreyHackRussianPlugin.PluginPath, "russian_translation.txt");
-
-            // Создаем директорию Translation, если нужно
+            // Сначала создаем директорию Translation, если нужно
             string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
             if (!Directory.Exists(translationDirectory))
             {
                 Directory.CreateDirectory(translationDirectory);
+                GreyHackRussianPlugin.Log.LogInfo($"Создана директория для переводов: {translationDirectory}");
             }
+
+            // Теперь путь к файлу переводов указывает на подпапку Translation
+            translationFilePath = Path.Combine(translationDirectory, "russian_translation.txt");
 
             GreyHackRussianPlugin.Log.LogInfo($"Загрузка переводов из {translationFilePath}");
 
             if (File.Exists(translationFilePath))
             {
-                // Существующий код загрузки...
+                // Загрузка переводов из файла
+                string[] lines = File.ReadAllLines(translationFilePath);
+                int count = 0;
+
+                foreach (string line in lines)
+                {
+                    if (string.IsNullOrEmpty(line) || line.StartsWith("#") || !line.Contains("=")) continue;
+
+                    string[] parts = line.Split(new[] { '=' }, 2);
+                    if (parts.Length == 2)
+                    {
+                        string key = parts[0].Trim();
+                        string value = parts[1].Trim();
+                        TranslationDictionary[key] = value;
+                        count++;
+                    }
+                }
+
+                GreyHackRussianPlugin.Log.LogInfo($"Загружено {count} строк перевода");
             }
             else
             {
