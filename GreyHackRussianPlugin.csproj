@@ -59,9 +59,16 @@
   <ItemGroup>
     <None Update="Translation\russian_translation.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <!-- Настраиваем папку назначения -->
+      <DestinationSubDirectory>Translation\</DestinationSubDirectory>
     </None>
     <None Include="README.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <!-- Добавьте этот Target для создания подпапки Translation при сборке -->
+  <Target Name="CreateDirectories" BeforeTargets="BeforeBuild">
+    <MakeDir Directories="$(OutputPath)\Translation" />
+  </Target>
 </Project>
