@@ -66,10 +66,10 @@
     <Reference Include="MonoMod.Utils, Version=25.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MonoMod.Utils.25.0.8\lib\net452\MonoMod.Utils.dll</HintPath>
     </Reference>
-	<Reference Include="UnityEngine">
-		<HintPath>$(ProjectDir)TranslatorDLL\lib\UnityEngine.dll</HintPath>
-		<Private>False</Private>
-	</Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(ProjectDir)TranslatorDLL\lib\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
