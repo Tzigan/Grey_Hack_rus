@@ -12,12 +12,11 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 
-    <!-- Имя папки плагина -->
-    <PluginFolderName>GreyHackRussian</PluginFolderName>
+    <!-- Явно указываем OutputPath с полным, статичным значением -->
+    <OutputPath>bin\$(Configuration)\BepInEx\plugins\GreyHackRussian\</OutputPath>
 
-    <!-- Изменение выходного пути на подпапку с именем плагина -->
-    <OutputPath>bin\$(Configuration)\BepInEx\plugins\</OutputPath>
-    
+    <!-- Отключаем автоматическое создание подкаталогов -->
+    <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
     
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
@@ -75,6 +74,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <!-- Добавим явные команды для копирования файлов -->
+  <Target Name="EnsureOutputPathExists" BeforeTargets="Build">
+    <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+  </Target>
 
   <!-- Обновляем целевую папку для копирования файлов -->
   <Target Name="CopyPlugin" AfterTargets="Build" Condition="'$(GamePath)' != ''">
