@@ -1,6 +1,3 @@
-Browser=Браузер 
-Details=Подробности
-
 Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to inject a new password to a registered user.
 <b>Remote use.</b>
 
@@ -12,13 +9,12 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to
 - Root user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>ssh</color> для внедрения нового пароля зарегистрированному пользователю.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
 - Зависимость от библиотеки net.so >= 1.0.0
-- Root-пользователь, авторизованный на компьютере.
-
+- Root-пользователь авторизован в системе.
 
 ---
 
@@ -31,17 +27,16 @@ Get access to a shell.
 <b>Required:</b>
 - Guest user logged in the computer.
 - Minimum number of 1 users registered in the computer.
-- /bin exists in the file system=Получить доступ к оболочке.
+- /bin exists in the file system=Получить доступ к командной оболочке.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>гостевой
+<b>Получаемые права: </b>гость
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
-- Гостевой пользователь, авторизованный на компьютере.
-- Минимум 1 зарегистрированный пользователь на компьютере.
-- Директория /bin существует в файловой системе
-
+- Гостевой пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+- /bin существует в файловой системе
 
 ---
 
@@ -52,15 +47,14 @@ Prints the contents of the file /etc/passwd.
 <b>Target: </b> libssh.so >= v1.0.0
 
 <b>Required:</b>
-- Guest user logged in the computer.=Выводит содержимое файла /etc/passwd.
+- Guest user logged in the computer.=Отображает содержимое файла /etc/passwd.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>root
+<b>Получаемые права: </b>root
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
-- Гостевой пользователь, авторизованный на компьютере.
-
+- Гостевой пользователь авторизован в системе.
 
 ---
 
@@ -71,15 +65,14 @@ Get access to a shell.
 <b>Target: </b> libssh.so >= v1.0.0
 
 <b>Required:</b>
-- Dependencies on library kernel_module.so >= 1.0.0=Получить доступ к оболочке.
+- Dependencies on library kernel_module.so >= 1.0.0=Получить доступ к командной оболочке.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>root
+<b>Получаемые права: </b>root
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
-
 
 ---
 
@@ -95,14 +88,13 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to
 - /bin exists in the file system=Использует уязвимость в сервисе <color=#0FABFFFF>ssh</color> для внедрения нового пароля зарегистрированному пользователю.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
-- Минимум 1 зарегистрированный пользователь на компьютере.
+- Минимум 1 пользователь зарегистрирован в системе.
 - Зависимость от библиотеки init.so >= 1.0.0
-- Директория /bin существует в файловой системе
-
+- /bin существует в файловой системе
 
 ---
 
@@ -116,18 +108,17 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Required:</b>
 - Root user logged in the computer.
-- Minimum number of 1 users registered in the computer.=Поиск всех файлов банковских учетных данных в компьютере для расшифровки всех паролей.
+- Minimum number of 1 users registered in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
 
-Необходимо иметь программу расшифровки, установленную на компьютере, запускающем эксплойт.
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
-- Root-пользователь, авторизованный на компьютере.
-- Минимум 1 зарегистрированный пользователь на компьютере.
-
+- Root-пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
 
 ---
 
@@ -137,14 +128,13 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Remote use.</b>
 
 <b>Permissions obtained: </b>guest
-<b>Target: </b> libssh.so >= v1.0.0=Поиск всех файлов банковских учетных данных в компьютере для расшифровки всех паролей.
+<b>Target: </b> libssh.so >= v1.0.0=Найти и расшифровать все файлы учетных данных Банка в компьютере.
 
-Необходимо иметь программу расшифровки, установленную на компьютере, запускающем эксплойт.
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>гостевой
+<b>Получаемые права: </b>гость
 <b>Цель: </b> libssh.so >= v1.0.0
-
 
 ---
 
@@ -159,13 +149,12 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to
 - /usr exists in the file system=Использует уязвимость в сервисе <color=#0FABFFFF>ssh</color> для внедрения нового пароля зарегистрированному пользователю.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
-- Гостевой пользователь, авторизованный на компьютере.
-- Директория /usr существует в файловой системе
-
+- Гостевой пользователь авторизован в системе.
+- /usr существует в файловой системе
 
 ---
 
@@ -179,12 +168,341 @@ Grant access to the path: <b>/bin</b> and prints their contents.
 - Guest user logged in the computer.=Предоставляет доступ к пути: <b>/bin</b> и выводит его содержимое.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>root
+<b>Получаемые права: </b>root
 <b>Цель: </b> libssh.so >= v1.0.0
 
 <b>Требуется:</b>
-- Гостевой пользователь, авторизованный на компьютере.
+- Гостевой пользователь авторизован в системе.
 
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- /usr exists in the file system=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- /usr существует в файловой системе
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- Root user logged in the computer.
+- Dependencies on library net.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- Root-пользователь авторизован в системе.
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Grant access to the path: <b>/usr</b> and prints their contents.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Предоставляет доступ к пути: <b>/usr</b> и выводит его содержимое.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Root user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- /lib/aptclient.so exists in the file system=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- /lib/aptclient.so существует в файловой системе
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Minimum number of 2 users registered in the computer.
+- /bin exists in the file system=Использует уязвимость в сервисе <color=#0FABFFFF>ftp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+- /bin существует в файловой системе
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- 3 port forwarding configured from router to the target computer.
+- Minimum number of 1 users registered in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- 2 port forwarding configured from router to the target computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- /lib/aptclient.so exists in the file system
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>ftp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- /lib/aptclient.so существует в файловой системе
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- /lib/aptclient.so exists in the file system
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>ftp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- /lib/aptclient.so существует в файловой системе
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- /lib/aptclient.so exists in the file system
+- Root user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- /lib/aptclient.so существует в файловой системе
+- Root-пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Minimum number of 1 users registered in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- Root user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>ftp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- Root-пользователь авторизован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 
 ---
 
@@ -195,15 +513,14 @@ Get access to a shell.
 <b>Target: </b> libhttp.so >= v1.0.0
 
 <b>Required:</b>
-- Minimum number of 1 users registered in the computer.=Получить доступ к оболочке.
+- Minimum number of 1 users registered in the computer.=Получить доступ к командной оболочке.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>root
+<b>Получаемые права: </b>root
 <b>Цель: </b> libhttp.so >= v1.0.0
 
 <b>Требуется:</b>
-- Минимум 1 зарегистрированный пользователь на компьютере.
-
+- Минимум 1 пользователь зарегистрирован в системе.
 
 ---
 
@@ -215,16 +532,15 @@ Prints the contents of the file /etc/passwd.
 
 <b>Required:</b>
 - Dependencies on library net.so >= 1.0.0
-- Minimum number of 1 users registered in the computer.=Выводит содержимое файла /etc/passwd.
+- Minimum number of 1 users registered in the computer.=Отображает содержимое файла /etc/passwd.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>гостевой
+<b>Получаемые права: </b>гость
 <b>Цель: </b> libhttp.so >= v1.0.0
 
 <b>Требуется:</b>
 - Зависимость от библиотеки net.so >= 1.0.0
-- Минимум 1 зарегистрированный пользователь на компьютере.
-
+- Минимум 1 пользователь зарегистрирован в системе.
 
 ---
 
@@ -235,9 +551,8 @@ Grant access to the path: <b>/usr</b> and prints their contents.
 <b>Target: </b> libhttp.so >= v1.0.0=Предоставляет доступ к пути: <b>/usr</b> и выводит его содержимое.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>гостевой
+<b>Получаемые права: </b>гость
 <b>Цель: </b> libhttp.so >= v1.0.0
-
 
 ---
 
@@ -249,16 +564,15 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 
 <b>Required:</b>
 - Root user logged in the computer.
-- /lib/aptclient.so exists in the file system=Выводит содержимое файла /home/user/Mail.txt всех пользователей на компьютере.
+- /lib/aptclient.so exists in the file system=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>root
+<b>Получаемые права: </b>root
 <b>Цель: </b> libhttp.so >= v1.0.0
 
 <b>Требуется:</b>
-- Root-пользователь, авторизованный на компьютере.
-- Файл /lib/aptclient.so существует в файловой системе
-
+- Root-пользователь авторизован в системе.
+- /lib/aptclient.so существует в файловой системе
 
 ---
 
@@ -269,9 +583,8 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>http</color> service t
 <b>Target: </b> libhttp.so >= v1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>http</color> для внедрения нового пароля зарегистрированному пользователю.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libhttp.so >= v1.0.0
-
 
 ---
 
@@ -285,12 +598,11 @@ Grant access to the path: <b>/sys</b> and prints their contents.
 - Root user logged in the computer.=Предоставляет доступ к пути: <b>/sys</b> и выводит его содержимое.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libhttp.so >= v1.0.0
 
 <b>Требуется:</b>
-- Root-пользователь, авторизованный на компьютере.
-
+- Root-пользователь авторизован в системе.
 
 ---
 
@@ -305,12 +617,3121 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>http</color> service t
 - Any user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>http</color> для внедрения нового пароля зарегистрированному пользователю.
 <b>Удаленное использование.</b>
 
-<b>Полученные разрешения: </b>Пользователь без root-прав
+<b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libhttp.so >= v1.0.0
 
 <b>Требуется:</b>
-- Настроено 3 перенаправления портов с маршрутизатора на целевой компьютер.
-- Любой пользователь, авторизованный на компьютере.
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Любой пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsql.so >= v1.0.0=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsql.so >= v1.0.0
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsql.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library init.so >= 1.0.0
+- Any user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsql.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки init.so >= 1.0.0
+- Любой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsql.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- 3 port forwarding configured from router to the target computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsql.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsql.so >= v1.0.0
+
+<b>Required:</b>
+- 2 port forwarding configured from router to the target computer.
+- Guest user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsql.so >= v1.0.0
+
+<b>Требуется:</b>
+- 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsql.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsql.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsql.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- /Public exists in the file system=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsql.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- /Public существует в файловой системе
+
+---
+
+Grant access to the path: <b>/sys</b> and prints their contents.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- /bin exists in the file system=Предоставляет доступ к пути: <b>/sys</b> и выводит его содержимое.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- /bin существует в файловой системе
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmtp.so >= v1.0.0=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- Guest user logged in the computer.
+- Minimum number of 1 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>smtp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- Гостевой пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>smtp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- /Public exists in the file system
+- Root user logged in the computer.
+- Minimum number of 1 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>smtp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- /Public существует в файловой системе
+- Root-пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- /bin exists in the file system
+- Dependencies on library kernel_module.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- /bin существует в файловой системе
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- 3 port forwarding configured from router to the target computer.
+- Minimum number of 1 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>smtp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- 1 port forwarding configured from router to the target computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+
+---
+
+Grant access to the path: <b>/etc</b> and prints their contents.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmtp.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Предоставляет доступ к пути: <b>/etc</b> и выводит его содержимое.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmtp.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>chat</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>chat</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Minimum number of 1 users registered in the computer.
+- /Public exists in the file system=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+- /Public существует в файловой системе
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- 1 port forwarding configured from router to the target computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- /bin exists in the file system=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- /bin существует в файловой системе
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- 2 port forwarding configured from router to the target computer.
+- Any user logged in the computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Любой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library net.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- 3 port forwarding configured from router to the target computer.
+- Root user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>chat</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Any user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>chat</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Любой пользователь авторизован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- /bin exists in the file system
+- Dependencies on library kernel_module.so >= 1.0.0=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- /bin существует в файловой системе
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- Any user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- Любой пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libchat.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- Minimum number of 1 users registered in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libchat.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>cam</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.
+- Any user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>cam</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+- Любой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Dependencies on library net.so >= 1.0.0
+- 3 port forwarding configured from router to the target computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Зависимость от библиотеки net.so >= 1.0.0
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Grant access to the path: <b>/sys</b> and prints their contents.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- Root user logged in the computer.=Предоставляет доступ к пути: <b>/sys</b> и выводит его содержимое.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Root user logged in the computer.
+- 1 port forwarding configured from router to the target computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Root-пользователь авторизован в системе.
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Root user logged in the computer.
+- Guest user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Root-пользователь авторизован в системе.
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Grant access to the path: <b>/usr/bin</b> and prints their contents.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Предоставляет доступ к пути: <b>/usr/bin</b> и выводит его содержимое.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- 3 port forwarding configured from router to the target computer.
+- Any user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Любой пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Minimum number of 2 users registered in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- /bin exists in the file system
+- Root user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- /bin существует в файловой системе
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libcam.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- /usr exists in the file system
+- Dependencies on library kernel_module.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libcam.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- /usr существует в файловой системе
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> librshell.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> librshell.so >= v1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>rshell</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> librshell.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0
+- Guest user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>rshell</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> librshell.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> librshell.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> librshell.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> librshell.so >= v1.0.0
+
+<b>Required:</b>
+- /lib/aptclient.so exists in the file system
+- Guest user logged in the computer.
+- Root user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> librshell.so >= v1.0.0
+
+<b>Требуется:</b>
+- /lib/aptclient.so существует в файловой системе
+- Гостевой пользователь авторизован в системе.
+- Root-пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> librshell.so >= v1.0.0
+
+<b>Required:</b>
+- 2 port forwarding configured from router to the target computer.
+- Any user logged in the computer.
+- /usr exists in the file system=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> librshell.so >= v1.0.0
+
+<b>Требуется:</b>
+- 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Любой пользователь авторизован в системе.
+- /usr существует в файловой системе
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> librshell.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> librshell.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>rshell</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> librshell.so >= v1.0.0
+
+<b>Required:</b>
+- /Public exists in the file system=Использует уязвимость в сервисе <color=#0FABFFFF>rshell</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> librshell.so >= v1.0.0
+
+<b>Требуется:</b>
+- /Public существует в файловой системе
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> librepository.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- 3 port forwarding configured from router to the target computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> librepository.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> librepository.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- 2 port forwarding configured from router to the target computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> librepository.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> librepository.so >= v1.0.0=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> librepository.so >= v1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>repository</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> librepository.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0
+- Root user logged in the computer.
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>repository</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> librepository.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+- Root-пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> librepository.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> librepository.so >= v1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>blockchain</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- /lib/aptclient.so exists in the file system
+- 1 port forwarding configured from router to the target computer.=Использует уязвимость в сервисе <color=#0FABFFFF>blockchain</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- /lib/aptclient.so существует в файловой системе
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>blockchain</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>blockchain</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Dependencies on library kernel_module.so >= 1.0.0
+- Root user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+- Root-пользователь авторизован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Dependencies on library net.so >= 1.0.0=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- Guest user logged in the computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Minimum number of 1 users registered in the computer.
+- /lib/aptclient.so exists in the file system=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+- /lib/aptclient.so существует в файловой системе
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- 2 port forwarding configured from router to the target computer.
+- Minimum number of 2 users registered in the computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library net.so >= 1.0.0
+- Any user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки net.so >= 1.0.0
+- Любой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> blockchain.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- Any user logged in the computer.
+- /usr exists in the file system=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> blockchain.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- Любой пользователь авторизован в системе.
+- /usr существует в файловой системе
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libadb.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>adb</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libadb.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libadb.so >= v1.0.0
+
+<b>Required:</b>
+- /Public exists in the file system=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libadb.so >= v1.0.0
+
+<b>Требуется:</b>
+- /Public существует в файловой системе
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libadb.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libadb.so >= v1.0.0
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libadb.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libadb.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libadb.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libadb.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libadb.so >= v1.0.0=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libadb.so >= v1.0.0
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libadb.so >= v1.0.0
+
+<b>Required:</b>
+- 1 port forwarding configured from router to the target computer.
+- Minimum number of 2 users registered in the computer.
+- Any user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libadb.so >= v1.0.0
+
+<b>Требуется:</b>
+- 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+- Минимум 2 пользователя зарегистрированы в системе.
+- Любой пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libadb.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>adb</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libadb.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> libadb.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Root user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>adb</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> libadb.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Root-пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>smartappliance</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> libsmartappliance.so >= v1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>smartappliance</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+---
+
+Unlock the settings of the smart device.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- /Public exists in the file system
+- Any user logged in the computer.=Разблокировать настройки умного устройства.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- /Public существует в файловой системе
+- Любой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmartappliance.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Grant access to the path: <b>/bin</b> and prints their contents.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library init.so >= 1.0.0
+- /Public exists in the file system
+- Root user logged in the computer.=Предоставляет доступ к пути: <b>/bin</b> и выводит его содержимое.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки init.so >= 1.0.0
+- /Public существует в файловой системе
+- Root-пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Root user logged in the computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- 2 port forwarding configured from router to the target computer.
+- /bin exists in the file system
+- Dependencies on library kernel_module.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
+- /bin существует в файловой системе
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Unlock the settings of the smart device.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- /lib/aptclient.so exists in the file system
+- Dependencies on library net.so >= 1.0.0=Разблокировать настройки умного устройства.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- /lib/aptclient.so существует в файловой системе
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Unlock the settings of the smart device.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.
+- Dependencies on library init.so >= 1.0.0=Разблокировать настройки умного устройства.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+- Зависимость от библиотеки init.so >= 1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>smartappliance</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- /usr exists in the file system
+- Root user logged in the computer.
+- Guest user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>smartappliance</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- /usr существует в файловой системе
+- Root-пользователь авторизован в системе.
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libsmartappliance.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Root user logged in the computer.=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libsmartappliance.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Root-пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> kernel_router.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> kernel_router.so >= v1.0.0
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> kernel_router.so >= v1.0.0=Отображает содержимое файла /etc/passwd.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> kernel_router.so >= v1.0.0
+
+---
+
+Change all firewall entries to "allowed"
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>guest
+<b>Target: </b> kernel_router.so >= v1.0.0=Изменить все записи брандмауэра на "разрешено"
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>гость
+<b>Цель: </b> kernel_router.so >= v1.0.0
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Grant access to the path: <b>/usr/bin</b> and prints their contents.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Root user logged in the computer.=Предоставляет доступ к пути: <b>/usr/bin</b> и выводит его содержимое.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Root-пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>aptclient</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Dependencies on library kernel_module.so >= 1.0.0
+- Any user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+- Любой пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>aptclient</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>aptclient</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- /Public exists in the file system=Использует уязвимость в сервисе <color=#0FABFFFF>aptclient</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- /Public существует в файловой системе
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- /bin exists in the file system
+- Any user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- /bin существует в файловой системе
+- Любой пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Dependencies on library net.so >= 1.0.0=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> aptclient.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> aptclient.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>metaxploit</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library net.so >= 1.0.0
+- Guest user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>metaxploit</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки net.so >= 1.0.0
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Dependencies on library net.so >= 1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>metaxploit</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>metaxploit</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library init.so >= 1.0.0
+- Guest user logged in the computer.
+- Root user logged in the computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки init.so >= 1.0.0
+- Гостевой пользователь авторизован в системе.
+- Root-пользователь авторизован в системе.
+
+---
+
+Grant access to the path: <b>/home</b> and prints their contents.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- /Public exists in the file system
+- Guest user logged in the computer.=Предоставляет доступ к пути: <b>/home</b> и выводит его содержимое.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- /Public существует в файловой системе
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Root user logged in the computer.
+- Dependencies on library net.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Root-пользователь авторизован в системе.
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- /usr exists in the file system
+- Guest user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- /usr существует в файловой системе
+- Гостевой пользователь авторизован в системе.
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> metaxploit.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.
+- Any user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> metaxploit.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+- Любой пользователь авторизован в системе.
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> crypto.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> crypto.so >= v1.0.0
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> crypto.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library net.so >= 1.0.0=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> crypto.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки net.so >= 1.0.0
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>crypto</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> crypto.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.
+- /lib/aptclient.so exists in the file system=Использует уязвимость в сервисе <color=#0FABFFFF>crypto</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> crypto.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+- /lib/aptclient.so существует в файловой системе
+
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> crypto.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library init.so >= 1.0.0=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> crypto.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки init.so >= 1.0.0
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> crypto.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.
+- /Public exists in the file system
+- Guest user logged in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> crypto.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+- /Public существует в файловой системе
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> crypto.so >= v1.0.0
+
+<b>Required:</b>
+- Guest user logged in the computer.
+- Any user logged in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> crypto.so >= v1.0.0
+
+<b>Требуется:</b>
+- Гостевой пользователь авторизован в системе.
+- Любой пользователь авторизован в системе.
+
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> crypto.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> crypto.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>crypto</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> crypto.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>crypto</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> crypto.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> kernel_module.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- Guest user logged in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> kernel_module.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> kernel_module.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> kernel_module.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> kernel_module.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library net.so >= 1.0.0
+- Any user logged in the computer.
+- Guest user logged in the computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> kernel_module.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки net.so >= 1.0.0
+- Любой пользователь авторизован в системе.
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>kernel_module</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> kernel_module.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library net.so >= 1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>kernel_module</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> kernel_module.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки net.so >= 1.0.0
+
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> kernel_module.so >= v1.0.0
+
+<b>Required:</b>
+- /lib/aptclient.so exists in the file system
+- Guest user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> kernel_module.so >= v1.0.0
+
+<b>Требуется:</b>
+- /lib/aptclient.so существует в файловой системе
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> kernel_module.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- Guest user logged in the computer.
+- Dependencies on library init.so >= 1.0.0=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> kernel_module.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- Гостевой пользователь авторизован в системе.
+- Зависимость от библиотеки init.so >= 1.0.0
+
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> kernel_module.so >= v1.0.0
+
+<b>Required:</b>
+- /bin exists in the file system=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> kernel_module.so >= v1.0.0
+
+<b>Требуется:</b>
+- /bin существует в файловой системе
+
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>init</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- /Public exists in the file system
+- Root user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>init</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- /Public существует в файловой системе
+- Root-пользователь авторизован в системе.
+
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- /usr exists in the file system
+- Minimum number of 2 users registered in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- /usr существует в файловой системе
+- Минимум 2 пользователя зарегистрированы в системе.
+
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- /Public exists in the file system=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- /Public существует в файловой системе
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library net.so >= 1.0.0
+- Guest user logged in the computer.
+- Any user logged in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки net.so >= 1.0.0
+- Гостевой пользователь авторизован в системе.
+- Любой пользователь авторизован в системе.
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- /usr exists in the file system=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- /usr существует в файловой системе
+
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Dependencies on library net.so >= 1.0.0=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Зависимость от библиотеки net.so >= 1.0.0
+
+
+---
+
+Prints the contents of the file /etc/passwd.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.=Отображает содержимое файла /etc/passwd.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 2 users registered in the computer.
+- Root user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 2 пользователя зарегистрированы в системе.
+- Root-пользователь авторизован в системе.
+
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> init.so >= v1.0.0
+
+<b>Required:</b>
+- /Public exists in the file system
+- Minimum number of 1 users registered in the computer.
+- Any user logged in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> init.so >= v1.0.0
+
+<b>Требуется:</b>
+- /Public существует в файловой системе
+- Минимум 1 пользователь зарегистрирован в системе.
+- Любой пользователь авторизован в системе.
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- Minimum number of 2 users registered in the computer.
+- Guest user logged in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>net</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- /Public exists in the file system=Использует уязвимость в сервисе <color=#0FABFFFF>net</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- /Public существует в файловой системе
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- /lib/aptclient.so exists in the file system
+- Guest user logged in the computer.=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- /lib/aptclient.so существует в файловой системе
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library init.so >= 1.0.0
+- Any user logged in the computer.
+- Guest user logged in the computer.=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки init.so >= 1.0.0
+- Любой пользователь авторизован в системе.
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Grant access to the file /etc/passwd and decipher its contents.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>root
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library init.so >= 1.0.0
+- Minimum number of 2 users registered in the computer.=Предоставляет доступ к файлу /etc/passwd и расшифровывает его содержимое.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>root
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки init.so >= 1.0.0
+- Минимум 2 пользователя зарегистрированы в системе.
+
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>net</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library kernel_module.so >= 1.0.0=Использует уязвимость в сервисе <color=#0FABFFFF>net</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки kernel_module.so >= 1.0.0
+
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>net</color> service to inject a new password to a registered user.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Minimum number of 1 users registered in the computer.
+- Guest user logged in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>net</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Минимум 1 пользователь зарегистрирован в системе.
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Root user logged in the computer.
+- Minimum number of 2 users registered in the computer.
+- /bin exists in the file system=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Root-пользователь авторизован в системе.
+- Минимум 2 пользователя зарегистрированы в системе.
+- /bin существует в файловой системе
+
+
+---
+
+Search all the Bank credentials files in the computer to decipher all passwords.
+
+It is necessary to have the decipher program installed in the computer that launch the exploit.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Any user logged in the computer.
+- Dependencies on library init.so >= 1.0.0=Найти и расшифровать все файлы учетных данных Банка в компьютере.
+
+Необходимо иметь программу расшифровки, установленную на компьютере, с которого запускается эксплойт.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Любой пользователь авторизован в системе.
+- Зависимость от библиотеки init.so >= 1.0.0
+
+
+---
+
+Prints the contents of the file /home/user/Mail.txt of all users in the computer.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Minimum number of 1 users registered in the computer.
+- Guest user logged in the computer.=Отображает содержимое файла /home/user/Mail.txt всех пользователей в компьютере.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Минимум 1 пользователь зарегистрирован в системе.
+- Гостевой пользователь авторизован в системе.
+
+
+---
+
+Get access to a shell.
+<b>For local use only.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> net.so >= v1.0.0
+
+<b>Required:</b>
+- Dependencies on library init.so >= 1.0.0=Получить доступ к командной оболочке.
+<b>Только для локального использования.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> net.so >= v1.0.0
+
+<b>Требуется:</b>
+- Зависимость от библиотеки init.so >= 1.0.0
 
 
 ---
