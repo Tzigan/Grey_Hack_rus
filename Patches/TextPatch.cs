@@ -19,7 +19,7 @@ namespace GreyHackRussianPlugin.Patches
                 string original = value;
 
                 // Переводим текст
-                value = GreyHackRussianPlugin.Translation.Translator.TranslateText(original);
+                value = Translation.Translator.TranslateText(original);
 
                 if (value != original)
                 {
@@ -29,7 +29,7 @@ namespace GreyHackRussianPlugin.Patches
                     if (!processedTexts.Contains(hash))
                     {
                         processedTexts.Add(hash);
-                        GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"UI Text переведен: '{original}' -> '{value}' на объекте '{__instance?.gameObject?.name}'");
+                        GreyHackRussianPlugin.Log.LogInfo($"UI Text переведен: '{original}' -> '{value}' на объекте '{__instance?.gameObject?.name}'");
                     }
 
                     // Ограничиваем размер кэша
@@ -41,7 +41,7 @@ namespace GreyHackRussianPlugin.Patches
             }
             catch (Exception ex)
             {
-                GreyHackRussian.GreyHackRussianPlugin.Log.LogError($"Ошибка в TextPatch: {ex.Message}\n{ex.StackTrace}");
+                GreyHackRussianPlugin.Log.LogError($"Ошибка в TextPatch: {ex.Message}\n{ex.StackTrace}");
             }
         }
     }
