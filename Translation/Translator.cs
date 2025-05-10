@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace GreyHackRussian
+namespace GreyHackRussianPlugin.Translation
 {
     public static class Translator
     {
@@ -12,17 +12,17 @@ namespace GreyHackRussian
         public static void LoadTranslations()
         {
             // Сначала создаем директорию Translation, если нужно
-            string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
+            string translationDirectory = Path.Combine(GreyHackRussian.GreyHackRussianPlugin.PluginPath, "Translation");
             if (!Directory.Exists(translationDirectory))
             {
                 Directory.CreateDirectory(translationDirectory);
-                GreyHackRussianPlugin.Log.LogInfo($"Создана директория для переводов: {translationDirectory}");
+                GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Создана директория для переводов: {translationDirectory}");
             }
 
             // Теперь путь к файлу переводов указывает на подпапку Translation
             translationFilePath = Path.Combine(translationDirectory, "russian_translation.txt");
 
-            GreyHackRussianPlugin.Log.LogInfo($"Загрузка переводов из {translationFilePath}");
+            GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Загрузка переводов из {translationFilePath}");
 
             if (File.Exists(translationFilePath))
             {
@@ -48,13 +48,13 @@ namespace GreyHackRussian
                     }
                 }
 
-                GreyHackRussianPlugin.Log.LogInfo($"Загружено {count} строк перевода");
+                GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Загружено {count} строк перевода");
             }
             else
             {
                 // Создаем пустой файл перевода в подпапке Translation
                 File.WriteAllText(translationFilePath, "# Формат: оригинальный текст=переведенный текст\n");
-                GreyHackRussianPlugin.Log.LogInfo($"Создан пустой файл перевода в {translationFilePath}");
+                GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Создан пустой файл перевода в {translationFilePath}");
             }
         }
 
@@ -65,7 +65,7 @@ namespace GreyHackRussian
         {
             TranslationDictionary.Clear();
             LoadTranslations();
-            GreyHackRussianPlugin.Log.LogInfo("Переводы перезагружены");
+            GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo("Переводы перезагружены");
         }
 
         public static string TranslateText(string original)
@@ -79,7 +79,7 @@ namespace GreyHackRussian
                 int hashCode = original.GetHashCode();
                 if (Math.Abs(hashCode % 100) == 0)
                 {
-                    GreyHackRussianPlugin.Log.LogDebug($"Перевод: '{original}' -> '{translation}'");
+                    GreyHackRussian.GreyHackRussianPlugin.Log.LogDebug($"Перевод: '{original}' -> '{translation}'");
                 }
                 return translation;
             }
@@ -90,7 +90,7 @@ namespace GreyHackRussian
                 if (original.Length > 2)
                 {
                     // Путь к непереведенным строкам в подпапке Translation
-                    string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
+                    string translationDirectory = Path.Combine(GreyHackRussian.GreyHackRussianPlugin.PluginPath, "Translation");
                     if (!Directory.Exists(translationDirectory))
                     {
                         Directory.CreateDirectory(translationDirectory);
@@ -115,13 +115,13 @@ namespace GreyHackRussian
                     int hashCode = original.GetHashCode();
                     if (Math.Abs(hashCode % 50) == 0)
                     {
-                        GreyHackRussianPlugin.Log.LogDebug($"Не найден перевод: '{original}'");
+                        GreyHackRussian.GreyHackRussianPlugin.Log.LogDebug($"Не найден перевод: '{original}'");
                     }
                 }
             }
             catch (Exception ex)
             {
-                GreyHackRussianPlugin.Log.LogError($"Ошибка записи непереведенной строки: {ex.Message}");
+                GreyHackRussian.GreyHackRussianPlugin.Log.LogError($"Ошибка записи непереведенной строки: {ex.Message}");
             }
 
             return original; // Возвращаем оригинальный текст, если перевода нет
@@ -144,14 +144,14 @@ namespace GreyHackRussian
                 // Проверка без учета регистра
                 if (string.Equals(kvp.Key, original, StringComparison.OrdinalIgnoreCase))
                 {
-                    GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета регистра: '{original}' -> '{kvp.Value}'");
+                    GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета регистра: '{original}' -> '{kvp.Value}'");
                     return kvp.Value;
                 }
 
                 // Проверка без учета пробелов в начале/конце и регистра
                 if (string.Equals(kvp.Key.Trim(), original.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета пробелов: '{original}' -> '{kvp.Value}'");
+                    GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета пробелов: '{original}' -> '{kvp.Value}'");
                     return kvp.Value;
                 }
             }
@@ -160,11 +160,11 @@ namespace GreyHackRussian
             try
             {
                 // Используем централизованный метод для сохранения непереведенных текстов
-                GreyHackRussian.Patches.ExploitPatch.SaveUntranslatedText(original);
+                GreyHackRussianPlugin.Patches.ExploitPatch.SaveUntranslatedText(original);
             }
             catch (Exception ex)
             {
-                GreyHackRussianPlugin.Log.LogError($"Ошибка при сохранении непереведенного текста: {ex.Message}");
+                GreyHackRussian.GreyHackRussianPlugin.Log.LogError($"Ошибка при сохранении непереведенного текста: {ex.Message}");
             }
 
             return original;
