@@ -9,6 +9,9 @@ namespace GreyHackRussianPlugin.Translation
         public static Dictionary<string, string> TranslationDictionary = new Dictionary<string, string>();
         private static string translationFilePath;
 
+        /// <summary>
+        /// Загружает переводы из файла
+        /// </summary>
         public static void LoadTranslations()
         {
             // Сначала создаем директорию Translation, если нужно
@@ -68,6 +71,11 @@ namespace GreyHackRussianPlugin.Translation
             GreyHackRussianPlugin.Log.LogInfo("Переводы перезагружены");
         }
 
+        /// <summary>
+        /// Переводит текст с использованием словаря переводов
+        /// </summary>
+        /// <param name="original">Оригинальный текст</param>
+        /// <returns>Переведенный текст или оригинал, если перевод не найден</returns>
         public static string TranslateText(string original)
         {
             if (string.IsNullOrEmpty(original)) return original;
@@ -84,50 +92,25 @@ namespace GreyHackRussianPlugin.Translation
                 return translation;
             }
 
-            // Записываем непереведенные строки в отдельный файл в подпапке Translation
-            try
+            // Для коротких строк (меньше 3 символов) просто возвращаем оригинал
+            if (original.Length <= 2)
+                return original;
+
+            // Для более длинных строк - логируем информацию о непереведенной строке (не слишком часто)
+            int logHashCode = original.GetHashCode();
+            if (Math.Abs(logHashCode % 50) == 0)
             {
-                if (original.Length > 2)
-                {
-                    // Путь к непереведенным строкам в подпапке Translation
-                    string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
-                    if (!Directory.Exists(translationDirectory))
-                    {
-                        Directory.CreateDirectory(translationDirectory);
-                    }
-
-                    string untranslatedPath = Path.Combine(translationDirectory, "untranslated.txt");
-
-                    // Проверяем, есть ли уже эта строка в файле
-                    bool shouldAppend = true;
-                    if (File.Exists(untranslatedPath))
-                    {
-                        string content = File.ReadAllText(untranslatedPath);
-                        shouldAppend = !content.Contains(original);
-                    }
-
-                    if (shouldAppend)
-                    {
-                        File.AppendAllText(untranslatedPath, original + "\n");
-                    }
-
-                    // Выводим информацию о непереведенной строке не слишком часто
-                    int hashCode = original.GetHashCode();
-                    if (Math.Abs(hashCode % 50) == 0)
-                    {
-                        GreyHackRussianPlugin.Log.LogDebug($"Не найден перевод: '{original}'");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                GreyHackRussianPlugin.Log.LogError($"Ошибка записи непереведенной строки: {ex.Message}");
+                GreyHackRussianPlugin.Log.LogDebug($"Не найден перевод: '{original}'");
             }
 
             return original; // Возвращаем оригинальный текст, если перевода нет
         }
 
-        // Метод для поиска перевода без учета регистра и пробелов
+        /// <summary>
+        /// Метод для поиска перевода без учета регистра и пробелов
+        /// </summary>
+        /// <param name="original">Оригинальный текст</param>
+        /// <returns>Переведенный текст или оригинал, если перевод не найден</returns>
         public static string TranslateTextIgnoreCase(string original)
         {
             if (string.IsNullOrEmpty(original)) return original;
@@ -154,17 +137,6 @@ namespace GreyHackRussianPlugin.Translation
                     GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета пробелов: '{original}' -> '{kvp.Value}'");
                     return kvp.Value;
                 }
-            }
-
-            // Если перевод не найден, используем централизованный метод для сохранения
-            try
-            {
-                // Используем централизованный метод для сохранения непереведенных текстов
-                Patches.ExploitPatch.SaveUntranslatedText(original);
-            }
-            catch (Exception ex)
-            {
-                GreyHackRussianPlugin.Log.LogError($"Ошибка при сохранении непереведенного текста: {ex.Message}");
             }
 
             return original;
