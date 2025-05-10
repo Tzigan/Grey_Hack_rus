@@ -75,6 +75,14 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Unity" Version="5.11.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="packages\" />
+  </ItemGroup>
+
   <!-- Добавим явные команды для копирования файлов -->
   <Target Name="EnsureOutputPathExists" BeforeTargets="Build">
     <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
