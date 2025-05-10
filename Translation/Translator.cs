@@ -34,13 +34,17 @@ namespace GreyHackRussian
                 {
                     if (string.IsNullOrEmpty(line) || line.StartsWith("#") || !line.Contains("=")) continue;
 
-                    string[] parts = line.Split(new[] { '=' }, 2);
-                    if (parts.Length == 2)
+                    // Лучшее разделение на ключ и значение, с поддержкой экранированных знаков равенства
+                    int equalPos = line.IndexOf('=');
+                    if (equalPos > 0)
                     {
-                        string key = parts[0].Trim();
-                        string value = parts[1].Trim();
-                        TranslationDictionary[key] = value;
-                        count++;
+                        string key = line.Substring(0, equalPos).Trim();
+                        string value = line.Substring(equalPos + 1).Trim();
+                        if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+                        {
+                            TranslationDictionary[key] = value;
+                            count++;
+                        }
                     }
                 }
 
@@ -52,6 +56,16 @@ namespace GreyHackRussian
                 File.WriteAllText(translationFilePath, "# Формат: оригинальный текст=переведенный текст\n");
                 GreyHackRussianPlugin.Log.LogInfo($"Создан пустой файл перевода в {translationFilePath}");
             }
+        }
+
+        /// <summary>
+        /// Перезагружает переводы из файла
+        /// </summary>
+        public static void ReloadTranslations()
+        {
+            TranslationDictionary.Clear();
+            LoadTranslations();
+            GreyHackRussianPlugin.Log.LogInfo("Переводы перезагружены");
         }
 
         public static string TranslateText(string original)
@@ -113,7 +127,7 @@ namespace GreyHackRussian
             return original; // Возвращаем оригинальный текст, если перевода нет
         }
 
-        // Новый метод для поиска перевода без учета регистра и пробелов
+        // Метод для поиска перевода без учета регистра и пробелов
         public static string TranslateTextIgnoreCase(string original)
         {
             if (string.IsNullOrEmpty(original)) return original;
@@ -142,16 +156,11 @@ namespace GreyHackRussian
                 }
             }
 
-            // Если перевод не найден, записываем в лог и в файлы
+            // Если перевод не найден, используем централизованный метод для сохранения
             try
             {
-                // Сохранение для отладки
-                string debugPath = Path.Combine(GreyHackRussianPlugin.PluginPath, "debug_untranslated.txt");
-                File.AppendAllText(debugPath, original + "\n\n---\n\n");
-
-                // Сохранение в формате для файла переводов
-                string exportPath = Path.Combine(GreyHackRussianPlugin.PluginPath, "export_translations.txt");
-                File.AppendAllText(exportPath, original + "=" + original + "\n\n");
+                // Используем централизованный метод для сохранения непереведенных текстов
+                GreyHackRussianPlugin.Patches.ExploitPatch.SaveUntranslatedText(original);
             }
             catch (Exception ex)
             {
