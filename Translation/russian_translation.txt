@@ -16,6 +16,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to
 - Зависимость от библиотеки net.so >= 1.0.0
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -38,6 +39,7 @@ Get access to a shell.
 - Минимум 1 пользователь зарегистрирован в системе.
 - /bin существует в файловой системе
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -56,6 +58,7 @@ Prints the contents of the file /etc/passwd.
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -73,6 +76,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
+
 
 ---
 
@@ -95,6 +99,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to
 - Минимум 1 пользователь зарегистрирован в системе.
 - Зависимость от библиотеки init.so >= 1.0.0
 - /bin существует в файловой системе
+
 
 ---
 
@@ -120,6 +125,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Root-пользователь авторизован в системе.
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Search all the Bank credentials files in the computer to decipher all passwords.
@@ -135,6 +141,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> libssh.so >= v1.0.0
+
 
 ---
 
@@ -156,6 +163,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ssh</color> service to
 - Гостевой пользователь авторизован в системе.
 - /usr существует в файловой системе
 
+
 ---
 
 Grant access to the path: <b>/bin</b> and prints their contents.
@@ -173,6 +181,7 @@ Grant access to the path: <b>/bin</b> and prints their contents.
 
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -193,6 +202,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 <b>Требуется:</b>
 - Любой пользователь авторизован в системе.
 - /usr существует в файловой системе
+
 
 ---
 
@@ -216,6 +226,7 @@ Get access to a shell.
 - Root-пользователь авторизован в системе.
 - Зависимость от библиотеки net.so >= 1.0.0
 
+
 ---
 
 Grant access to the path: <b>/usr</b> and prints their contents.
@@ -233,6 +244,7 @@ Grant access to the path: <b>/usr</b> and prints their contents.
 
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -258,6 +270,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Гостевой пользователь авторизован в системе.
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -277,6 +290,7 @@ Get access to a shell.
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
 - /lib/aptclient.so существует в файловой системе
+
 
 ---
 
@@ -300,6 +314,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to
 - Минимум 2 пользователя зарегистрированы в системе.
 - /bin существует в файловой системе
 
+
 ---
 
 Get access to a shell.
@@ -317,6 +332,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -338,6 +354,7 @@ Get access to a shell.
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -358,25 +375,6 @@ Get access to a shell.
 - Любой пользователь авторизован в системе.
 - 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 
----
-
-Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to inject a new password to a registered user.
-<b>Remote use.</b>
-
-<b>Permissions obtained: </b>Non root user
-<b>Target: </b> libftp.so >= v1.0.0
-
-<b>Required:</b>
-- /lib/aptclient.so exists in the file system
-- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>ftp</color> для внедрения нового пароля зарегистрированному пользователю.
-<b>Удаленное использование.</b>
-
-<b>Получаемые права: </b>Пользователь без root-прав
-<b>Цель: </b> libftp.so >= v1.0.0
-
-<b>Требуется:</b>
-- /lib/aptclient.so существует в файловой системе
-- Минимум 2 пользователя зарегистрированы в системе.
 
 ---
 
@@ -397,6 +395,28 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to
 <b>Требуется:</b>
 - /lib/aptclient.so существует в файловой системе
 - Минимум 2 пользователя зарегистрированы в системе.
+
+
+---
+
+Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to inject a new password to a registered user.
+<b>Remote use.</b>
+
+<b>Permissions obtained: </b>Non root user
+<b>Target: </b> libftp.so >= v1.0.0
+
+<b>Required:</b>
+- /lib/aptclient.so exists in the file system
+- Minimum number of 2 users registered in the computer.=Использует уязвимость в сервисе <color=#0FABFFFF>ftp</color> для внедрения нового пароля зарегистрированному пользователю.
+<b>Удаленное использование.</b>
+
+<b>Получаемые права: </b>Пользователь без root-прав
+<b>Цель: </b> libftp.so >= v1.0.0
+
+<b>Требуется:</b>
+- /lib/aptclient.so существует в файловой системе
+- Минимум 2 пользователя зарегистрированы в системе.
+
 
 ---
 
@@ -424,6 +444,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - /lib/aptclient.so существует в файловой системе
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -444,6 +465,7 @@ Prints the contents of the file /etc/passwd.
 - Root-пользователь авторизован в системе.
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to inject a new password to a registered user.
@@ -463,6 +485,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>ftp</color> service to
 <b>Требуется:</b>
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -486,6 +509,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
 
+
 ---
 
 Prints the contents of the file /home/user/Mail.txt of all users in the computer.
@@ -504,6 +528,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 <b>Требуется:</b>
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Get access to a shell.
@@ -521,6 +546,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Минимум 1 пользователь зарегистрирован в системе.
+
 
 ---
 
@@ -542,6 +568,7 @@ Prints the contents of the file /etc/passwd.
 - Зависимость от библиотеки net.so >= 1.0.0
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Grant access to the path: <b>/usr</b> and prints their contents.
@@ -553,6 +580,7 @@ Grant access to the path: <b>/usr</b> and prints their contents.
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> libhttp.so >= v1.0.0
+
 
 ---
 
@@ -574,6 +602,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 - Root-пользователь авторизован в системе.
 - /lib/aptclient.so существует в файловой системе
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>http</color> service to inject a new password to a registered user.
@@ -585,6 +614,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>http</color> service t
 
 <b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libhttp.so >= v1.0.0
+
 
 ---
 
@@ -603,6 +633,7 @@ Grant access to the path: <b>/sys</b> and prints their contents.
 
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -624,6 +655,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>http</color> service t
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Grant access to the file /etc/passwd and decipher its contents.
@@ -639,6 +671,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libsql.so >= v1.0.0
+
 
 ---
 
@@ -660,6 +693,7 @@ Get access to a shell.
 - Зависимость от библиотеки init.so >= 1.0.0
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -680,6 +714,7 @@ Get access to a shell.
 - Любой пользователь авторизован в системе.
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Get access to a shell.
@@ -699,6 +734,7 @@ Get access to a shell.
 <b>Требуется:</b>
 - 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -722,6 +758,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Prints the contents of the file /home/user/Mail.txt of all users in the computer.
@@ -742,6 +779,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 - Гостевой пользователь авторизован в системе.
 - /Public существует в файловой системе
 
+
 ---
 
 Grant access to the path: <b>/sys</b> and prints their contents.
@@ -760,6 +798,7 @@ Grant access to the path: <b>/sys</b> and prints their contents.
 <b>Требуется:</b>
 - /bin существует в файловой системе
 
+
 ---
 
 Prints the contents of the file /home/user/Mail.txt of all users in the computer.
@@ -771,6 +810,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> libsmtp.so >= v1.0.0
+
 
 ---
 
@@ -794,6 +834,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service t
 - Гостевой пользователь авторизован в системе.
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service to inject a new password to a registered user.
@@ -811,6 +852,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service t
 
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -834,6 +876,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -851,6 +894,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -874,6 +918,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service t
 - Root-пользователь авторизован в системе.
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -893,6 +938,7 @@ Get access to a shell.
 <b>Требуется:</b>
 - /bin существует в файловой системе
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
+
 
 ---
 
@@ -916,6 +962,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>smtp</color> service t
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -936,6 +983,7 @@ Get access to a shell.
 - Root-пользователь авторизован в системе.
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Grant access to the path: <b>/etc</b> and prints their contents.
@@ -953,6 +1001,7 @@ Grant access to the path: <b>/etc</b> and prints their contents.
 
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
+
 
 ---
 
@@ -973,6 +1022,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>chat</color> service t
 <b>Требуется:</b>
 - Любой пользователь авторизован в системе.
 - Минимум 2 пользователя зарегистрированы в системе.
+
 
 ---
 
@@ -1000,6 +1050,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Минимум 1 пользователь зарегистрирован в системе.
 - /Public существует в файловой системе
 
+
 ---
 
 Grant access to the file /etc/passwd and decipher its contents.
@@ -1024,6 +1075,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Root-пользователь авторизован в системе.
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Search all the Bank credentials files in the computer to decipher all passwords.
@@ -1045,6 +1097,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Требуется:</b>
 - Минимум 1 пользователь зарегистрирован в системе.
+
 
 ---
 
@@ -1068,6 +1121,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -1086,6 +1140,7 @@ Prints the contents of the file /etc/passwd.
 <b>Требуется:</b>
 - /bin существует в файловой системе
 
+
 ---
 
 Grant access to the file /etc/passwd and decipher its contents.
@@ -1101,6 +1156,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> libchat.so >= v1.0.0
+
 
 ---
 
@@ -1122,6 +1178,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 - 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -1139,6 +1196,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Зависимость от библиотеки net.so >= 1.0.0
+
 
 ---
 
@@ -1160,6 +1218,7 @@ Prints the contents of the file /etc/passwd.
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -1177,6 +1236,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Любой пользователь авторизован в системе.
+
 
 ---
 
@@ -1197,6 +1257,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>chat</color> service t
 <b>Требуется:</b>
 - Минимум 1 пользователь зарегистрирован в системе.
 - Любой пользователь авторизован в системе.
+
 
 ---
 
@@ -1222,6 +1283,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - /bin существует в файловой системе
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
 
+
 ---
 
 Search all the Bank credentials files in the computer to decipher all passwords.
@@ -1245,6 +1307,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 - Любой пользователь авторизован в системе.
+
 
 ---
 
@@ -1270,6 +1333,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Любой пользователь авторизован в системе.
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>cam</color> service to inject a new password to a registered user.
@@ -1289,6 +1353,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>cam</color> service to
 <b>Требуется:</b>
 - Минимум 2 пользователя зарегистрированы в системе.
 - Любой пользователь авторизован в системе.
+
 
 ---
 
@@ -1312,6 +1377,7 @@ Get access to a shell.
 - Зависимость от библиотеки net.so >= 1.0.0
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -1329,6 +1395,7 @@ Prints the contents of the file /etc/passwd.
 
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -1350,6 +1417,7 @@ Grant access to the path: <b>/sys</b> and prints their contents.
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -1367,6 +1435,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+
 
 ---
 
@@ -1389,6 +1458,7 @@ Get access to a shell.
 - Минимум 1 пользователь зарегистрирован в системе.
 - Root-пользователь авторизован в системе.
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
+
 
 ---
 
@@ -1416,6 +1486,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Root-пользователь авторизован в системе.
 - Гостевой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -1433,6 +1504,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -1452,6 +1524,7 @@ Grant access to the path: <b>/usr/bin</b> and prints their contents.
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
 
+
 ---
 
 Get access to a shell.
@@ -1463,6 +1536,7 @@ Get access to a shell.
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> libcam.so >= v1.0.0
+
 
 ---
 
@@ -1485,6 +1559,7 @@ Get access to a shell.
 - Гостевой пользователь авторизован в системе.
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Любой пользователь авторизован в системе.
+
 
 ---
 
@@ -1510,6 +1585,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Гостевой пользователь авторизован в системе.
 - Минимум 2 пользователя зарегистрированы в системе.
 
+
 ---
 
 Grant access to the file /etc/passwd and decipher its contents.
@@ -1534,6 +1610,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - /bin существует в файловой системе
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -1556,6 +1633,7 @@ Get access to a shell.
 - /usr существует в файловой системе
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
 
+
 ---
 
 Get access to a shell.
@@ -1567,6 +1645,7 @@ Get access to a shell.
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> librshell.so >= v1.0.0
+
 
 ---
 
@@ -1587,6 +1666,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>rshell</color> service
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -1609,6 +1689,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
+
 
 ---
 
@@ -1635,6 +1716,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - /lib/aptclient.so существует в файловой системе
 - Гостевой пользователь авторизован в системе.
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -1662,6 +1744,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Любой пользователь авторизован в системе.
 - /usr существует в файловой системе
 
+
 ---
 
 Grant access to the file /etc/passwd and decipher its contents.
@@ -1684,6 +1767,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>rshell</color> service to inject a new password to a registered user.
@@ -1701,6 +1785,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>rshell</color> service
 
 <b>Требуется:</b>
 - /Public существует в файловой системе
+
 
 ---
 
@@ -1726,6 +1811,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Гостевой пользователь авторизован в системе.
 - 3 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Get access to a shell.
@@ -1746,6 +1832,7 @@ Get access to a shell.
 - Гостевой пользователь авторизован в системе.
 - 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Grant access to the file /etc/passwd and decipher its contents.
@@ -1761,6 +1848,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> librepository.so >= v1.0.0
+
 
 ---
 
@@ -1784,6 +1872,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>repository</color> ser
 - Root-пользователь авторизован в системе.
 - Минимум 2 пользователя зарегистрированы в системе.
 
+
 ---
 
 Get access to a shell.
@@ -1795,6 +1884,7 @@ Get access to a shell.
 
 <b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> librepository.so >= v1.0.0
+
 
 ---
 
@@ -1818,6 +1908,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>blockchain</color> ser
 - /lib/aptclient.so существует в файловой системе
 - 1 перенаправление порта настроено с маршрутизатора на целевой компьютер.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>blockchain</color> service to inject a new password to a registered user.
@@ -1835,6 +1926,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>blockchain</color> ser
 
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
+
 
 ---
 
@@ -1861,6 +1953,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Гостевой пользователь авторизован в системе.
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -1886,6 +1979,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Минимум 1 пользователь зарегистрирован в системе.
 - Зависимость от библиотеки net.so >= 1.0.0
 
+
 ---
 
 Prints the contents of the file /home/user/Mail.txt of all users in the computer.
@@ -1905,6 +1999,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 <b>Требуется:</b>
 - Любой пользователь авторизован в системе.
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -1928,6 +2023,7 @@ Prints the contents of the file /etc/passwd.
 - Минимум 1 пользователь зарегистрирован в системе.
 - /lib/aptclient.so существует в файловой системе
 
+
 ---
 
 Prints the contents of the file /home/user/Mail.txt of all users in the computer.
@@ -1950,6 +2046,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 - 2 перенаправления порта настроены с маршрутизатора на целевой компьютер.
 - Минимум 2 пользователя зарегистрированы в системе.
 
+
 ---
 
 Get access to a shell.
@@ -1967,6 +2064,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Минимум 1 пользователь зарегистрирован в системе.
+
 
 ---
 
@@ -1990,6 +2088,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Search all the Bank credentials files in the computer to decipher all passwords.
@@ -2011,6 +2110,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Требуется:</b>
 - Минимум 1 пользователь зарегистрирован в системе.
+
 
 ---
 
@@ -2036,6 +2136,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Зависимость от библиотеки net.so >= 1.0.0
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -2058,6 +2159,7 @@ Get access to a shell.
 - Любой пользователь авторизован в системе.
 - /usr существует в файловой системе
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to inject a new password to a registered user.
@@ -2078,6 +2180,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to
 - Гостевой пользователь авторизован в системе.
 - Минимум 2 пользователя зарегистрированы в системе.
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -2096,6 +2199,7 @@ Prints the contents of the file /etc/passwd.
 <b>Требуется:</b>
 - /Public существует в файловой системе
 
+
 ---
 
 Get access to a shell.
@@ -2107,6 +2211,7 @@ Get access to a shell.
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> libadb.so >= v1.0.0
+
 
 ---
 
@@ -2125,6 +2230,7 @@ Prints the contents of the file /etc/passwd.
 
 <b>Требуется:</b>
 - Любой пользователь авторизован в системе.
+
 
 ---
 
@@ -2148,6 +2254,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Grant access to the file /etc/passwd and decipher its contents.
@@ -2163,6 +2270,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> libadb.so >= v1.0.0
+
 
 ---
 
@@ -2186,6 +2294,7 @@ Get access to a shell.
 - Минимум 2 пользователя зарегистрированы в системе.
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to inject a new password to a registered user.
@@ -2203,6 +2312,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to
 
 <b>Требуется:</b>
 - Минимум 2 пользователя зарегистрированы в системе.
+
 
 ---
 
@@ -2224,6 +2334,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>adb</color> service to
 - Минимум 1 пользователь зарегистрирован в системе.
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>smartappliance</color> service to inject a new password to a registered user.
@@ -2235,6 +2346,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>smartappliance</color>
 
 <b>Получаемые права: </b>root
 <b>Цель: </b> libsmartappliance.so >= v1.0.0
+
 
 ---
 
@@ -2258,6 +2370,7 @@ Unlock the settings of the smart device.
 - /Public существует в файловой системе
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -2269,6 +2382,7 @@ Get access to a shell.
 
 <b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> libsmartappliance.so >= v1.0.0
+
 
 ---
 
@@ -2292,6 +2406,7 @@ It is necessary to have the decipher program installed in the computer that laun
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
 
+
 ---
 
 Grant access to the path: <b>/bin</b> and prints their contents.
@@ -2314,6 +2429,7 @@ Grant access to the path: <b>/bin</b> and prints their contents.
 - /Public существует в файловой системе
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Prints the contents of the file /home/user/Mail.txt of all users in the computer.
@@ -2333,6 +2449,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -2356,6 +2473,7 @@ Get access to a shell.
 - /bin существует в файловой системе
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
 
+
 ---
 
 Unlock the settings of the smart device.
@@ -2378,6 +2496,7 @@ Unlock the settings of the smart device.
 - /lib/aptclient.so существует в файловой системе
 - Зависимость от библиотеки net.so >= 1.0.0
 
+
 ---
 
 Unlock the settings of the smart device.
@@ -2397,6 +2516,7 @@ Unlock the settings of the smart device.
 <b>Требуется:</b>
 - Минимум 2 пользователя зарегистрированы в системе.
 - Зависимость от библиотеки init.so >= 1.0.0
+
 
 ---
 
@@ -2420,6 +2540,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>smartappliance</color>
 - Root-пользователь авторизован в системе.
 - Гостевой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -2440,6 +2561,7 @@ Get access to a shell.
 - Минимум 1 пользователь зарегистрирован в системе.
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -2451,6 +2573,7 @@ Get access to a shell.
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> kernel_router.so >= v1.0.0
+
 
 ---
 
@@ -2464,6 +2587,7 @@ Prints the contents of the file /etc/passwd.
 <b>Получаемые права: </b>гость
 <b>Цель: </b> kernel_router.so >= v1.0.0
 
+
 ---
 
 Change all firewall entries to "allowed"
@@ -2475,6 +2599,7 @@ Change all firewall entries to "allowed"
 
 <b>Получаемые права: </b>гость
 <b>Цель: </b> kernel_router.so >= v1.0.0
+
 
 ---
 
@@ -2493,6 +2618,7 @@ Get access to a shell.
 
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -2514,6 +2640,7 @@ Grant access to the path: <b>/usr/bin</b> and prints their contents.
 - Минимум 1 пользователь зарегистрирован в системе.
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> service to inject a new password to a registered user.
@@ -2531,6 +2658,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> serv
 
 <b>Требуется:</b>
 - Root-пользователь авторизован в системе.
+
 
 ---
 
@@ -2558,6 +2686,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> service to inject a new password to a registered user.
@@ -2578,6 +2707,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> serv
 - Root-пользователь авторизован в системе.
 - Минимум 2 пользователя зарегистрированы в системе.
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -2595,6 +2725,7 @@ Prints the contents of the file /etc/passwd.
 
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -2614,6 +2745,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> serv
 <b>Требуется:</b>
 - Минимум 1 пользователь зарегистрирован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> service to inject a new password to a registered user.
@@ -2631,6 +2763,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>aptclient</color> serv
 
 <b>Требуется:</b>
 - /Public существует в файловой системе
+
 
 ---
 
@@ -2656,6 +2789,7 @@ It is necessary to have the decipher program installed in the computer that laun
 - /bin существует в файловой системе
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -2676,6 +2810,7 @@ Prints the contents of the file /etc/passwd.
 - Root-пользователь авторизован в системе.
 - Зависимость от библиотеки net.so >= 1.0.0
 
+
 ---
 
 Get access to a shell.
@@ -2694,6 +2829,7 @@ Get access to a shell.
 <b>Требуется:</b>
 - Минимум 2 пользователя зарегистрированы в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> service to inject a new password to a registered user.
@@ -2711,6 +2847,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> ser
 
 <b>Требуется:</b>
 - Зависимость от библиотеки kernel_module.so >= 1.0.0
+
 
 ---
 
@@ -2732,6 +2869,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> ser
 - Зависимость от библиотеки net.so >= 1.0.0
 - Гостевой пользователь авторизован в системе.
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> service to inject a new password to a registered user.
@@ -2752,6 +2890,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> ser
 - Минимум 1 пользователь зарегистрирован в системе.
 - Зависимость от библиотеки net.so >= 1.0.0
 
+
 ---
 
 Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> service to inject a new password to a registered user.
@@ -2763,6 +2902,7 @@ Take advantage of a vulnerability in the <color=#0FABFFFF>metaxploit</color> ser
 
 <b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> metaxploit.so >= v1.0.0
+
 
 ---
 
@@ -2786,6 +2926,7 @@ Prints the contents of the file /home/user/Mail.txt of all users in the computer
 - Гостевой пользователь авторизован в системе.
 - Root-пользователь авторизован в системе.
 
+
 ---
 
 Grant access to the path: <b>/home</b> and prints their contents.
@@ -2806,6 +2947,7 @@ Grant access to the path: <b>/home</b> and prints their contents.
 - /Public существует в файловой системе
 - Гостевой пользователь авторизован в системе.
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -2823,6 +2965,7 @@ Prints the contents of the file /etc/passwd.
 
 <b>Требуется:</b>
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -2846,6 +2989,7 @@ Get access to a shell.
 - Root-пользователь авторизован в системе.
 - Зависимость от библиотеки net.so >= 1.0.0
 
+
 ---
 
 Prints the contents of the file /etc/passwd.
@@ -2865,6 +3009,7 @@ Prints the contents of the file /etc/passwd.
 <b>Требуется:</b>
 - /usr существует в файловой системе
 - Гостевой пользователь авторизован в системе.
+
 
 ---
 
@@ -2886,6 +3031,7 @@ Prints the contents of the file /etc/passwd.
 - Минимум 2 пользователя зарегистрированы в системе.
 - Любой пользователь авторизован в системе.
 
+
 ---
 
 Get access to a shell.
@@ -2897,6 +3043,7 @@ Get access to a shell.
 
 <b>Получаемые права: </b>Пользователь без root-прав
 <b>Цель: </b> crypto.so >= v1.0.0
+
 
 ---
 
@@ -2919,6 +3066,7 @@ It is necessary to have the decipher program installed in the computer that laun
 
 <b>Требуется:</b>
 - Зависимость от библиотеки net.so >= 1.0.0
+
 
 ---
 
@@ -3735,3 +3883,4 @@ Get access to a shell.
 
 
 ---
+
