@@ -160,7 +160,7 @@ namespace GreyHackRussianPlugin.Translation
             try
             {
                 // Используем централизованный метод для сохранения непереведенных текстов
-                GreyHackRussianPlugin.Patches.ExploitPatch.SaveUntranslatedText(original);
+                Patches.ExploitPatch.SaveUntranslatedText(original);
             }
             catch (Exception ex)
             {
