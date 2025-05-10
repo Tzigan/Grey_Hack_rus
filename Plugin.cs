@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
+using GreyHackRussianPlugin.Translation;
 using HarmonyLib;
 using System;
 using System.IO;
