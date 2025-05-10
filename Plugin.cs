@@ -57,42 +57,6 @@ namespace GreyHackRussianPlugin
             // Подписываемся на событие обновления Unity для анализа UI
             gameObject.AddComponent<UIAnalyzer>();
         }
-
-        // Кэшированные значения для повышения производительности
-        private static Type inputType;
-        private static MethodInfo getKeyDownMethod;
-
-        private bool IsKeyPressed(int keyCode)
-        {
-            try
-            {
-                // Инициализация при первом вызове
-                if (inputType == null)
-                    inputType = Type.GetType("UnityEngine.Input, UnityEngine");
-                if (getKeyDownMethod == null && inputType != null)
-                    getKeyDownMethod = inputType.GetMethod("GetKeyDown", BindingFlags.Public | BindingFlags.Static);
-
-                if (getKeyDownMethod != null)
-                    return (bool)getKeyDownMethod.Invoke(null, new object[] { (KeyCode)keyCode });
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"Ошибка при проверке нажатия клавиши: {ex.Message}");
-            }
-            return false;
-        }
-
-        void Update()
-        {
-            // Используйте метод IsKeyPressed (115 - код клавиши F4)
-            if (IsKeyPressed(115))
-            {
-                Patches.ExploitPatch.RequestExport();
-                Log.LogInfo("Запрошен экспорт переводов по нажатию F4");
-            }
-
-            Patches.ExploitPatch.OnUpdate();
-        }
     }
 
     // Компонент для анализа UI (добавляется к объекту плагина)
