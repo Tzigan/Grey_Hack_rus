@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-namespace GreyHackRussian.Patches
+namespace GreyHackRussianPlugin.Patches
 {
     [HarmonyPatch(typeof(Text), "set_text")]
     public class TextPatch
@@ -19,7 +19,7 @@ namespace GreyHackRussian.Patches
                 string original = value;
 
                 // Переводим текст
-                value = Translator.TranslateText(original);
+                value = GreyHackRussianPlugin.Translation.Translator.TranslateText(original);
 
                 if (value != original)
                 {
@@ -29,7 +29,7 @@ namespace GreyHackRussian.Patches
                     if (!processedTexts.Contains(hash))
                     {
                         processedTexts.Add(hash);
-                        GreyHackRussianPlugin.Log.LogInfo($"UI Text переведен: '{original}' -> '{value}' на объекте '{__instance?.gameObject?.name}'");
+                        GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"UI Text переведен: '{original}' -> '{value}' на объекте '{__instance?.gameObject?.name}'");
                     }
 
                     // Ограничиваем размер кэша
@@ -41,7 +41,7 @@ namespace GreyHackRussian.Patches
             }
             catch (Exception ex)
             {
-                GreyHackRussianPlugin.Log.LogError($"Ошибка в TextPatch: {ex.Message}\n{ex.StackTrace}");
+                GreyHackRussian.GreyHackRussianPlugin.Log.LogError($"Ошибка в TextPatch: {ex.Message}\n{ex.StackTrace}");
             }
         }
     }
