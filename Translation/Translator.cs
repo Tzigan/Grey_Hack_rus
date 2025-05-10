@@ -12,17 +12,17 @@ namespace GreyHackRussianPlugin.Translation
         public static void LoadTranslations()
         {
             // Сначала создаем директорию Translation, если нужно
-            string translationDirectory = Path.Combine(GreyHackRussian.GreyHackRussianPlugin.PluginPath, "Translation");
+            string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
             if (!Directory.Exists(translationDirectory))
             {
                 Directory.CreateDirectory(translationDirectory);
-                GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Создана директория для переводов: {translationDirectory}");
+                GreyHackRussianPlugin.Log.LogInfo($"Создана директория для переводов: {translationDirectory}");
             }
 
             // Теперь путь к файлу переводов указывает на подпапку Translation
             translationFilePath = Path.Combine(translationDirectory, "russian_translation.txt");
 
-            GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Загрузка переводов из {translationFilePath}");
+            GreyHackRussianPlugin.Log.LogInfo($"Загрузка переводов из {translationFilePath}");
 
             if (File.Exists(translationFilePath))
             {
@@ -48,13 +48,13 @@ namespace GreyHackRussianPlugin.Translation
                     }
                 }
 
-                GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Загружено {count} строк перевода");
+                GreyHackRussianPlugin.Log.LogInfo($"Загружено {count} строк перевода");
             }
             else
             {
                 // Создаем пустой файл перевода в подпапке Translation
                 File.WriteAllText(translationFilePath, "# Формат: оригинальный текст=переведенный текст\n");
-                GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Создан пустой файл перевода в {translationFilePath}");
+                GreyHackRussianPlugin.Log.LogInfo($"Создан пустой файл перевода в {translationFilePath}");
             }
         }
 
@@ -65,7 +65,7 @@ namespace GreyHackRussianPlugin.Translation
         {
             TranslationDictionary.Clear();
             LoadTranslations();
-            GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo("Переводы перезагружены");
+            GreyHackRussianPlugin.Log.LogInfo("Переводы перезагружены");
         }
 
         public static string TranslateText(string original)
@@ -79,7 +79,7 @@ namespace GreyHackRussianPlugin.Translation
                 int hashCode = original.GetHashCode();
                 if (Math.Abs(hashCode % 100) == 0)
                 {
-                    GreyHackRussian.GreyHackRussianPlugin.Log.LogDebug($"Перевод: '{original}' -> '{translation}'");
+                    GreyHackRussianPlugin.Log.LogDebug($"Перевод: '{original}' -> '{translation}'");
                 }
                 return translation;
             }
@@ -90,7 +90,7 @@ namespace GreyHackRussianPlugin.Translation
                 if (original.Length > 2)
                 {
                     // Путь к непереведенным строкам в подпапке Translation
-                    string translationDirectory = Path.Combine(GreyHackRussian.GreyHackRussianPlugin.PluginPath, "Translation");
+                    string translationDirectory = Path.Combine(GreyHackRussianPlugin.PluginPath, "Translation");
                     if (!Directory.Exists(translationDirectory))
                     {
                         Directory.CreateDirectory(translationDirectory);
@@ -115,13 +115,13 @@ namespace GreyHackRussianPlugin.Translation
                     int hashCode = original.GetHashCode();
                     if (Math.Abs(hashCode % 50) == 0)
                     {
-                        GreyHackRussian.GreyHackRussianPlugin.Log.LogDebug($"Не найден перевод: '{original}'");
+                        GreyHackRussianPlugin.Log.LogDebug($"Не найден перевод: '{original}'");
                     }
                 }
             }
             catch (Exception ex)
             {
-                GreyHackRussian.GreyHackRussianPlugin.Log.LogError($"Ошибка записи непереведенной строки: {ex.Message}");
+                GreyHackRussianPlugin.Log.LogError($"Ошибка записи непереведенной строки: {ex.Message}");
             }
 
             return original; // Возвращаем оригинальный текст, если перевода нет
@@ -144,14 +144,14 @@ namespace GreyHackRussianPlugin.Translation
                 // Проверка без учета регистра
                 if (string.Equals(kvp.Key, original, StringComparison.OrdinalIgnoreCase))
                 {
-                    GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета регистра: '{original}' -> '{kvp.Value}'");
+                    GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета регистра: '{original}' -> '{kvp.Value}'");
                     return kvp.Value;
                 }
 
                 // Проверка без учета пробелов в начале/конце и регистра
                 if (string.Equals(kvp.Key.Trim(), original.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    GreyHackRussian.GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета пробелов: '{original}' -> '{kvp.Value}'");
+                    GreyHackRussianPlugin.Log.LogInfo($"Найден перевод без учета пробелов: '{original}' -> '{kvp.Value}'");
                     return kvp.Value;
                 }
             }
@@ -164,7 +164,7 @@ namespace GreyHackRussianPlugin.Translation
             }
             catch (Exception ex)
             {
-                GreyHackRussian.GreyHackRussianPlugin.Log.LogError($"Ошибка при сохранении непереведенного текста: {ex.Message}");
+                GreyHackRussianPlugin.Log.LogError($"Ошибка при сохранении непереведенного текста: {ex.Message}");
             }
 
             return original;

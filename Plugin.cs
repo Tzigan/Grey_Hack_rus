@@ -9,8 +9,12 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GreyHackRussian
+namespace GreyHackRussianPlugin
 {
+    // Основной класс плагина, наследуется от BaseUnityPlugin
+    // Использует BepInEx для загрузки и управления плагинами
+    // Патчинг с помощью HarmonyLib для изменения поведения игры
+
     [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.0.0")]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
