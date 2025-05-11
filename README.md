@@ -37,7 +37,7 @@ Grey Hack — это хакерский симулятор с открытым �
 📥 **Установка**
 
 **Требования**
-- 🎮 Grey Hack (лицензионная версия из Steam)
+- 🎮 Grey Hack
 - 🔌 [BepInEx 6.0.0-pre.2](https://github.com/BepInEx/BepInEx/releases/tag/v6.0.0-pre.2)
 
 **Пошаговая установка**
