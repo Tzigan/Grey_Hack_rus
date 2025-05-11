@@ -1,0 +1,3 @@
+Details=Детали
+Buy=Купить
+Cancel=Отмена
