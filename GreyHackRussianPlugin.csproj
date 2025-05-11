@@ -70,9 +70,6 @@
       <!-- Добавим явное указание целевой подпапки -->
       <DestinationSubDirectory>Translation\</DestinationSubDirectory>
     </None>
-    <None Include="README.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
