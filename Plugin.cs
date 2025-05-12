@@ -80,15 +80,12 @@ namespace GreyHackRussianPlugin
                     ShopPatch.Initialize();
                     Log.LogInfo("ShopPatch успешно инициализирован");
 
-                    // Регистрация и инициализация ShopDetailsPatch
-                    Log.LogInfo("Явная регистрация ShopDetailsPatch...");
-                    harmony.PatchAll(typeof(ShopDetailsPatch));
-                    ShopDetailsPatch.Initialize();
-                    Log.LogInfo("ShopDetailsPatch успешно инициализирован");
+                    // Используем обновленный метод инициализации для ShopDetailsPatch
+                    ShopDetailsPatch.Initialize(harmony);
                 }
                 catch (Exception ex)
                 {
-                    Log.LogError($"Ошибка регистрации ShopPatch: {ex.Message}");
+                    Log.LogError($"Ошибка регистрации патчей: {ex.Message}");
                 }
             }
             catch (Exception ex)

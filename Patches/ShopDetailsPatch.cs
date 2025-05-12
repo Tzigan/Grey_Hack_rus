@@ -2,6 +2,7 @@
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,6 @@ namespace GreyHackRussianPlugin.Patches
     /// <summary>
     /// Патч для перевода технических терминов в окне Details магазина
     /// </summary>
-    [HarmonyPatch]
     public class ShopDetailsPatch
     {
         // Словарь замен для HTML-контента
@@ -66,47 +66,6 @@ namespace GreyHackRussianPlugin.Patches
             { " No", " Нет" }
         };
 
-        // Патчим несколько возможных методов, которые могут генерировать HTML для окна Details
-
-        // Вариант 1: Метод GetDetailsHTML
-        [HarmonyPatch(typeof(ItemShopAdvanced), "GetDetailsHTML")]
-        [HarmonyPostfix]
-        public static void GetDetailsHTMLPostfix(ref string __result)
-        {
-            TranslateHtml(ref __result, "GetDetailsHTML");
-        }
-
-        // Вариант 2: Метод GetDetailsHtml (с другим регистром)
-        [HarmonyPatch(typeof(ItemShopAdvanced), "GetDetailsHtml")]
-        [HarmonyPostfix]
-        public static void GetDetailsHtmlPostfix(ref string __result)
-        {
-            TranslateHtml(ref __result, "GetDetailsHtml");
-        }
-
-        // Вариант 3: Метод в ItemShopHardware
-        [HarmonyPatch(typeof(ItemShopHardware), "GetDetailsHTML")]
-        [HarmonyPostfix]
-        public static void ItemShopHardwareGetDetailsHTMLPostfix(ref string __result)
-        {
-            TranslateHtml(ref __result, "ItemShopHardware.GetDetailsHTML");
-        }
-
-        // Вариант 4: Метод, который конфигурирует браузер (с проверкой контекста)
-        [HarmonyPatch(typeof(HtmlBrowser), "SetHTML")]
-        [HarmonyPrefix]
-        public static void HtmlBrowserSetHTMLPrefix(HtmlBrowser __instance, ref string html)
-        {
-            // Проверяем, находимся ли мы в контексте магазина
-            bool isShopContext = __instance.transform.root.name.Contains("Shop") ||
-                (__instance.transform.parent != null && __instance.transform.parent.name.Contains("Item"));
-
-            if (isShopContext)
-            {
-                TranslateHtml(ref html, "HtmlBrowser.SetHTML");
-            }
-        }
-
         // Общий метод для перевода HTML
         private static void TranslateHtml(ref string html, string source)
         {
@@ -129,9 +88,69 @@ namespace GreyHackRussianPlugin.Patches
         }
 
         // Метод инициализации патча
-        public static void Initialize()
+        public static void Initialize(Harmony harmony)
         {
-            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch инициализирован с поддержкой перевода технических терминов магазина");
+            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Начало инициализации...");
+
+            try
+            {
+                // Динамически ищем и патчим методы только если они существуют
+                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHTML", TranslateDetailsHTML);
+                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHtml", TranslateDetailsHTML);
+                RegisterPatchForMethod(harmony, "ItemShopHardware", "GetDetailsHTML", TranslateDetailsHTML);
+
+                GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch успешно инициализирован");
+            }
+            catch (Exception ex)
+            {
+                GreyHackRussianPlugin.Log.LogError($"Ошибка при инициализации ShopDetailsPatch: {ex.Message}");
+            }
+        }
+
+        // Вспомогательный метод для регистрации патча только если метод существует
+        private static void RegisterPatchForMethod(Harmony harmony, string typeName, string methodName,
+            HarmonyPostfix.HarmonyPostfixDelegate postfixMethod)
+        {
+            try
+            {
+                // Ищем тип по имени
+                Type type = AccessTools.TypeByName(typeName);
+                if (type == null)
+                {
+                    GreyHackRussianPlugin.Log.LogWarning($"ShopDetailsPatch: Тип '{typeName}' не найден");
+                    return;
+                }
+
+                // Ищем метод
+                MethodInfo method = AccessTools.Method(type, methodName);
+                if (method == null)
+                {
+                    GreyHackRussianPlugin.Log.LogWarning($"ShopDetailsPatch: Метод '{methodName}' не найден в типе '{typeName}'");
+                    return;
+                }
+
+                // Патчим найденный метод
+                HarmonyMethod postfix = new HarmonyMethod(typeof(ShopDetailsPatch), nameof(TranslateDetailsHTML));
+                harmony.Patch(method, null, postfix);
+                GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Успешно зарегистрирован патч для {typeName}.{methodName}");
+            }
+            catch (Exception ex)
+            {
+                GreyHackRussianPlugin.Log.LogWarning($"ShopDetailsPatch: Не удалось зарегистрировать патч для {typeName}.{methodName}: {ex.Message}");
+            }
+        }
+
+        // Общий постфикс для всех методов, возвращающих HTML
+        public static void TranslateDetailsHTML(ref string __result)
+        {
+            try
+            {
+                TranslateHtml(ref __result, "DetailsHTML");
+            }
+            catch (Exception ex)
+            {
+                GreyHackRussianPlugin.Log.LogError($"ShopDetailsPatch: Ошибка перевода HTML: {ex.Message}");
+            }
         }
     }
 }
