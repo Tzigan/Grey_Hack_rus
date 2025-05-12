@@ -88,16 +88,25 @@ namespace GreyHackRussianPlugin.Patches
         }
 
         // Метод инициализации патча
-        public static void Initialize(Harmony harmony)
+        public static void Initialize()
         {
             GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Начало инициализации...");
 
             try
             {
-                // Динамически ищем и патчим методы только если они существуют
-                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHTML");
-                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHtml");
-                RegisterPatchForMethod(harmony, "ItemShopHardware", "GetDetailsHTML");
+                // Проверка классов магазина, чтобы не вызывать ошибок
+                Type itemShopAdvanced = AccessTools.TypeByName("ItemShopAdvanced");
+                Type itemShopHardware = AccessTools.TypeByName("ItemShopHardware");
+
+                if (itemShopAdvanced != null)
+                {
+                    GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Найден класс ItemShopAdvanced");
+                }
+
+                if (itemShopHardware != null)
+                {
+                    GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Найден класс ItemShopHardware");
+                }
 
                 GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch успешно инициализирован");
             }
@@ -107,51 +116,55 @@ namespace GreyHackRussianPlugin.Patches
             }
         }
 
-        // Вспомогательный метод для регистрации патча только если метод существует
-        private static void RegisterPatchForMethod(Harmony harmony, string typeName, string methodName)
-        {
-            try
-            {
-                // Ищем тип по имени
-                Type type = AccessTools.TypeByName(typeName);
-                if (type == null)
-                {
-                    GreyHackRussianPlugin.Log.LogWarning($"ShopDetailsPatch: Тип '{typeName}' не найден");
-                    return;
-                }
-
-                // Ищем метод
-                MethodInfo method = AccessTools.Method(type, methodName);
-                if (method == null)
-                {
-                    GreyHackRussianPlugin.Log.LogWarning($"ShopDetailsPatch: Метод '{methodName}' не найден в типе '{typeName}'");
-                    return;
-                }
-
-                // Создаем метод для постфикса с правильной сигнатурой
-                MethodInfo postfixMethod = typeof(ShopDetailsPatch).GetMethod(nameof(TranslateDetailsHTML), BindingFlags.Static | BindingFlags.Public);
-
-                // Патчим найденный метод
-                HarmonyMethod postfix = new HarmonyMethod(postfixMethod);
-                harmony.Patch(method, null, postfix);
-                GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Успешно зарегистрирован патч для {typeName}.{methodName}");
-            }
-            catch (Exception ex)
-            {
-                GreyHackRussianPlugin.Log.LogWarning($"ShopDetailsPatch: Не удалось зарегистрировать патч для {typeName}.{methodName}: {ex.Message}");
-            }
-        }
-
         // Общий постфикс для всех методов, возвращающих HTML
-        public static void TranslateDetailsHTML(ref string __result)
+        [HarmonyPatch]
+        public class DetailsPatchGroup
         {
-            try
+            static MethodBase TargetMethod()
+            {
+                // Попытка найти ItemShopAdvanced.GetDetailsHTML
+                Type type = AccessTools.TypeByName("ItemShopAdvanced");
+                if (type != null)
+                {
+                    MethodInfo method = AccessTools.Method(type, "GetDetailsHTML");
+                    if (method != null)
+                    {
+                        GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopAdvanced.GetDetailsHTML");
+                        return method;
+                    }
+                }
+
+                // Если не найден, пробуем GetDetailsHtml
+                if (type != null)
+                {
+                    MethodInfo method = AccessTools.Method(type, "GetDetailsHtml");
+                    if (method != null)
+                    {
+                        GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopAdvanced.GetDetailsHtml");
+                        return method;
+                    }
+                }
+
+                // Если не найден, пробуем ItemShopHardware
+                type = AccessTools.TypeByName("ItemShopHardware");
+                if (type != null)
+                {
+                    MethodInfo method = AccessTools.Method(type, "GetDetailsHTML");
+                    if (method != null)
+                    {
+                        GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopHardware.GetDetailsHTML");
+                        return method;
+                    }
+                }
+
+                // Если ничего не найдено, возвращаем null, чтобы отключить патч
+                GreyHackRussianPlugin.Log.LogWarning("ShopDetailsPatch: Не найдены подходящие методы для патча");
+                return null;
+            }
+
+            static void Postfix(ref string __result)
             {
                 TranslateHtml(ref __result, "DetailsHTML");
-            }
-            catch (Exception ex)
-            {
-                GreyHackRussianPlugin.Log.LogError($"ShopDetailsPatch: Ошибка перевода HTML: {ex.Message}");
             }
         }
     }
