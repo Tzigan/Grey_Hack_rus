@@ -19,8 +19,9 @@ namespace GreyHackRussianPlugin.Patches
     /// Патч для перевода текстов в магазине игры
     /// </summary>
     [HarmonyPatch]
-    public class ShopPatch
+    public class ShopPatch : MonoBehaviour
     {
+
         // Словарь для кэширования переведенных описаний
         private static readonly Dictionary<string, string> translationCache = new Dictionary<string, string>();
 
@@ -816,10 +817,12 @@ namespace GreyHackRussianPlugin.Patches
             {
                 try
                 {
-                    // Перехватываем вопросительное окно
-                    if (__instance.browser == null)
+                    // Используем рефлексию для доступа к защищенному полю browser
+                    FieldInfo browserField = AccessTools.Field(typeof(ItemShop), "browser");
+                    HtmlBrowser browser = (HtmlBrowser)browserField.GetValue(__instance);
+
+                    if (browser == null)
                     {
-                        // Текст задается прямо в методе, поэтому мы перехватим вызов OS.ShowQuestionWindow в отдельном патче
                         GreyHackRussianPlugin.Log.LogInfo("Перехвачен вызов OnBuy для ItemShopHardware без браузера");
                     }
                 }
