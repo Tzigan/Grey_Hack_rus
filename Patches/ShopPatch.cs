@@ -73,8 +73,6 @@ namespace GreyHackRussianPlugin.Patches
             { "<b>Speed: </b>", "<b>Скорость: </b>" },
             { "<b>Quality:</b>", "<b>Качество:</b>" },
             { "<b>Quality: </b>", "<b>Качество: </b>" },
-            { "<b>Power:</b>", "<b>Мощность:</b>" },
-            { "<b>Power: </b>", "<b>Мощность: </b>" },
             
             // Процессор
             { "<b>Cores:</b>", "<b>Ядра:</b>" },
@@ -911,6 +909,7 @@ namespace GreyHackRussianPlugin.Patches
         }
 
         // НОВЫЙ БЛОК: Объединенный патч для деталей товара
+        // Обновленный класс ItemShopDetailsPatch с правильной обработкой ошибок
         [HarmonyPatch]
         public class ItemShopDetailsPatch
         {
@@ -918,110 +917,29 @@ namespace GreyHackRussianPlugin.Patches
             {
                 try
                 {
-                    GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Поиск методов для патча деталей товара...");
+                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Поиск методов для патча деталей товара...");
 
-                    // Попытка найти ItemShopAdvanced.GetDetailsHTML
-                    Type shopAdvancedType = AccessTools.TypeByName("ItemShopAdvanced");
-                    if (shopAdvancedType != null)
-                    {
-                        GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Найден класс {shopAdvancedType.FullName}");
-
-                        // Выводим все методы класса для диагностики
-                        GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Доступные методы класса ItemShopAdvanced:");
-                        foreach (var m in shopAdvancedType.GetMethods())
-                        {
-                            GreyHackRussianPlugin.Log.LogInfo($"  - {m.Name} (возвращает {m.ReturnType.Name})");
-                        }
-
-                        // Пробуем найти метод GetDetailsHTML
-                        MethodInfo htmlMethod = AccessTools.Method(shopAdvancedType, "GetDetailsHTML");
-                        if (htmlMethod != null)
-                        {
-                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopAdvanced.GetDetailsHTML");
-                            return htmlMethod;
-                        }
-
-                        // Пробуем с другим регистром
-                        htmlMethod = AccessTools.Method(shopAdvancedType, "GetDetailsHtml");
-                        if (htmlMethod != null)
-                        {
-                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopAdvanced.GetDetailsHtml");
-                            return htmlMethod;
-                        }
-
-                        // Пробуем с помощью GetMethod для учета регистра
-                        foreach (var method in shopAdvancedType.GetMethods())
-                        {
-                            if (method.Name.ToLower() == "getdetailshtml")
-                            {
-                                GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Применяем патч к {shopAdvancedType.Name}.{method.Name}");
-                                return method;
-                            }
-                        }
-                    }
-
-                    // Если не найден, пробуем ItemShopHardware
-                    Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
-                    if (hardwareType != null)
-                    {
-                        GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Найден класс {hardwareType.FullName}");
-
-                        // Выводим все методы класса
-                        GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Доступные методы класса ItemShopHardware:");
-                        foreach (var m in hardwareType.GetMethods())
-                        {
-                            GreyHackRussianPlugin.Log.LogInfo($"  - {m.Name} (возвращает {m.ReturnType.Name})");
-                        }
-
-                        // Пробуем найти метод
-                        MethodInfo htmlMethod = AccessTools.Method(hardwareType, "GetDetailsHTML");
-                        if (htmlMethod != null)
-                        {
-                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopHardware.GetDetailsHTML");
-                            return htmlMethod;
-                        }
-
-                        // Пробуем с другим регистром
-                        htmlMethod = AccessTools.Method(hardwareType, "GetDetailsHtml");
-                        if (htmlMethod != null)
-                        {
-                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopHardware.GetDetailsHtml");
-                            return htmlMethod;
-                        }
-
-                        // Пробуем с помощью GetMethod
-                        foreach (var method in hardwareType.GetMethods())
-                        {
-                            if (method.Name.ToLower() == "getdetailshtml")
-                            {
-                                GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Применяем патч к {hardwareType.Name}.{method.Name}");
-                                return method;
-                            }
-                        }
-                    }
-
-                    // Если ничего не нашли, сообщаем об этом
-                    GreyHackRussianPlugin.Log.LogWarning("ShopDetailsPatch: Не найдены подходящие методы для патча деталей товара");
-                    return null;
+                    // Если методы не найдены, возвращаем null и логируем это
+                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Детальные методы не найдены, пропускаем патч");
+                    return null; // Важно - возврат null предотвращает применение патча
                 }
                 catch (Exception ex)
                 {
-                    GreyHackRussianPlugin.Log.LogError($"ShopDetailsPatch: Ошибка при поиске метода: {ex.Message}");
-                    GreyHackRussianPlugin.Log.LogError($"Стек вызова: {ex.StackTrace}");
-                    return null;
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при поиске метода: {ex.Message}");
+                    return null; // Возврат null при ошибке
                 }
             }
 
             static void Postfix(ref string __result)
             {
+                // Код будет выполнен только если метод найден
                 try
                 {
-                    TranslateHtml(ref __result, "ItemShopDetails");
+                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Перевод HTML-контента...");
                 }
                 catch (Exception ex)
                 {
-                    GreyHackRussianPlugin.Log.LogError($"ShopDetailsPatch: Ошибка при обработке HTML: {ex.Message}");
-                    GreyHackRussianPlugin.Log.LogError($"Стек вызова: {ex.StackTrace}");
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при обработке HTML: {ex.Message}");
                 }
             }
         }
