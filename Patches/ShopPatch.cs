@@ -1084,51 +1084,50 @@ namespace GreyHackRussianPlugin.Patches
                     GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка в патче ItemShopHardware: {ex.Message}");
                 }
             }
+        }
 
-            // Патч для метода, который генерирует HTML для ItemShopHardware
-            [HarmonyPatch]
-            public class ItemShopHardwareHtmlPatch
+        [HarmonyPatch]
+        public class ItemShopHardwareHtmlPatch
+        {
+            static MethodBase TargetMethod()
             {
-                static MethodBase TargetMethod()
+                try
                 {
-                    try
+                    Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
+                    if (hardwareType != null)
                     {
-                        Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
-                        if (hardwareType != null)
+                        // Ищем методы, которые могут возвращать HTML
+                        foreach (var method in hardwareType.GetMethods())
                         {
-                            // Ищем методы, которые могут возвращать HTML
-                            foreach (var method in hardwareType.GetMethods())
+                            if ((method.Name.Contains("HTML") || method.Name.Contains("Html")) &&
+                                method.ReturnType == typeof(string))
                             {
-                                if ((method.Name.Contains("HTML") || method.Name.Contains("Html")) &&
-                                    method.ReturnType == typeof(string))
-                                {
-                                    GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Найден метод {method.Name} для генерации HTML");
-                                    return method;
-                                }
+                                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Найден метод {method.Name} для генерации HTML");
+                                return method;
                             }
                         }
-                        return null;
                     }
-                    catch (Exception ex)
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при поиске метода HTML: {ex.Message}");
+                    return null;
+                }
+            }
+
+            static void Postfix(ref string __result)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(__result))
                     {
-                        GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при поиске метода HTML: {ex.Message}");
-                        return null;
+                        TranslateHtml(ref __result, "HardwareHtml");
                     }
                 }
-
-                static void Postfix(ref string __result)
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        if (!string.IsNullOrEmpty(__result))
-                        {
-                            TranslateHtml(ref __result, "HardwareHtml");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при переводе HTML: {ex.Message}");
-                    }
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при переводе HTML: {ex.Message}");
                 }
             }
         }
