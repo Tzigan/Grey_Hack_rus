@@ -969,10 +969,78 @@ namespace GreyHackRussianPlugin.Patches
                             }
                         }
                     }
+
+                    // Расширенная логика для перевода HTML через uDialog
+                    // Используем delayedAction для перевода после создания PreBuy
+                    if (__instance != null && __instance.prefabPreBuyObj != null)
+                    {
+                        GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Найден prefabPreBuyObj, настраиваем перехват PreBuy");
+
+                        // Используем MonoBehaviour.Invoke для отложенного вызова (после создания PreBuy)
+                        GameObject gameObject = new GameObject("TranslationHelper");
+                        DummyMonoBehaviour helper = gameObject.AddComponent<DummyMonoBehaviour>();
+                        helper.DelayedAction(0.1f, () => {
+                            try {
+                                // Поиск всех PreBuy в сцене
+                                PreBuy[] allPreBuys = UnityEngine.Object.FindObjectsOfType<PreBuy>();
+                                if (allPreBuys != null && allPreBuys.Length > 0)
+                                {
+                                    // Берем последний созданный PreBuy
+                                    PreBuy preBuy = allPreBuys[allPreBuys.Length - 1];
+                                    if (preBuy != null)
+                                    {
+                                        // Работаем с HTML-браузером в PreBuy
+                                        FieldInfo browserField = preBuy.GetType().GetField("browser", 
+                                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                                        
+                                        if (browserField != null)
+                                        {
+                                            // Остальной код для перевода HTML
+                                            // ...
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex) {
+                                GreyHackRussianPlugin.Log.LogError($"Ошибка в отложенном обработчике: {ex.Message}");
+                            }
+                            finally {
+                                UnityEngine.Object.Destroy(gameObject);
+                            }
+                        });
+                    }
                 }
                 catch (Exception ex)
                 {
                     GreyHackRussianPlugin.Log.LogError($"ShopPatch: Безопасная обработка ошибки в OnBuy: {ex.Message}");
+                }
+            }
+        }
+
+        // Вспомогательный класс для отложенной обработки
+        public class DummyMonoBehaviour : MonoBehaviour
+        {
+            private Action pendingAction;
+            private float delay;
+            private float timer;
+
+            public void DelayedAction(float delay, Action action)
+            {
+                this.pendingAction = action;
+                this.delay = delay;
+                this.timer = 0f;
+            }
+
+            void Update()
+            {
+                if (pendingAction != null)
+                {
+                    timer += Time.deltaTime;
+                    if (timer >= delay)
+                    {
+                        pendingAction();
+                        pendingAction = null;
+                    }
                 }
             }
         }
@@ -1082,61 +1150,6 @@ namespace GreyHackRussianPlugin.Patches
                 catch (Exception ex)
                 {
                     GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка в патче ItemShopHardware: {ex.Message}");
-                }
-            }
-        }
-
-        // Вместо патча OnGUI используем патч для Update
-        [HarmonyPatch(typeof(ItemShop))]
-        [HarmonyPatch("Update")]
-        public class ItemShopUpdatePatch
-        {
-            // Создаём переменную для отслеживания последнего HTML
-            private static string lastHtml = "";
-            
-            static void Postfix(ItemShop __instance)
-            {
-                try
-                {
-                    // Проверяем браузер только раз в 10 кадров для оптимизации
-                    if (Time.frameCount % 10 != 0) return;
-                    
-                    // Находим поле с браузером через рефлексию
-                    FieldInfo browserField = AccessTools.Field(typeof(ItemShop), "browser");
-                    if (browserField != null)
-                    {
-                        var browser = browserField.GetValue(__instance);
-                        if (browser != null)
-                        {
-                            // Получаем свойство Html
-                            PropertyInfo htmlProperty = AccessTools.Property(browser.GetType(), "Html");
-                            if (htmlProperty != null)
-                            {
-                                string html = (string)htmlProperty.GetValue(browser);
-                                if (!string.IsNullOrEmpty(html) && html != lastHtml)
-                                {
-                                    lastHtml = html; // Сохраняем текущий HTML
-                                    string translatedHtml = html;
-                                    TranslateHtml(ref translatedHtml, "ItemShopUpdate");
-                                    
-                                    if (translatedHtml != html)
-                                    {
-                                        // Вызов метода LoadHtml для обновления HTML
-                                        MethodInfo loadHtmlMethod = AccessTools.Method(browser.GetType(), "LoadHtml");
-                                        if (loadHtmlMethod != null)
-                                        {
-                                            loadHtmlMethod.Invoke(browser, new object[] { translatedHtml });
-                                            GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Обновлен HTML через Update патч");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка в Update патче: {ex.Message}");
                 }
             }
         }
