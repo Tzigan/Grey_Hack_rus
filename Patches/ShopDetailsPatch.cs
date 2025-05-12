@@ -95,9 +95,9 @@ namespace GreyHackRussianPlugin.Patches
             try
             {
                 // Динамически ищем и патчим методы только если они существуют
-                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHTML", TranslateDetailsHTML);
-                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHtml", TranslateDetailsHTML);
-                RegisterPatchForMethod(harmony, "ItemShopHardware", "GetDetailsHTML", TranslateDetailsHTML);
+                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHTML");
+                RegisterPatchForMethod(harmony, "ItemShopAdvanced", "GetDetailsHtml");
+                RegisterPatchForMethod(harmony, "ItemShopHardware", "GetDetailsHTML");
 
                 GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch успешно инициализирован");
             }
@@ -108,8 +108,7 @@ namespace GreyHackRussianPlugin.Patches
         }
 
         // Вспомогательный метод для регистрации патча только если метод существует
-        private static void RegisterPatchForMethod(Harmony harmony, string typeName, string methodName,
-            HarmonyPostfix.HarmonyPostfixDelegate postfixMethod)
+        private static void RegisterPatchForMethod(Harmony harmony, string typeName, string methodName)
         {
             try
             {
@@ -129,8 +128,11 @@ namespace GreyHackRussianPlugin.Patches
                     return;
                 }
 
+                // Создаем метод для постфикса с правильной сигнатурой
+                MethodInfo postfixMethod = typeof(ShopDetailsPatch).GetMethod(nameof(TranslateDetailsHTML), BindingFlags.Static | BindingFlags.Public);
+
                 // Патчим найденный метод
-                HarmonyMethod postfix = new HarmonyMethod(typeof(ShopDetailsPatch), nameof(TranslateDetailsHTML));
+                HarmonyMethod postfix = new HarmonyMethod(postfixMethod);
                 harmony.Patch(method, null, postfix);
                 GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Успешно зарегистрирован патч для {typeName}.{methodName}");
             }
