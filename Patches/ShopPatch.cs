@@ -1086,48 +1086,49 @@ namespace GreyHackRussianPlugin.Patches
             }
         }
 
-        [HarmonyPatch]
-        public class ItemShopHardwareHtmlPatch
+        // Альтернативный патч для перехвата отрисовки HTML
+        [HarmonyPatch(typeof(ItemShop))]
+        [HarmonyPatch("OnGUI")]
+        public class ItemShopOnGuiPatch
         {
-            static MethodBase TargetMethod()
+            static void Postfix(ItemShop __instance)
             {
                 try
                 {
-                    Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
-                    if (hardwareType != null)
+                    // Находим поле с браузером через рефлексию
+                    FieldInfo browserField = AccessTools.Field(typeof(ItemShop), "browser");
+                    if (browserField != null)
                     {
-                        // Ищем методы, которые могут возвращать HTML
-                        foreach (var method in hardwareType.GetMethods())
+                        var browser = browserField.GetValue(__instance);
+                        if (browser != null)
                         {
-                            if ((method.Name.Contains("HTML") || method.Name.Contains("Html")) &&
-                                method.ReturnType == typeof(string))
+                            // Получаем свойство Html
+                            PropertyInfo htmlProperty = AccessTools.Property(browser.GetType(), "Html");
+                            if (htmlProperty != null)
                             {
-                                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Найден метод {method.Name} для генерации HTML");
-                                return method;
+                                string html = (string)htmlProperty.GetValue(browser);
+                                if (!string.IsNullOrEmpty(html))
+                                {
+                                    string translatedHtml = html;
+                                    TranslateHtml(ref translatedHtml, "ItemShopOnGUI");
+                                    
+                                    if (translatedHtml != html)
+                                    {
+                                        // Вызов метода LoadHtml для обновления HTML
+                                        MethodInfo loadHtmlMethod = AccessTools.Method(browser.GetType(), "LoadHtml");
+                                        if (loadHtmlMethod != null)
+                                        {
+                                            loadHtmlMethod.Invoke(browser, new object[] { translatedHtml });
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    return null;
                 }
                 catch (Exception ex)
                 {
-                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при поиске метода HTML: {ex.Message}");
-                    return null;
-                }
-            }
-
-            static void Postfix(ref string __result)
-            {
-                try
-                {
-                    if (!string.IsNullOrEmpty(__result))
-                    {
-                        TranslateHtml(ref __result, "HardwareHtml");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при переводе HTML: {ex.Message}");
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка в OnGUI патче: {ex.Message}");
                 }
             }
         }
