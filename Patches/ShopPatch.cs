@@ -13,7 +13,7 @@ using UnityEngine;
 namespace GreyHackRussianPlugin.Patches
 {
     /// <summary>
-    /// Патч для перевода текстов в магазине игры
+    /// Объединенный патч для перевода текстов в магазине игры
     /// </summary>
     [HarmonyPatch]
     public class ShopPatch
@@ -63,31 +63,64 @@ namespace GreyHackRussianPlugin.Patches
             { "No", "Нет" }
         };
 
-        // Шаблоны для замены HTML-форматирования и технических характеристик
+        // ОБЪЕДИНЕННЫЙ словарь шаблонов для замены HTML-форматирования и технических характеристик
         private static readonly Dictionary<string, string> htmlPatterns = new Dictionary<string, string>
         {
+            // Базовые характеристики
+            { "<b>Size:</b>", "<b>Размер:</b>" },
             { "<b>Size: </b>", "<b>Размер: </b>" },
+            { "<b>Speed:</b>", "<b>Скорость:</b>" },
             { "<b>Speed: </b>", "<b>Скорость: </b>" },
+            { "<b>Quality:</b>", "<b>Качество:</b>" },
             { "<b>Quality: </b>", "<b>Качество: </b>" },
+            { "<b>Power:</b>", "<b>Мощность:</b>" },
             { "<b>Power: </b>", "<b>Мощность: </b>" },
-            { "<b>Model: </b>", "<b>Модель: </b>" },
-            { "<b>Memory: </b>", "<b>Память: </b>" },
+            
+            // Процессор
+            { "<b>Cores:</b>", "<b>Ядра:</b>" },
             { "<b>Cores: </b>", "<b>Ядра: </b>" },
+            { "<b>Socket:</b>", "<b>Сокет:</b>" },
             { "<b>Socket :</b>", "<b>Сокет:</b>" },
+            
+            // Видеокарта
+            { "<b>Hashrate:</b>", "<b>Хешрейт:</b>" },
             { "<b>Hashrate: </b>", "<b>Хешрейт: </b>" },
+            
+            // Память
+            { "<b>Memory:</b>", "<b>Память:</b>" },
+            { "<b>Memory: </b>", "<b>Память: </b>" },
+            { "<b>Model:</b>", "<b>Модель:</b>" },
+            { "<b>Model: </b>", "<b>Модель: </b>" },
+            
+            // Материнская плата
+            { "<b>CPUs:</b>", "<b>Процессоры:</b>" },
             { "<b>CPUs: </b>", "<b>Процессоры: </b>" },
+            { "<b>RAMs:</b>", "<b>Память:</b>" },
             { "<b>RAMs: </b>", "<b>Память: </b>" },
+            { "<b>Max socket RAM:</b>", "<b>Макс. RAM на сокет:</b>" },
             { "<b>Max socket RAM: </b>", "<b>Макс. RAM на сокет: </b>" },
+            { "<b>PCIs:</b>", "<b>PCI слоты:</b>" },
             { "<b>PCIs: </b>", "<b>PCI слоты: </b>" },
+            
+            // Блок питания
+            { "<b>Power:</b>", "<b>Мощность:</b>" },
+            { "<b>Power: </b>", "<b>Мощность: </b>" },
+            
+            // Сетевые карты
+            { "<b>Monitor support:</b>", "<b>Поддержка мониторинга:</b>" },
             { "<b>Monitor support: </b>", "<b>Поддержка мониторинга: </b>" },
             { "<b>Ethernet card</b>", "<b>Ethernet карта</b>" },
-            { "<b>WiFi card</b>", "<b>WiFi карта</b>" }
+            { "<b>WiFi card</b>", "<b>WiFi карта</b>" },
+            
+            // Прочее
+            { " Yes", " Да" },
+            { " No", " Нет" }
         };
 
         // Инициализация - должна вызываться при старте плагина
         public static void Initialize()
         {
-            GreyHackRussianPlugin.Log.LogInfo("Инициализация ShopPatch...");
+            GreyHackRussianPlugin.Log.LogInfo("Инициализация объединенного ShopPatch...");
 
             // Обеспечить существование директорий
             EnsureDirectoriesExist();
@@ -95,8 +128,59 @@ namespace GreyHackRussianPlugin.Patches
             // Инициализация XML файла с непереведенными текстами
             InitializeXmlFile();
 
-            // Тестовая запись для проверки доступа
-            //TestSaveFromPlugin("Инициализация успешна");
+            try
+            {
+                // УЛУЧШЕННОЕ ЛОГИРОВАНИЕ: выводим все найденные классы и методы, относящиеся к магазину
+                LogClassInfo("ItemShop");
+                LogClassInfo("ItemShopAdvanced");
+                LogClassInfo("ItemShopHardware");
+                LogClassInfo("PreBuy");
+            }
+            catch (Exception ex)
+            {
+                GreyHackRussianPlugin.Log.LogError($"Ошибка при логировании информации о классах: {ex.Message}");
+            }
+
+            GreyHackRussianPlugin.Log.LogInfo("Объединенный ShopPatch успешно инициализирован");
+        }
+
+        /// <summary>
+        /// Логирует информацию о классе и его методах
+        /// </summary>
+        private static void LogClassInfo(string className)
+        {
+            try
+            {
+                Type type = AccessTools.TypeByName(className);
+
+                if (type == null)
+                {
+                    GreyHackRussianPlugin.Log.LogWarning($"Класс {className} не найден");
+                    return;
+                }
+
+                GreyHackRussianPlugin.Log.LogInfo($"Найден класс {className}");
+
+                // Получаем и выводим все публичные методы
+                MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var method in methods)
+                {
+                    var parameters = method.GetParameters();
+                    string paramInfo = string.Join(", ", Array.ConvertAll(parameters, p => $"{p.ParameterType.Name} {p.Name}"));
+                    GreyHackRussianPlugin.Log.LogInfo($"  Метод: {method.ReturnType.Name} {method.Name}({paramInfo})");
+                }
+
+                // Получаем и выводим все публичные поля
+                FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var field in fields)
+                {
+                    GreyHackRussianPlugin.Log.LogInfo($"  Поле: {field.FieldType.Name} {field.Name}");
+                }
+            }
+            catch (Exception ex)
+            {
+                GreyHackRussianPlugin.Log.LogError($"Ошибка при получении информации о классе {className}: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -325,7 +409,7 @@ namespace GreyHackRussianPlugin.Patches
                 // Сохраняем файл
                 xmlDoc.Save(untranslatedXmlPath);
 
-                GreyHackRussianPlugin.Log.LogInfo($"Сохранен непереведенный текст в XML файл (качество перевода: {quality:P0})");
+                GreyHackRussianPlugin.Log.LogInfo($"Сохранен непереведенный текст из источника {source} в XML файл (качество перевода: {quality:P0})");
             }
             catch (Exception ex)
             {
@@ -524,6 +608,7 @@ namespace GreyHackRussianPlugin.Patches
             // Проверка кэша
             if (translationCache.TryGetValue(original, out string cachedTranslation))
             {
+                GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Используется кешированный перевод");
                 return cachedTranslation;
             }
 
@@ -532,9 +617,20 @@ namespace GreyHackRussianPlugin.Patches
             // 1. Сначала пытаемся найти точный перевод
             result = Translation.Translator.TranslateText(original);
 
+            // Если найден точный перевод, логируем это
+            if (result != original)
+            {
+                GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Найден точный перевод в словаре");
+            }
+
             // 2. Если точного перевода нет, пытаемся применить общие фразы
             if (result == original)
             {
+                GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Точный перевод не найден, применяем шаблоны замены");
+
+                // Сохраняем оригинал для сравнения
+                string beforeTemplates = result;
+
                 // Применяем общие фразы
                 foreach (var phrase in commonPhrases)
                 {
@@ -552,32 +648,71 @@ namespace GreyHackRussianPlugin.Patches
                         result = result.Replace(pattern.Key, pattern.Value);
                     }
                 }
+
+                // Проверяем, был ли текст изменен шаблонами
+                if (result != beforeTemplates)
+                {
+                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Применены шаблоны замены");
+                }
             }
 
             // Если перевод получился, кэшируем его
             if (result != original)
             {
                 translationCache[original] = result;
+                GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Перевод сохранен в кеш");
+            }
+            else
+            {
+                GreyHackRussianPlugin.Log.LogWarning("ShopPatch: Текст не был переведен");
             }
 
             return result;
         }
 
         /// <summary>
-        /// Тестовая запись для проверки работоспособности
+        /// Общий метод для перевода HTML-контента
         /// </summary>
-        public static void TestSaveFromPlugin(string message)
+        private static void TranslateHtml(ref string html, string source)
         {
-            try
+            if (string.IsNullOrEmpty(html))
             {
-                // Инициируем принудительную запись
-                string testText = $"ТЕСТОВАЯ ЗАПИСЬ: {message} - {DateTime.Now}";
-                SaveUntranslatedTextToXml(testText, testText, 1.0f, "Test");
-                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: тестовая запись в XML успешна");
+                GreyHackRussianPlugin.Log.LogWarning($"ShopPatch: Получен пустой HTML от {source}");
+                return;
             }
-            catch (Exception ex)
+
+            // Логируем начало обработки HTML
+            string shortHtml = html.Length > 50 ? html.Substring(0, 50) + "..." : html;
+            GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Начата обработка HTML от {source}: {shortHtml}");
+
+            string originalHtml = html;
+
+            // 1. Сначала пытаемся найти точный перевод
+            string translated = Translation.Translator.TranslateText(html);
+            if (translated != html)
             {
-                GreyHackRussianPlugin.Log.LogError($"ShopPatch: ошибка тестовой записи: {ex.Message}");
+                html = translated;
+                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: HTML успешно переведен через словарь");
+                return;
+            }
+
+            // 2. Если точного перевода нет, применяем шаблоны замен
+            foreach (var replacement in htmlPatterns)
+            {
+                html = html.Replace(replacement.Key, replacement.Value);
+            }
+
+            // Если что-то изменилось, логируем это
+            if (html != originalHtml)
+            {
+                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: HTML-контент успешно переведен через шаблоны замен");
+            }
+            else
+            {
+                // Сохраняем непереведенный контент для анализа
+                float quality = CalculateTranslationQuality(html, html);
+                SaveUntranslatedTextToXml(html, html, quality, $"HTML-{source}");
+                GreyHackRussianPlugin.Log.LogWarning($"ShopPatch: HTML-контент не был переведен, сохранен для анализа");
             }
         }
 
@@ -638,6 +773,7 @@ namespace GreyHackRussianPlugin.Patches
 
                         // В любом случае применяем перевод (даже если он равен оригиналу)
                         description.text = translated;
+                        GreyHackRussianPlugin.Log.LogInfo("ShopPatch: применен перевод для ItemShop.description");
                     }
                 }
                 else
@@ -655,6 +791,8 @@ namespace GreyHackRussianPlugin.Patches
             catch (Exception ex)
             {
                 GreyHackRussianPlugin.Log.LogError($"ShopPatch: ошибка в патче ItemShop: {ex.Message}");
+                // Расширенная информация об ошибке
+                GreyHackRussianPlugin.Log.LogError($"Стек вызова: {ex.StackTrace}");
             }
         }
 
@@ -664,17 +802,38 @@ namespace GreyHackRussianPlugin.Patches
         {
             static MethodBase TargetMethod()
             {
-                // Ищем метод Configure в классе PreBuy с 8 параметрами
-                foreach (var method in typeof(PreBuy).GetMethods())
+                try
                 {
-                    if (method.Name == "Configure")
+                    // Ищем метод Configure в классе PreBuy с 8 параметрами
+                    Type preBuyType = typeof(PreBuy);
+
+                    GreyHackRussianPlugin.Log.LogInfo($"ShopPatch.PreBuyPatch: Поиск метода Configure в классе {preBuyType.FullName}");
+
+                    foreach (var method in preBuyType.GetMethods())
                     {
-                        var parameters = method.GetParameters();
-                        if (parameters.Length == 8)
-                            return method;
+                        if (method.Name == "Configure")
+                        {
+                            var parameters = method.GetParameters();
+                            if (parameters.Length == 8)
+                            {
+                                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch.PreBuyPatch: Найден метод Configure с 8 параметрами");
+                                return method;
+                            }
+                            else
+                            {
+                                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch.PreBuyPatch: Найден метод Configure с {parameters.Length} параметрами");
+                            }
+                        }
                     }
+
+                    GreyHackRussianPlugin.Log.LogWarning("ShopPatch.PreBuyPatch: Метод Configure с 8 параметрами не найден");
+                    return null;
                 }
-                return null;
+                catch (Exception ex)
+                {
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch.PreBuyPatch: Ошибка при поиске метода Configure: {ex.Message}");
+                    return null;
+                }
             }
 
             static void Postfix(PreBuy __instance, string nombreItemShop, string description)
@@ -728,16 +887,184 @@ namespace GreyHackRussianPlugin.Patches
 
                             // В любом случае применяем перевод (даже если он равен оригиналу)
                             descriptionField.text = translated;
+                            GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Применен перевод для PreBuy.description");
                         }
                     }
                     else
                     {
                         GreyHackRussianPlugin.Log.LogError("ShopPatch: поле description в PreBuy не найдено");
+
+                        // Диагностика - выводим все поля класса
+                        FieldInfo[] fields = typeof(PreBuy).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                        foreach (var f in fields)
+                        {
+                            GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: найдено поле {f.Name} типа {f.FieldType.Name}");
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     GreyHackRussianPlugin.Log.LogError($"ShopPatch: ошибка в патче PreBuy: {ex.Message}");
+                    GreyHackRussianPlugin.Log.LogError($"Стек вызова: {ex.StackTrace}");
+                }
+            }
+        }
+
+        // НОВЫЙ БЛОК: Объединенный патч для деталей товара
+        [HarmonyPatch]
+        public class ItemShopDetailsPatch
+        {
+            static MethodBase TargetMethod()
+            {
+                try
+                {
+                    GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Поиск методов для патча деталей товара...");
+
+                    // Попытка найти ItemShopAdvanced.GetDetailsHTML
+                    Type shopAdvancedType = AccessTools.TypeByName("ItemShopAdvanced");
+                    if (shopAdvancedType != null)
+                    {
+                        GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Найден класс {shopAdvancedType.FullName}");
+
+                        // Выводим все методы класса для диагностики
+                        GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Доступные методы класса ItemShopAdvanced:");
+                        foreach (var m in shopAdvancedType.GetMethods())
+                        {
+                            GreyHackRussianPlugin.Log.LogInfo($"  - {m.Name} (возвращает {m.ReturnType.Name})");
+                        }
+
+                        // Пробуем найти метод GetDetailsHTML
+                        MethodInfo htmlMethod = AccessTools.Method(shopAdvancedType, "GetDetailsHTML");
+                        if (htmlMethod != null)
+                        {
+                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopAdvanced.GetDetailsHTML");
+                            return htmlMethod;
+                        }
+
+                        // Пробуем с другим регистром
+                        htmlMethod = AccessTools.Method(shopAdvancedType, "GetDetailsHtml");
+                        if (htmlMethod != null)
+                        {
+                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopAdvanced.GetDetailsHtml");
+                            return htmlMethod;
+                        }
+
+                        // Пробуем с помощью GetMethod для учета регистра
+                        foreach (var method in shopAdvancedType.GetMethods())
+                        {
+                            if (method.Name.ToLower() == "getdetailshtml")
+                            {
+                                GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Применяем патч к {shopAdvancedType.Name}.{method.Name}");
+                                return method;
+                            }
+                        }
+                    }
+
+                    // Если не найден, пробуем ItemShopHardware
+                    Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
+                    if (hardwareType != null)
+                    {
+                        GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Найден класс {hardwareType.FullName}");
+
+                        // Выводим все методы класса
+                        GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Доступные методы класса ItemShopHardware:");
+                        foreach (var m in hardwareType.GetMethods())
+                        {
+                            GreyHackRussianPlugin.Log.LogInfo($"  - {m.Name} (возвращает {m.ReturnType.Name})");
+                        }
+
+                        // Пробуем найти метод
+                        MethodInfo htmlMethod = AccessTools.Method(hardwareType, "GetDetailsHTML");
+                        if (htmlMethod != null)
+                        {
+                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopHardware.GetDetailsHTML");
+                            return htmlMethod;
+                        }
+
+                        // Пробуем с другим регистром
+                        htmlMethod = AccessTools.Method(hardwareType, "GetDetailsHtml");
+                        if (htmlMethod != null)
+                        {
+                            GreyHackRussianPlugin.Log.LogInfo("ShopDetailsPatch: Применяем патч к ItemShopHardware.GetDetailsHtml");
+                            return htmlMethod;
+                        }
+
+                        // Пробуем с помощью GetMethod
+                        foreach (var method in hardwareType.GetMethods())
+                        {
+                            if (method.Name.ToLower() == "getdetailshtml")
+                            {
+                                GreyHackRussianPlugin.Log.LogInfo($"ShopDetailsPatch: Применяем патч к {hardwareType.Name}.{method.Name}");
+                                return method;
+                            }
+                        }
+                    }
+
+                    // Если ничего не нашли, сообщаем об этом
+                    GreyHackRussianPlugin.Log.LogWarning("ShopDetailsPatch: Не найдены подходящие методы для патча деталей товара");
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    GreyHackRussianPlugin.Log.LogError($"ShopDetailsPatch: Ошибка при поиске метода: {ex.Message}");
+                    GreyHackRussianPlugin.Log.LogError($"Стек вызова: {ex.StackTrace}");
+                    return null;
+                }
+            }
+
+            static void Postfix(ref string __result)
+            {
+                try
+                {
+                    TranslateHtml(ref __result, "ItemShopDetails");
+                }
+                catch (Exception ex)
+                {
+                    GreyHackRussianPlugin.Log.LogError($"ShopDetailsPatch: Ошибка при обработке HTML: {ex.Message}");
+                    GreyHackRussianPlugin.Log.LogError($"Стек вызова: {ex.StackTrace}");
+                }
+            }
+        }
+
+        // ДОПОЛНИТЕЛЬНЫЙ ПАТЧ для отображения деталей через ItemShop
+        [HarmonyPatch(typeof(ItemShop))]
+        [HarmonyPatch("OnBuy")]
+        public class ItemShopOnBuyPatch
+        {
+            static void Postfix(ItemShop __instance)
+            {
+                try
+                {
+                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Перехвачен метод ItemShop.OnBuy");
+
+                    // Диагностика для нахождения поля с текстом
+                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Поиск всех текстовых полей в ItemShop...");
+
+                    FieldInfo[] fields = typeof(ItemShop).GetFields(
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                    foreach (var field in fields)
+                    {
+                        if (field.FieldType == typeof(TMP_Text) || field.FieldType.IsSubclassOf(typeof(TMP_Text)))
+                        {
+                            TMP_Text textField = field.GetValue(__instance) as TMP_Text;
+                            if (textField != null && !string.IsNullOrEmpty(textField.text))
+                            {
+                                string originalText = textField.text;
+                                string translatedText = TranslateShopText(originalText);
+
+                                if (translatedText != originalText)
+                                {
+                                    textField.text = translatedText;
+                                    GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Переведен текст в поле {field.Name}");
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при патче OnBuy: {ex.Message}");
                 }
             }
         }
