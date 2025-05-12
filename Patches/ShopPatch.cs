@@ -618,6 +618,34 @@ namespace GreyHackRussianPlugin.Patches
         }
 
         /// <summary>
+        /// Проверяет, относится ли заголовок к аппаратным компонентам
+        /// </summary>
+        private static bool IsHardwareTitle(string title)
+        {
+            if (string.IsNullOrEmpty(title))
+                return false;
+
+            // Список ключевых слов для аппаратных компонентов (только на английском)
+            string[] hardwareKeywords = new string[]
+            {
+        "cpu", "processor", "gpu", "graphics card",
+        "ram", "memory", "motherboard", "main board",
+        "power supply", "power unit", "network card",
+        "ethernet", "wifi", "wireless", "hardware"
+            };
+
+            string lowerTitle = title.ToLowerInvariant();
+
+            foreach (string keyword in hardwareKeywords)
+            {
+                if (lowerTitle.Contains(keyword))
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Интеллектуальный перевод текста с использованием различных стратегий
         /// </summary>
         private static string TranslateShopText(string original)
@@ -979,8 +1007,9 @@ namespace GreyHackRussianPlugin.Patches
                         // Используем MonoBehaviour.Invoke для отложенного вызова (после создания PreBuy)
                         GameObject gameObject = new GameObject("TranslationHelper");
                         DummyMonoBehaviour helper = gameObject.AddComponent<DummyMonoBehaviour>();
-                        helper.DelayedAction(0.1f, () => {
-                            try {
+                        helper.DelayedActionRepeating(0.2f, 1.0f, 5, () => {
+                            try
+                            {
                                 // Поиск всех PreBuy в сцене
                                 PreBuy[] allPreBuys = UnityEngine.Object.FindObjectsOfType<PreBuy>();
                                 if (allPreBuys != null && allPreBuys.Length > 0)
@@ -989,23 +1018,38 @@ namespace GreyHackRussianPlugin.Patches
                                     PreBuy preBuy = allPreBuys[allPreBuys.Length - 1];
                                     if (preBuy != null)
                                     {
-                                        // Работаем с HTML-браузером в PreBuy
-                                        FieldInfo browserField = preBuy.GetType().GetField("browser", 
+                                        // ДОБАВИТЬ ПРОВЕРКУ ЗАГОЛОВКА:
+                                        FieldInfo titleField = preBuy.GetType().GetField("nombre",
                                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                                        
-                                        if (browserField != null)
+
+                                        bool isHardware = true; // По умолчанию считаем, что это окно с комплектующими
+
+                                        if (titleField != null)
                                         {
-                                            // Остальной код для перевода HTML
-                                            // ...
+                                            TMP_Text titleText = titleField.GetValue(preBuy) as TMP_Text;
+                                            if (titleText != null)
+                                            {
+                                                isHardware = IsHardwareTitle(titleText.text);
+                                                GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Окно с заголовком '{titleText.text}', комплектующее: {isHardware}");
+                                            }
+                                        }
+
+                                        // Если это окно с комплектующими, переводим его
+                                        if (isHardware)
+                                        {
+                                            // ОСТАЛЬНАЯ ЛОГИКА БЕЗ ИЗМЕНЕНИЙ:
+                                            // Работаем с HTML-браузером в PreBuy
+                                            FieldInfo browserField = preBuy.GetType().GetField("browser",
+                                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                                            // ... код для перевода HTML ...
                                         }
                                     }
                                 }
                             }
-                            catch (Exception ex) {
+                            catch (Exception ex)
+                            {
                                 GreyHackRussianPlugin.Log.LogError($"Ошибка в отложенном обработчике: {ex.Message}");
-                            }
-                            finally {
-                                UnityEngine.Object.Destroy(gameObject);
                             }
                         });
                     }
@@ -1031,8 +1075,24 @@ namespace GreyHackRussianPlugin.Patches
                 this.timer = 0f;
             }
 
+            private Action repeatingAction;
+            private float interval;
+            private float repeatTimer;
+            private int remainingRepeats;
+
+            public void DelayedActionRepeating(float initialDelay, float repeatInterval, int repeatCount, Action action)
+            {
+                this.repeatingAction = action;
+                this.delay = initialDelay;
+                this.interval = repeatInterval;
+                this.remainingRepeats = repeatCount;
+                this.timer = 0f;
+                this.repeatTimer = 0f;
+            }
+
             void Update()
             {
+                // Однократное действие с задержкой
                 if (pendingAction != null)
                 {
                     timer += Time.deltaTime;
@@ -1041,6 +1101,38 @@ namespace GreyHackRussianPlugin.Patches
                         pendingAction();
                         pendingAction = null;
                     }
+                }
+
+                // Периодическое действие с ограниченным количеством повторений
+                if (repeatingAction != null)
+                {
+                    timer += Time.deltaTime;
+
+                    // Начальная задержка
+                    if (timer < delay)
+                        return;
+
+                    repeatTimer += Time.deltaTime;
+
+                    // Проверка интервала повторения
+                    if (repeatTimer >= interval)
+                    {
+                        repeatingAction();
+                        repeatTimer = 0f;
+                        remainingRepeats--;
+
+                        // Проверка оставшихся повторений
+                        if (remainingRepeats <= 0)
+                        {
+                            repeatingAction = null;
+                        }
+                    }
+                }
+
+                // Уничтожить объект, когда все задачи выполнены
+                if (pendingAction == null && repeatingAction == null)
+                {
+                    Destroy(gameObject);
                 }
             }
         }
