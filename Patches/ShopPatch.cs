@@ -140,6 +140,25 @@ namespace GreyHackRussianPlugin.Patches
             }
 
             GreyHackRussianPlugin.Log.LogInfo("Объединенный ShopPatch успешно инициализирован");
+
+            // Диагностика ItemShopHardware
+            try
+            {
+                Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
+                if (hardwareType != null)
+                {
+                    GreyHackRussianPlugin.Log.LogInfo("Найден класс ItemShopHardware, анализ методов:");
+                    foreach (var method in hardwareType.GetMethods())
+                    {
+                        string paramInfo = string.Join(", ", Array.ConvertAll(method.GetParameters(), p => p.ParameterType.Name));
+                        GreyHackRussianPlugin.Log.LogInfo($"Метод: {method.ReturnType.Name} {method.Name}({paramInfo})");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                GreyHackRussianPlugin.Log.LogError($"Ошибка при диагностике ItemShopHardware: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -954,6 +973,162 @@ namespace GreyHackRussianPlugin.Patches
                 catch (Exception ex)
                 {
                     GreyHackRussianPlugin.Log.LogError($"ShopPatch: Безопасная обработка ошибки в OnBuy: {ex.Message}");
+                }
+            }
+        }
+
+        // Патч для ItemShopHardware.Configure
+        [HarmonyPatch]
+        public class ItemShopHardwarePatch
+        {
+            static MethodBase TargetMethod()
+            {
+                try
+                {
+                    // Ищем метод Configure в классе ItemShopHardware
+                    Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
+                    if (hardwareType != null)
+                    {
+                        GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Поиск Configure в ItemShopHardware");
+
+                        // Находим метод Configure, который принимает Hardware.ItemHardware
+                        foreach (var method in hardwareType.GetMethods())
+                        {
+                            if (method.Name == "Configure")
+                            {
+                                var parameters = method.GetParameters();
+                                if (parameters.Length > 0 && parameters[0].ParameterType.Name.Contains("ItemHardware"))
+                                {
+                                    GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Найден метод Configure для ItemHardware");
+                                    return method;
+                                }
+                            }
+                        }
+                    }
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при поиске метода: {ex.Message}");
+                    return null;
+                }
+            }
+
+            static void Postfix(ItemShop __instance)
+            {
+                try
+                {
+                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Постобработка ItemShopHardware.Configure");
+
+                    // Получаем поля с названием и описанием
+                    FieldInfo nameField = __instance.GetType().GetField("nombre", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    FieldInfo descField = __instance.GetType().GetField("description", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                    // Переводим имя устройства если есть
+                    if (nameField != null)
+                    {
+                        TMP_Text nameText = nameField.GetValue(__instance) as TMP_Text;
+                        if (nameText != null && !string.IsNullOrEmpty(nameText.text))
+                        {
+                            nameText.text = TranslateShopText(nameText.text);
+                            GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Переведено название: {nameText.text}");
+                        }
+                    }
+
+                    // Переводим описание устройства если есть
+                    if (descField != null)
+                    {
+                        TMP_Text descText = descField.GetValue(__instance) as TMP_Text;
+                        if (descText != null && !string.IsNullOrEmpty(descText.text))
+                        {
+                            descText.text = TranslateShopText(descText.text);
+                            GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Переведено описание: {descText.text}");
+                        }
+                    }
+
+                    // Поиск и перевод HTML-содержимого
+                    FieldInfo browserField = __instance.GetType().GetField("browser", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (browserField != null)
+                    {
+                        var browser = browserField.GetValue(__instance);
+                        if (browser != null)
+                        {
+                            // Получаем метод LoadHtml для браузера
+                            Type browserType = browser.GetType();
+                            MethodInfo loadHtmlMethod = browserType.GetMethod("LoadHtml");
+
+                            if (loadHtmlMethod != null)
+                            {
+                                // Попытка получить текущий HTML
+                                MethodInfo getHtmlMethod = browserType.GetMethod("get_Html");
+                                if (getHtmlMethod != null)
+                                {
+                                    string currentHtml = (string)getHtmlMethod.Invoke(browser, null);
+                                    if (!string.IsNullOrEmpty(currentHtml))
+                                    {
+                                        // Перевод HTML
+                                        string translatedHtml = currentHtml;
+                                        TranslateHtml(ref translatedHtml, "ItemShopHardware");
+
+                                        // Загрузка переведенного HTML
+                                        loadHtmlMethod.Invoke(browser, new object[] { translatedHtml });
+                                        GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Переведен HTML контент для hardware");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка в патче ItemShopHardware: {ex.Message}");
+                }
+            }
+
+            // Патч для метода, который генерирует HTML для ItemShopHardware
+            [HarmonyPatch]
+            public class ItemShopHardwareHtmlPatch
+            {
+                static MethodBase TargetMethod()
+                {
+                    try
+                    {
+                        Type hardwareType = AccessTools.TypeByName("ItemShopHardware");
+                        if (hardwareType != null)
+                        {
+                            // Ищем методы, которые могут возвращать HTML
+                            foreach (var method in hardwareType.GetMethods())
+                            {
+                                if ((method.Name.Contains("HTML") || method.Name.Contains("Html")) &&
+                                    method.ReturnType == typeof(string))
+                                {
+                                    GreyHackRussianPlugin.Log.LogInfo($"ShopPatch: Найден метод {method.Name} для генерации HTML");
+                                    return method;
+                                }
+                            }
+                        }
+                        return null;
+                    }
+                    catch (Exception ex)
+                    {
+                        GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при поиске метода HTML: {ex.Message}");
+                        return null;
+                    }
+                }
+
+                static void Postfix(ref string __result)
+                {
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(__result))
+                        {
+                            TranslateHtml(ref __result, "HardwareHtml");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при переводе HTML: {ex.Message}");
+                    }
                 }
             }
         }
