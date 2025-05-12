@@ -1086,15 +1086,21 @@ namespace GreyHackRussianPlugin.Patches
             }
         }
 
-        // Альтернативный патч для перехвата отрисовки HTML
+        // Вместо патча OnGUI используем патч для Update
         [HarmonyPatch(typeof(ItemShop))]
-        [HarmonyPatch("OnGUI")]
-        public class ItemShopOnGuiPatch
+        [HarmonyPatch("Update")]
+        public class ItemShopUpdatePatch
         {
+            // Создаём переменную для отслеживания последнего HTML
+            private static string lastHtml = "";
+            
             static void Postfix(ItemShop __instance)
             {
                 try
                 {
+                    // Проверяем браузер только раз в 10 кадров для оптимизации
+                    if (Time.frameCount % 10 != 0) return;
+                    
                     // Находим поле с браузером через рефлексию
                     FieldInfo browserField = AccessTools.Field(typeof(ItemShop), "browser");
                     if (browserField != null)
@@ -1107,10 +1113,11 @@ namespace GreyHackRussianPlugin.Patches
                             if (htmlProperty != null)
                             {
                                 string html = (string)htmlProperty.GetValue(browser);
-                                if (!string.IsNullOrEmpty(html))
+                                if (!string.IsNullOrEmpty(html) && html != lastHtml)
                                 {
+                                    lastHtml = html; // Сохраняем текущий HTML
                                     string translatedHtml = html;
-                                    TranslateHtml(ref translatedHtml, "ItemShopOnGUI");
+                                    TranslateHtml(ref translatedHtml, "ItemShopUpdate");
                                     
                                     if (translatedHtml != html)
                                     {
@@ -1119,6 +1126,7 @@ namespace GreyHackRussianPlugin.Patches
                                         if (loadHtmlMethod != null)
                                         {
                                             loadHtmlMethod.Invoke(browser, new object[] { translatedHtml });
+                                            GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Обновлен HTML через Update патч");
                                         }
                                     }
                                 }
@@ -1128,7 +1136,7 @@ namespace GreyHackRussianPlugin.Patches
                 }
                 catch (Exception ex)
                 {
-                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка в OnGUI патче: {ex.Message}");
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка в Update патче: {ex.Message}");
                 }
             }
         }
