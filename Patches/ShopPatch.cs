@@ -908,42 +908,6 @@ namespace GreyHackRussianPlugin.Patches
             }
         }
 
-        // НОВЫЙ БЛОК: Объединенный патч для деталей товара
-        // Обновленный класс ItemShopDetailsPatch с правильной обработкой ошибок
-        [HarmonyPatch]
-        public class ItemShopDetailsPatch
-        {
-            static MethodBase TargetMethod()
-            {
-                try
-                {
-                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Поиск методов для патча деталей товара...");
-
-                    // Если методы не найдены, возвращаем null и логируем это
-                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Детальные методы не найдены, пропускаем патч");
-                    return null; // Важно - возврат null предотвращает применение патча
-                }
-                catch (Exception ex)
-                {
-                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при поиске метода: {ex.Message}");
-                    return null; // Возврат null при ошибке
-                }
-            }
-
-            static void Postfix(ref string __result)
-            {
-                // Код будет выполнен только если метод найден
-                try
-                {
-                    GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Перевод HTML-контента...");
-                }
-                catch (Exception ex)
-                {
-                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при обработке HTML: {ex.Message}");
-                }
-            }
-        }
-
         // ДОПОЛНИТЕЛЬНЫЙ ПАТЧ для отображения деталей через ItemShop
         [HarmonyPatch(typeof(ItemShop))]
         [HarmonyPatch("OnBuy")]
@@ -953,6 +917,13 @@ namespace GreyHackRussianPlugin.Patches
             {
                 try
                 {
+                    // Проверка на null для защиты
+                    if (__instance == null)
+                    {
+                        GreyHackRussianPlugin.Log.LogWarning("ShopPatch: __instance был null в OnBuy патче");
+                        return;
+                    }
+
                     GreyHackRussianPlugin.Log.LogInfo("ShopPatch: Перехвачен метод ItemShop.OnBuy");
 
                     // Диагностика для нахождения поля с текстом
@@ -982,7 +953,7 @@ namespace GreyHackRussianPlugin.Patches
                 }
                 catch (Exception ex)
                 {
-                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Ошибка при патче OnBuy: {ex.Message}");
+                    GreyHackRussianPlugin.Log.LogError($"ShopPatch: Безопасная обработка ошибки в OnBuy: {ex.Message}");
                 }
             }
         }
