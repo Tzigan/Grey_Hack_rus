@@ -2,9 +2,11 @@
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
 using GreyHackRussianPlugin.Translation;
+using GreyHackRussianPlugin.Patches;
 using HarmonyLib;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,6 +33,25 @@ namespace GreyHackRussianPlugin
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             Log.LogInfo($"Путь к плагину: {PluginPath}");
 
+            try
+            {
+                var itemShopType = AccessTools.TypeByName("ItemShop");
+                UnityEngine.Debug.Log($"[GreyHackRussian] ItemShop тип найден: {itemShopType != null}");
+
+                var preBuyType = AccessTools.TypeByName("PreBuy");
+                UnityEngine.Debug.Log($"[GreyHackRussian] PreBuy тип найден: {preBuyType != null}");
+
+                // Проверка пространства имен
+                if (itemShopType != null)
+                {
+                    UnityEngine.Debug.Log($"[GreyHackRussian] ItemShop namespace: {itemShopType.Namespace}");
+                }
+            }
+            catch (Exception ex)
+            {
+                UnityEngine.Debug.LogError($"[GreyHackRussian] Ошибка проверки типов: {ex.Message}");
+            }
+
             // Загрузка переводов
             try
             {
@@ -48,6 +69,27 @@ namespace GreyHackRussianPlugin
                 var harmony = new Harmony("com.tzigan.greyhack.russian");
                 harmony.PatchAll();
                 Log.LogInfo("Патчи успешно применены");
+
+                try
+                {
+                    Log.LogInfo("Явная регистрация ShopPatch...");
+                    harmony.PatchAll(typeof(ShopPatch));
+                    Log.LogInfo("ShopPatch успешно зарегистрирован");
+
+                    // Инициализируем ShopPatch после успешной регистрации
+                    ShopPatch.Initialize();
+                    Log.LogInfo("ShopPatch успешно инициализирован");
+
+                    // Регистрация и инициализация ShopDetailsPatch
+                    Log.LogInfo("Явная регистрация ShopDetailsPatch...");
+                    harmony.PatchAll(typeof(ShopDetailsPatch));
+                    ShopDetailsPatch.Initialize();
+                    Log.LogInfo("ShopDetailsPatch успешно инициализирован");
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError($"Ошибка регистрации ShopPatch: {ex.Message}");
+                }
             }
             catch (Exception ex)
             {
@@ -56,6 +98,25 @@ namespace GreyHackRussianPlugin
 
             // Подписываемся на событие обновления Unity для анализа UI
             gameObject.AddComponent<UIAnalyzer>();
+
+            // Вывод информации о методах для отладки
+            foreach (var method in typeof(ItemShop).GetMethods())
+            {
+                if (method.Name == "Configure")
+                {
+                    string paramInfo = string.Join(", ", method.GetParameters().Select(p => p.ParameterType.Name));
+                    UnityEngine.Debug.Log($"[GreyHackRussian] ItemShop.Configure метод: ({paramInfo})");
+                }
+            }
+
+            foreach (var method in typeof(PreBuy).GetMethods())
+            {
+                if (method.Name == "Configure")
+                {
+                    string paramInfo = string.Join(", ", method.GetParameters().Select(p => p.ParameterType.Name));
+                    UnityEngine.Debug.Log($"[GreyHackRussian] PreBuy.Configure метод: ({paramInfo})");
+                }
+            }
         }
     }
 
