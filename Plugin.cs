@@ -14,7 +14,7 @@ using GreyHackRussianPlugin.PluginUpdater;
 
 namespace GreyHackRussianPlugin
 {
-    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.2")]
+    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.3-beta")]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
@@ -49,6 +49,9 @@ namespace GreyHackRussianPlugin
                 var harmony = new Harmony("com.tzigan.greyhack.russian");
                 harmony.PatchAll();
                 Log.LogInfo("Патчи успешно применены");
+
+                // Инициализируем ExploitPatch 
+                Patches.ExploitPatch.Initialize();
 
                 // Диагностика ExploitPatch после обновления игры
                 try
@@ -130,7 +133,7 @@ namespace GreyHackRussianPlugin
             try
             {
                 _updateModule = new UpdateModule(
-                    "1.1.2",
+                    "1.1.3-beta",
                     PluginPath,
                     Log,
                     DebugLog
