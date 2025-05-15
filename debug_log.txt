@@ -1,0 +1,49 @@
+=== Debug Log Start: 15.05.2025 3:50:48 ===
+Plugin Path: D:\Games\steamapps\common\Grey Hack\BepInEx\plugins\GreyHackRussian
+Unity Version: 2022.3.55f1
+OS: Windows 11  (10.0.26100) 64bit
+Device: System Product Name (ASUS)
+Processor: AMD Ryzen 9 3900XT 12-Core Processor 
+Memory: 32653 MB
+--------------------------------------------------
+[03:50:48.203] Базовое логирование инициализировано
+[03:50:48.205] [UpdateModule] ======== НАЧАЛО ПРОВЕРКИ ОБНОВЛЕНИЙ ========
+[03:50:48.206] [UpdateModule] Проверка обновлений. Текущая версия: 1.0.0
+[03:50:48.212] [UpdateModule] Запрос к URL: https://raw.githubusercontent.com/Tzigan/Grey_Hack_rus/master/version.json
+[03:50:48.724] [UpdateModule] Информация об обновлении успешно загружена
+[03:50:48.726] [UpdateModule] Парсинг данных JSON...
+[03:50:48.736] [UpdateModule] Получена информация: версия 1.1.0, URL: https://github.com/Tzigan/Grey_Hack_rus/releases/download/v1.1.0/GreyHackRussianPlugin_v1.1.0.zip
+[03:50:48.736] [UpdateModule] Changelog: Тест
+[03:50:48.737] [UpdateModule] Сравнение версий: текущая=1.0.0, новая=1.1.0
+[03:50:48.738] [UpdateModule] Результат сравнения: Доступно обновление
+[03:50:48.739] [UpdateModule] Данные кэшированы до 16.05.2025 3:50:48
+[03:50:48.740] [UpdateModule] Доступно обновление: 1.1.0
+[03:50:48.742] [UpdateModule] ======== КОНЕЦ ПРОВЕРКИ ОБНОВЛЕНИЙ ========
+[03:50:48.744] [UpdateModule] Создание окна обновления
+[03:50:48.752] [UpdateModule] Окно обновления успешно создано
+[03:51:00.946] [UpdateModule] ======== НАЧАЛО УСТАНОВКИ ОБНОВЛЕНИЯ ========
+[03:51:00.946] [UpdateModule] Установка обновления с 1.0.0 до 1.1.0
+[03:51:00.947] [UpdateModule] URL загрузки: https://github.com/Tzigan/Grey_Hack_rus/releases/download/v1.1.0/GreyHackRussianPlugin_v1.1.0.zip
+[03:51:00.948] [UpdateModule] Временный путь: C:\Users\nikol\AppData\Local\Temp\GreyHackRus_update
+[03:51:00.949] [UpdateModule] Путь для Zip файла: C:\Users\nikol\AppData\Local\Temp\GreyHackRus_update\update.zip
+[03:51:00.950] [UpdateModule] Путь для распаковки: C:\Users\nikol\AppData\Local\Temp\GreyHackRus_update\extracted
+[03:51:00.951] [UpdateModule] Начало загрузки файла обновления...
+[03:51:01.937] [UpdateModule] Прогресс загрузки: 20% (6895/33687 байт)
+[03:51:01.938] [UpdateModule] Прогресс загрузки: 40% (13790/33687 байт)
+[03:51:01.942] [UpdateModule] Прогресс загрузки: 60% (20521/33687 байт)
+[03:51:01.943] [UpdateModule] Прогресс загрузки: 100% (33687/33687 байт)
+[03:51:01.944] [UpdateModule] Файл успешно загружен за 993 мс
+[03:51:01.946] [UpdateModule] Размер файла: 33687 байт
+[03:51:01.948] [UpdateModule] Начало распаковки архива...
+[03:51:01.951] [UpdateModule] Открытие ZIP архива...
+[03:51:01.973] [UpdateModule] Архив открыт, найдено 4 файлов
+[03:51:01.973] [UpdateModule] Распаковка: GreyHackRussianPlugin.dll.config -> C:\Users\nikol\AppData\Local\Temp\GreyHackRus_update\extracted\GreyHackRussianPlugin.dll.config
+[03:51:01.983] [UpdateModule] Распаковка: GreyHackRussianPlugin.deps.json -> C:\Users\nikol\AppData\Local\Temp\GreyHackRus_update\extracted\GreyHackRussianPlugin.deps.json
+[03:51:01.984] [UpdateModule] Распаковка: GreyHackRussianPlugin.dll -> C:\Users\nikol\AppData\Local\Temp\GreyHackRus_update\extracted\GreyHackRussianPlugin.dll
+[03:51:01.986] [UpdateModule] Распаковка: GreyHackRussianPlugin.pdb -> C:\Users\nikol\AppData\Local\Temp\GreyHackRus_update\extracted\GreyHackRussianPlugin.pdb
+[03:51:01.988] [UpdateModule] Архив успешно распакован
+[03:51:01.989] [UpdateModule] Копирование файлов в директорию плагина: D:\Games\steamapps\common\Grey Hack\BepInEx\plugins\GreyHackRussian
+[03:51:01.995] [UpdateModule] Пропускаем PDB файл при копировании: GreyHackRussianPlugin.pdb
+[03:51:01.996] [UpdateModule] Копирование файлов завершено
+[03:51:01.998] [UpdateModule] Обновление успешно установлено!
+[03:51:02.004] [UpdateModule] ======== КОНЕЦ УСТАНОВКИ ОБНОВЛЕНИЯ ========

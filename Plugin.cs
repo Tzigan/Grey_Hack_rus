@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Unity.Mono;
+using GreyHackRussianPlugin.DebugTools;
 using GreyHackRussianPlugin.Translation;
 using HarmonyLib;
 using System;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
+using GreyHackRussianPlugin.PluginUpdater;
 
 namespace GreyHackRussianPlugin
 {
@@ -15,11 +17,13 @@ namespace GreyHackRussianPlugin
     // Использует BepInEx для загрузки и управления плагинами
     // Патчинг с помощью HarmonyLib для изменения поведения игры
 
-    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.0.0")]
+    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.0")]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
         internal static string PluginPath;
+        internal static DebugLogger DebugLog;
+        private UpdateModule _updateModule;
 
         private void Awake()
         {
@@ -52,6 +56,39 @@ namespace GreyHackRussianPlugin
             catch (Exception ex)
             {
                 Log.LogError($"Ошибка при применении патчей: {ex.Message}\n{ex.StackTrace}");
+            }
+
+            // Только для логирования, без API запросов
+            try
+            {
+                DebugLog = new DebugLogger(Log, PluginPath);
+                // НЕ инициализируем ApiDebug
+                DebugLog.Log("Базовое логирование инициализировано");
+            }
+            catch (Exception ex)
+            {
+                Log.LogWarning($"Ошибка инициализации логирования: {ex.Message}");
+            }
+
+            // Инициализация модуля обновлений
+            try
+            {
+                _updateModule = new UpdateModule(
+                    "1.1.0",                 // Текущая версия плагина
+                    PluginPath,              // Путь к директории плагина
+                    Log,                      // Логгер
+                    DebugLog                 // Передаем экземпляр DebugLogger
+                );
+
+                // Запускаем проверку обновлений только если нет режима отладки (чтобы избежать двойных запросов)
+#if !DEBUG
+                _ = _updateModule.CheckForUpdates();
+#endif
+                Log.LogInfo("Модуль обновлений инициализирован");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"Ошибка при инициализации модуля обновлений: {ex.Message}");
             }
 
             // Подписываемся на событие обновления Unity для анализа UI
