@@ -59,8 +59,7 @@ Grey Hack/
  │   │       ├── GreyHackRussianPlugin.deps.json
  │   │       ├── GreyHackRussianPlugin.dll.config
  │   │       ├── GreyHackRussianPlugin.pdb
- │   │       ├── README.md
- │   │       ├── Translation/
+ │   │       ├── Translation/  - создаётся автоматически при запуске игры (изначально её нет)
  │   │       └── ExploitPatch/ - создаётся автоматически после нахождения текста (изначально её нет)
 ```
  3. Запустите игру и наслаждайтесь русским интерфейсом!
