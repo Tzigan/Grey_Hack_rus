@@ -1,6 +1,6 @@
 🎮 **Grey Hack Russian | Русификатор для Grey Hack**
 
- ![Версия](https://img.shields.io/badge/%D0%92%D0%B5%D1%80%D1%81%D0%B8%D1%8F-1.1.0-blue) ![Version](https://img.shields.io/badge/BepInEx-6.0.0--pre.2-green) ![Version](https://img.shields.io/badge/Grey%20Hack-0.9.5-5c7cfa)
+ ![Version](https://img.shields.io/badge/Version-1.1.2-blue) ![Version](https://img.shields.io/badge/BepInEx-6.0.0--pre.2-green) ![Version](https://img.shields.io/badge/Grey%20Hack-0.9.5-5c7cfa)
  
  🌍 ~~Полный русификатор для хакерского симулятора Grey Hack~~
 
