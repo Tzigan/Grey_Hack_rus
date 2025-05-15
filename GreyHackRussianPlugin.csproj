@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GreyHackRussianPlugin</AssemblyName>
     <Description>Русификатор для игры Grey Hack</Description>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>

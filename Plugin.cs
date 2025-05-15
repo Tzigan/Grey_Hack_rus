@@ -14,7 +14,7 @@ using GreyHackRussianPlugin.PluginUpdater;
 
 namespace GreyHackRussianPlugin
 {
-    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.1")]
+    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.2")]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
@@ -130,7 +130,7 @@ namespace GreyHackRussianPlugin
             try
             {
                 _updateModule = new UpdateModule(
-                    "1.1.1",
+                    "1.1.2",
                     PluginPath,
                     Log,
                     DebugLog

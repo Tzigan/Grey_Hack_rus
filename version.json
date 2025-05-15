@@ -1,5 +1,5 @@
 {
-  "version": "1.1.1",
-  "download_url": "https://github.com/Tzigan/Grey_Hack_rus/releases/download/v1.1.1/GreyHackRussianPlugin_v1.1.1.zip",
-  "changelog": ""
+  "version": "1.1.2",
+  "download_url": "https://github.com/Tzigan/Grey_Hack_rus/releases/download/v1.1.2/GreyHackRussianPlugin_v1.1.2.zip",
+  "changelog": "🛠️ Исправление перевода эксплойтов в ExploitPatch, 🔍 Добавлена поддержка новых текстов эксплойтов"
 }
