@@ -6,6 +6,7 @@ using GreyHackRussianPlugin.Translation;
 using HarmonyLib;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,7 @@ using GreyHackRussianPlugin.PluginUpdater;
 
 namespace GreyHackRussianPlugin
 {
-    // Основной класс плагина, наследуется от BaseUnityPlugin
-    // Использует BepInEx для загрузки и управления плагинами
-    // Патчинг с помощью HarmonyLib для изменения поведения игры
-
-    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.0")]
+    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.1")]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
@@ -52,6 +49,66 @@ namespace GreyHackRussianPlugin
                 var harmony = new Harmony("com.tzigan.greyhack.russian");
                 harmony.PatchAll();
                 Log.LogInfo("Патчи успешно применены");
+
+                // Диагностика ExploitPatch после обновления игры
+                try
+                {
+                    var exploitType = AccessTools.TypeByName("Exploit");
+                    if (exploitType != null)
+                    {
+                        var method = AccessTools.Method(exploitType, "GetShopDescription");
+                        if (method != null)
+                        {
+                            Log.LogInfo("Патч ExploitPatch применен успешно");
+                        }
+                        else
+                        {
+                            Log.LogError("Метод GetShopDescription не найден в классе Exploit!");
+
+                            // Поиск похожих методов для подсказки
+                            foreach (var m in exploitType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                            {
+                                if (m.Name.Contains("Description") || m.Name.Contains("Shop"))
+                                {
+                                    Log.LogInfo($"Найден похожий метод: {m.Name} в {exploitType.Name}");
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Log.LogError("Класс Exploit не найден. Патч ExploitPatch не будет применен.");
+
+                        // Поиск похожих классов во всех загруженных сборках
+                        Log.LogInfo("Поиск похожих классов в загруженных сборках...");
+                        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                        {
+                            try
+                            {
+                                foreach (var type in assembly.GetTypes())
+                                {
+                                    if (type.Name.Contains("Exploit") || type.Name.Contains("exploit"))
+                                    {
+                                        Log.LogInfo($"Найден похожий тип: {type.FullName} в сборке {assembly.GetName().Name}");
+                                    }
+                                }
+                            }
+                            catch (ReflectionTypeLoadException)
+                            {
+                                // Игнорируем сборки, которые не могут быть загружены
+                                continue;
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.LogWarning($"Ошибка при сканировании сборки {assembly.GetName().Name}: {ex.Message}");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError($"Ошибка при проверке патча ExploitPatch: {ex.Message}");
+                }
             }
             catch (Exception ex)
             {
@@ -62,7 +119,6 @@ namespace GreyHackRussianPlugin
             try
             {
                 DebugLog = new DebugLogger(Log, PluginPath);
-                // НЕ инициализируем ApiDebug
                 DebugLog.Log("Базовое логирование инициализировано");
             }
             catch (Exception ex)
@@ -74,13 +130,13 @@ namespace GreyHackRussianPlugin
             try
             {
                 _updateModule = new UpdateModule(
-                    "1.1.0",                 // Текущая версия плагина
-                    PluginPath,              // Путь к директории плагина
-                    Log,                      // Логгер
-                    DebugLog                 // Передаем экземпляр DebugLogger
+                    "1.1.1",
+                    PluginPath,
+                    Log,
+                    DebugLog
                 );
 
-                // Запускаем проверку обновлений только если нет режима отладки (чтобы избежать двойных запросов)
+                // Запускаем проверку обновлений только если нет режима отладки
 #if !DEBUG
                 _ = _updateModule.CheckForUpdates();
 #endif
