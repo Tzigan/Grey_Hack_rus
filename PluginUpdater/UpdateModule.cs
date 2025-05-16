@@ -18,7 +18,7 @@ namespace GreyHackRussianPlugin.PluginUpdater
     public class UpdateModule
     {
         // URL для обновления - прямая ссылка на JSON с информацией
-        private const string UPDATE_INFO_URL = "https://raw.githubusercontent.com/Tzigan/Grey_Hack_rus/master/version.json";
+        private const string UPDATE_INFO_URL = "https://raw.githubusercontent.com/Tzigan/Grey_Hack_rus/blob/1.1.4-test/version.json";
 
         // Константы для файлов
         private const string UPDATE_FILE_PREFIX = "GreyHackRussianPlugin_v";
