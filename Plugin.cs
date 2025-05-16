@@ -12,9 +12,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using GreyHackRussianPlugin.PluginUpdater;
 
+// Метатег для замены во время сборки
+[assembly: AssemblyInformationalVersion("$(PluginVersion)")]
+
 namespace GreyHackRussianPlugin
 {
-    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.4")]
+    // Константы для версии
+    public static class PluginInfo
+    {
+        public const string PLUGIN_VERSION = "$(PluginVersion)"; // Будет заменено во время сборки
+    }
+
+    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", PluginInfo.PLUGIN_VERSION)]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
@@ -132,12 +141,7 @@ namespace GreyHackRussianPlugin
             // Инициализация модуля обновлений
             try
             {
-                _updateModule = new UpdateModule(
-                    "1.1.4",
-                    PluginPath,
-                    Log,
-                    DebugLog
-                );
+                _updateModule = new UpdateModule(PluginInfo.PLUGIN_VERSION, PluginPath, Log, DebugLog);
 
                 // Запускаем проверку обновлений только если нет режима отладки
 #if !DEBUG
