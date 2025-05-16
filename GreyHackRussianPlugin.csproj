@@ -29,6 +29,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="VersionInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <OutputFileName>VersionInfo.cs</OutputFileName>
+      <LastGenOutput>VersionInfo.cs</LastGenOutput>
+    </None>
+    <Compile Include="VersionInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersionInfo.tt</DependentUpon>
+    </Compile>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Обновлено: все BepInEx библиотеки находятся в папке core -->
     <Reference Include="BepInEx.Core">
       <HintPath>libs\BepInEx.Core.dll</HintPath>

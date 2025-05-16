@@ -1,0 +1,64 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ output extension=".cs" #>
+<#
+    // Чтение версии из файла version.json
+    string projectPath = Host.ResolvePath(".");
+    string jsonFilePath = Path.Combine(projectPath, "version.json");
+    
+    string version = "1.0.0";
+    string downloadUrl = "";
+    
+    if (File.Exists(jsonFilePath))
+    {
+        try
+        {
+            string json = File.ReadAllText(jsonFilePath);
+            
+            // Извлекаем версию
+            int versionStartIndex = json.IndexOf("\"version\":");
+            if (versionStartIndex > 0)
+            {
+                int valueStartIndex = json.IndexOf('"', versionStartIndex + 10) + 1;
+                int valueEndIndex = json.IndexOf('"', valueStartIndex);
+                version = json.Substring(valueStartIndex, valueEndIndex - valueStartIndex);
+            }
+            
+            // Извлекаем URL загрузки
+            int urlStartIndex = json.IndexOf("\"download_url\":");
+            if (urlStartIndex > 0)
+            {
+                int valueStartIndex = json.IndexOf('"', urlStartIndex + 15) + 1;
+                int valueEndIndex = json.IndexOf('"', valueStartIndex);
+                downloadUrl = json.Substring(valueStartIndex, valueEndIndex - valueStartIndex);
+            }
+        }
+        catch (Exception)
+        {
+            // При ошибке используем версию по умолчанию
+        }
+    }
+#>
+using System.Reflection;
+
+// Этот файл создан автоматически из version.json, не редактировать вручную!
+// Для изменения версии редактируйте файл version.json
+
+[assembly: AssemblyVersion("<#= version #>")]
+[assembly: AssemblyFileVersion("<#= version #>")]
+[assembly: AssemblyInformationalVersion("<#= version #>")]
+
+namespace GreyHackRussianPlugin
+{
+    public static class PluginInfo
+    {
+        public const string PLUGIN_GUID = "com.tzigan.greyhack.russian";
+        public const string PLUGIN_NAME = "Grey Hack Russian";
+        public const string PLUGIN_VERSION = "<#= version #>";
+        public const string DOWNLOAD_URL = "<#= downloadUrl #>";
+    }
+}

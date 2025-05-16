@@ -12,18 +12,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using GreyHackRussianPlugin.PluginUpdater;
 
-// Метатег для замены во время сборки
-[assembly: AssemblyInformationalVersion("$(PluginVersion)")]
-
 namespace GreyHackRussianPlugin
 {
-    // Константы для версии
-    public static class PluginInfo
-    {
-        public const string PLUGIN_VERSION = "$(PluginVersion)"; // Будет заменено во время сборки
-    }
-
-    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", PluginInfo.PLUGIN_VERSION)]
+    // Используем значения версии из сгенерированного T4 шаблоном файла VersionInfo.cs
+    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
@@ -35,7 +27,7 @@ namespace GreyHackRussianPlugin
         {
             // Инициализация логгера BepInEx
             Log = Logger;
-            Log.LogInfo("Grey Hack Russian плагин запущен");
+            Log.LogInfo($"Grey Hack Russian плагин запущен (версия {PluginInfo.PLUGIN_VERSION})");
 
             // Получение пути к папке плагина
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -55,7 +47,7 @@ namespace GreyHackRussianPlugin
             // Применение патчей Harmony
             try
             {
-                var harmony = new Harmony("com.tzigan.greyhack.russian");
+                var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
                 harmony.PatchAll();
                 Log.LogInfo("Патчи успешно применены");
 
