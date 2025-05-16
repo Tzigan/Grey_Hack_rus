@@ -360,7 +360,7 @@ namespace GreyHackRussianPlugin.PluginUpdater
             LogDebug("Окно обновления в стиле Grey Hack успешно создано");
         }
 
-        // Создание текста в хакерском стиле
+        // Создание текста в хакерском стиле с улучшенным позиционированием
         private void CreateHackerText(GameObject parent, string message, Vector2 position, int fontSize,
             TextAnchor alignment = TextAnchor.MiddleCenter, Color? color = null)
         {
@@ -368,14 +368,25 @@ namespace GreyHackRussianPlugin.PluginUpdater
             textObj.transform.SetParent(parent.transform, false);
             Text text = textObj.AddComponent<Text>();
             text.text = message;
-            text.font = Resources.GetBuiltinResource<Font>("Courier New.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf"); // Используем сразу Arial, чтобы избежать ошибок с Courier New
             text.fontSize = fontSize;
             text.alignment = alignment;
-            text.color = color ?? new Color(0.0f, 0.8f, 0.3f); // По умолчанию зеленый хакерский текст
+            text.color = color ?? new Color(0.0f, 0.8f, 0.3f); // Зеленый хакерский текст по умолчанию
 
+            // Улучшенное позиционирование
             RectTransform rectTransform = textObj.GetComponent<RectTransform>();
+            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.sizeDelta = new Vector2(500, 30);
             rectTransform.anchoredPosition = position;
+
+            // Убедимся, что текст корректно отображается
+            text.raycastTarget = false; // Для лучшей производительности
+            text.supportRichText = true;
+            text.resizeTextForBestFit = false;
+            text.horizontalOverflow = HorizontalWrapMode.Wrap;
+            text.verticalOverflow = VerticalWrapMode.Truncate;
         }
 
         // Создание кнопки в хакерском стиле
