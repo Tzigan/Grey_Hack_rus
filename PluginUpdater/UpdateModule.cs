@@ -300,7 +300,7 @@ namespace GreyHackRussianPlugin.PluginUpdater
                 GameObject changelogText = new GameObject("ChangelogText");
                 changelogText.transform.SetParent(changelogBg.transform, false);
                 Text text = changelogText.AddComponent<Text>();
-                text.font = Resources.GetBuiltinResource<Font>("Courier New.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+                text.font = Resources.GetBuiltinResource<Font>("Arial.ttf"); // Используем сразу Arial, чтобы избежать ошибок с Courier New
                 text.fontSize = 14;
                 text.alignment = TextAnchor.UpperLeft;
                 text.color = new Color(0.0f, 0.8f, 0.3f); // Терминально-зеленый текст
@@ -423,7 +423,7 @@ namespace GreyHackRussianPlugin.PluginUpdater
             textObj.transform.SetParent(buttonObj.transform, false);
             Text text = textObj.AddComponent<Text>();
             text.text = label;
-            text.font = Resources.GetBuiltinResource<Font>("Courier New.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf"); // Используем сразу Arial, чтобы избежать ошибок с Courier New
             text.fontSize = 14;
             text.alignment = TextAnchor.MiddleCenter;
             text.color = new Color(0.0f, 0.9f, 0.4f); // Зеленый хакерский текст
