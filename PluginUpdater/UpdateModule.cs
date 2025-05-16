@@ -217,9 +217,9 @@ namespace GreyHackRussianPlugin.PluginUpdater
 
         private void CreateUpdateWindow()
         {
-            LogDebug("Создание окна обновления");
+            LogDebug("Создание окна обновления в стиле Grey Hack");
 
-            // Создаем окно с Canvas, панелью и текстом
+            // Создаем окно с Canvas
             _updateWindow = new GameObject("UpdateWindow");
             GameObject.DontDestroyOnLoad(_updateWindow);
 
@@ -233,101 +233,192 @@ namespace GreyHackRussianPlugin.PluginUpdater
 
             _updateWindow.AddComponent<GraphicRaycaster>();
 
-            // Создаем затемненный фон
+            // Создаем затемненный фон в стиле хакерского интерфейса
             GameObject overlay = new GameObject("Overlay");
             overlay.transform.SetParent(_updateWindow.transform, false);
             Image overlayImage = overlay.AddComponent<Image>();
-            overlayImage.color = new Color(0, 0, 0, 0.8f);
+            overlayImage.color = new Color(0.05f, 0.05f, 0.05f, 0.95f); // Почти черный фон
             RectTransform overlayRect = overlay.GetComponent<RectTransform>();
             overlayRect.anchorMin = Vector2.zero;
             overlayRect.anchorMax = Vector2.one;
             overlayRect.sizeDelta = Vector2.zero;
 
-            // Создаем панель сообщения
+            // Создаем панель в стиле терминала
             GameObject panel = new GameObject("Panel");
             panel.transform.SetParent(_updateWindow.transform, false);
             Image panelImage = panel.AddComponent<Image>();
-            panelImage.color = new Color(0.1f, 0.1f, 0.1f, 0.95f);
+            panelImage.color = new Color(0.08f, 0.08f, 0.09f, 0.95f); // Темно-серый фон
+
+            // Добавляем рамку в хакерском стиле
+            Outline outline = panel.AddComponent<Outline>();
+            outline.effectColor = new Color(0.0f, 0.8f, 0.4f, 0.8f); // Неоново-зеленая рамка
+            outline.effectDistance = new Vector2(2, 2);
+
             RectTransform panelRect = panel.GetComponent<RectTransform>();
-            panelRect.sizeDelta = new Vector2(500, 300);
+            panelRect.sizeDelta = new Vector2(580, 350);
             panelRect.anchoredPosition = Vector2.zero;
 
-            // Заголовок
-            CreateText(panel, "Доступно обновление!", new Vector2(0, 100), 24);
+            // Заголовок в хакерском стиле
+            GameObject titleBar = new GameObject("TitleBar");
+            titleBar.transform.SetParent(panel.transform, false);
+            Image titleBarImage = titleBar.AddComponent<Image>();
+            titleBarImage.color = new Color(0.0f, 0.5f, 0.2f, 0.8f); // Терминально-зеленый цвет
+            RectTransform titleBarRect = titleBar.GetComponent<RectTransform>();
+            titleBarRect.anchorMin = new Vector2(0, 1);
+            titleBarRect.anchorMax = new Vector2(1, 1);
+            titleBarRect.pivot = new Vector2(0.5f, 1f);
+            titleBarRect.sizeDelta = new Vector2(0, 30);
+            titleBarRect.anchoredPosition = Vector2.zero;
 
-            // Информация о версиях
-            CreateText(panel, $"Текущая версия: {_currentVersion}", new Vector2(0, 50), 18);
-            CreateText(panel, $"Новая версия: {_latestVersion}", new Vector2(0, 20), 18);
+            // Текст заголовка в стиле терминала
+            CreateHackerText(titleBar, ":: SYSTEM UPDATE AVAILABLE ::", new Vector2(0, -15), 16,
+                TextAnchor.MiddleCenter, new Color(0.9f, 0.9f, 0.9f));
 
-            // Информация об изменениях, если есть
+            // Информация о версиях в терминальном стиле
+            CreateHackerText(panel, $"> Current version: {_currentVersion}", new Vector2(-180, 60), 16,
+                TextAnchor.MiddleLeft, new Color(0.7f, 0.7f, 0.7f));
+            CreateHackerText(panel, $"> New version: {_latestVersion}", new Vector2(-180, 30), 16,
+                TextAnchor.MiddleLeft, new Color(0.0f, 0.9f, 0.4f));
+
+            // Информация об изменениях в стиле терминала
             if (!string.IsNullOrEmpty(_changelog))
             {
-                CreateText(panel, "Изменения:", new Vector2(0, -10), 16);
-                CreateText(panel, _changelog, new Vector2(0, -40), 14);
+                // Создаем фон для лога изменений в стиле терминала
+                GameObject changelogBg = new GameObject("ChangelogBackground");
+                changelogBg.transform.SetParent(panel.transform, false);
+                Image changelogImage = changelogBg.AddComponent<Image>();
+                changelogImage.color = new Color(0.05f, 0.05f, 0.05f, 0.95f); // Почти черный фон
+                RectTransform changelogRect = changelogBg.GetComponent<RectTransform>();
+                changelogRect.sizeDelta = new Vector2(520, 170);
+                changelogRect.anchoredPosition = new Vector2(0, -60);
+
+                // Заголовок секции
+                CreateHackerText(panel, "> Changelog:", new Vector2(-180, -5), 16,
+                    TextAnchor.MiddleLeft, new Color(0.7f, 0.7f, 0.7f));
+
+                // Текст изменений в стиле консоли
+                GameObject changelogText = new GameObject("ChangelogText");
+                changelogText.transform.SetParent(changelogBg.transform, false);
+                Text text = changelogText.AddComponent<Text>();
+                text.font = Resources.GetBuiltinResource<Font>("Courier New.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+                text.fontSize = 14;
+                text.alignment = TextAnchor.UpperLeft;
+                text.color = new Color(0.0f, 0.8f, 0.3f); // Терминально-зеленый текст
+                text.text = _changelog;
+
+                RectTransform textRectTransform = changelogText.GetComponent<RectTransform>();
+                textRectTransform.sizeDelta = new Vector2(500, 150);
+                textRectTransform.anchoredPosition = new Vector2(0, 0);
+
+                // Добавляем скролл для длинных текстов
+                ScrollRect scrollRect = changelogBg.AddComponent<ScrollRect>();
+                scrollRect.content = textRectTransform;
+                scrollRect.horizontal = false;
+                scrollRect.vertical = true;
+
+                // Добавляем скроллбар в хакерском стиле
+                GameObject scrollbar = new GameObject("Scrollbar");
+                scrollbar.transform.SetParent(changelogBg.transform, false);
+                Scrollbar scrl = scrollbar.AddComponent<Scrollbar>();
+                Image scrollbarImage = scrollbar.AddComponent<Image>();
+                scrollbarImage.color = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+
+                GameObject slidingArea = new GameObject("SlidingArea");
+                slidingArea.transform.SetParent(scrollbar.transform, false);
+                RectTransform slidingAreaRect = slidingArea.AddComponent<RectTransform>();
+                slidingAreaRect.anchorMin = Vector2.zero;
+                slidingAreaRect.anchorMax = Vector2.one;
+                slidingAreaRect.sizeDelta = Vector2.zero;
+
+                GameObject handle = new GameObject("Handle");
+                handle.transform.SetParent(slidingArea.transform, false);
+                Image handleImage = handle.AddComponent<Image>();
+                handleImage.color = new Color(0.0f, 0.7f, 0.3f, 0.8f); // Зеленый хакерский стиль
+
+                scrl.handleRect = handle.GetComponent<RectTransform>();
+                scrl.direction = Scrollbar.Direction.BottomToTop;
+
+                RectTransform scrollbarRect = scrollbar.GetComponent<RectTransform>();
+                scrollbarRect.anchorMin = new Vector2(1, 0);
+                scrollbarRect.anchorMax = new Vector2(1, 1);
+                scrollbarRect.pivot = new Vector2(1, 0.5f);
+                scrollbarRect.sizeDelta = new Vector2(15, 0);
+                scrollbarRect.anchoredPosition = new Vector2(7.5f, 0);
+
+                scrollRect.verticalScrollbar = scrl;
             }
 
-            // Кнопки
-            CreateButton(panel, "Обновить", new Vector2(-100, -80), () => {
+            // Кнопки в стиле терминала
+            CreateHackerButton(panel, "INSTALL", new Vector2(-80, -160), () => {
                 InstallUpdate();
             });
 
-            CreateButton(panel, "Отмена", new Vector2(100, -80), () => {
+            CreateHackerButton(panel, "CANCEL", new Vector2(80, -160), () => {
                 GameObject.Destroy(_updateWindow);
             });
 
-            LogDebug("Окно обновления успешно создано");
+            LogDebug("Окно обновления в стиле Grey Hack успешно создано");
         }
 
-        private void CreateText(GameObject parent, string message, Vector2 position, int fontSize)
+        // Создание текста в хакерском стиле
+        private void CreateHackerText(GameObject parent, string message, Vector2 position, int fontSize,
+            TextAnchor alignment = TextAnchor.MiddleCenter, Color? color = null)
         {
             GameObject textObj = new GameObject("Text");
             textObj.transform.SetParent(parent.transform, false);
             Text text = textObj.AddComponent<Text>();
             text.text = message;
-            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            text.font = Resources.GetBuiltinResource<Font>("Courier New.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
             text.fontSize = fontSize;
-            text.alignment = TextAnchor.MiddleCenter;
-            text.color = Color.white;
+            text.alignment = alignment;
+            text.color = color ?? new Color(0.0f, 0.8f, 0.3f); // По умолчанию зеленый хакерский текст
 
             RectTransform rectTransform = textObj.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(400, 30);
+            rectTransform.sizeDelta = new Vector2(500, 30);
             rectTransform.anchoredPosition = position;
         }
 
-        private void CreateButton(GameObject parent, string label, Vector2 position, Action onClick)
+        // Создание кнопки в хакерском стиле
+        private void CreateHackerButton(GameObject parent, string label, Vector2 position, Action onClick)
         {
             GameObject buttonObj = new GameObject(label + "Button");
             buttonObj.transform.SetParent(parent.transform, false);
 
             Image buttonImage = buttonObj.AddComponent<Image>();
-            buttonImage.color = new Color(0.2f, 0.2f, 0.2f);
+            buttonImage.color = new Color(0.08f, 0.08f, 0.08f);
+
+            // Добавляем эффект обводки в стиле терминала
+            Outline buttonOutline = buttonObj.AddComponent<Outline>();
+            buttonOutline.effectColor = new Color(0.0f, 0.7f, 0.3f, 0.8f); // Зеленая обводка
+            buttonOutline.effectDistance = new Vector2(1, 1);
 
             Button button = buttonObj.AddComponent<Button>();
             button.targetGraphic = buttonImage;
 
-            // Цвета кнопки при наведении/нажатии
+            // Цвета кнопки при наведении/нажатии в хакерском стиле
             ColorBlock colors = button.colors;
-            colors.normalColor = new Color(0.2f, 0.2f, 0.2f);
-            colors.highlightedColor = new Color(0.3f, 0.3f, 0.3f);
-            colors.pressedColor = new Color(0.1f, 0.1f, 0.1f);
+            colors.normalColor = new Color(0.08f, 0.08f, 0.08f);
+            colors.highlightedColor = new Color(0.1f, 0.3f, 0.2f);
+            colors.pressedColor = new Color(0.0f, 0.4f, 0.2f);
+            colors.selectedColor = new Color(0.0f, 0.5f, 0.25f);
             button.colors = colors;
 
             RectTransform rectTransform = buttonObj.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(160, 40);
+            rectTransform.sizeDelta = new Vector2(120, 30);
             rectTransform.anchoredPosition = position;
 
-            // Текст кнопки
+            // Текст кнопки в стиле терминала
             GameObject textObj = new GameObject("Text");
             textObj.transform.SetParent(buttonObj.transform, false);
             Text text = textObj.AddComponent<Text>();
             text.text = label;
-            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            text.font = Resources.GetBuiltinResource<Font>("Courier New.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
             text.fontSize = 14;
             text.alignment = TextAnchor.MiddleCenter;
-            text.color = Color.white;
+            text.color = new Color(0.0f, 0.9f, 0.4f); // Зеленый хакерский текст
 
             RectTransform textRectTransform = textObj.GetComponent<RectTransform>();
-            textRectTransform.sizeDelta = new Vector2(160, 40);
+            textRectTransform.sizeDelta = new Vector2(120, 30);
             textRectTransform.anchoredPosition = Vector2.zero;
 
             // Добавляем обработчик нажатия
@@ -529,7 +620,7 @@ namespace GreyHackRussianPlugin.PluginUpdater
                         Transform panel = _updateWindow.transform.Find("Panel");
                         if (panel != null)
                         {
-                            CreateText(panel.gameObject, $"Ошибка: {ex.Message}", new Vector2(0, -20), 14);
+                            CreateHackerText(panel.gameObject, $"Ошибка: {ex.Message}", new Vector2(0, -20), 14);
                         }
                     }
                 });
