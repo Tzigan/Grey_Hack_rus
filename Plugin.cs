@@ -50,6 +50,9 @@ namespace GreyHackRussianPlugin
                 harmony.PatchAll();
                 Log.LogInfo("Патчи успешно применены");
 
+                // Инициализируем ExploitPatch 
+                Patches.ExploitPatch.Initialize();
+
                 // Диагностика ExploitPatch после обновления игры
                 try
                 {
