@@ -14,8 +14,7 @@ using GreyHackRussianPlugin.PluginUpdater;
 
 namespace GreyHackRussianPlugin
 {
-    // Используем значения версии из сгенерированного T4 шаблоном файла VersionInfo.cs
-    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+    [BepInPlugin("com.tzigan.greyhack.russian", "Grey Hack Russian", "1.1.4")]
     public class GreyHackRussianPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
@@ -27,7 +26,7 @@ namespace GreyHackRussianPlugin
         {
             // Инициализация логгера BepInEx
             Log = Logger;
-            Log.LogInfo($"Grey Hack Russian плагин запущен (версия {PluginInfo.PLUGIN_VERSION})");
+            Log.LogInfo("Grey Hack Russian плагин запущен");
 
             // Получение пути к папке плагина
             PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -47,7 +46,7 @@ namespace GreyHackRussianPlugin
             // Применение патчей Harmony
             try
             {
-                var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+                var harmony = new Harmony("com.tzigan.greyhack.russian");
                 harmony.PatchAll();
                 Log.LogInfo("Патчи успешно применены");
 
@@ -133,7 +132,12 @@ namespace GreyHackRussianPlugin
             // Инициализация модуля обновлений
             try
             {
-                _updateModule = new UpdateModule(PluginInfo.PLUGIN_VERSION, PluginPath, Log, DebugLog);
+                _updateModule = new UpdateModule(
+                    "1.1.4",
+                    PluginPath,
+                    Log,
+                    DebugLog
+                );
 
                 // Запускаем проверку обновлений только если нет режима отладки
 #if !DEBUG

@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GreyHackRussianPlugin</AssemblyName>
     <Description>Русификатор для игры Grey Hack</Description>
-    <Version>$(PluginVersion)</Version>
+    <Version>1.1.4</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
@@ -27,20 +27,6 @@
     <Authors>Tzygan</Authors>
     <Copyright>Copyright © 2025</Copyright>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="VersionInfo.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <OutputFileName>VersionInfo.cs</OutputFileName>
-      <LastGenOutput>VersionInfo.cs</LastGenOutput>
-    </None>
-    <Compile Include="VersionInfo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VersionInfo.tt</DependentUpon>
-    </Compile>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
 
   <ItemGroup>
     <!-- Обновлено: все BepInEx библиотеки находятся в папке core -->
@@ -117,14 +103,5 @@
     <Message Text="Copying plugin to game directory..." Importance="high" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)\BepInEx\plugins\$(PluginFolderName)" />
     <Copy SourceFiles="$(ProjectDir)README.md" DestinationFolder="$(GamePath)\BepInEx\plugins\$(PluginFolderName)" />
-  </Target>
-
-  <Target Name="UpdateVersionJson" BeforeTargets="Build">
-    <PropertyGroup>
-      <VersionJsonPath>$(ProjectDir)version.json</VersionJsonPath>
-      <DownloadUrl>https://github.com/Tzigan/Grey_Hack_rus/releases/download/v$(PluginVersion)/GreyHackRussianPlugin_v$(PluginVersion).zip</DownloadUrl>
-    </PropertyGroup>
-
-    <Exec Command="powershell -Command &quot;$json = Get-Content '$(VersionJsonPath)' | ConvertFrom-Json; $json.version = '$(PluginVersion)'; $json.download_url = '$(DownloadUrl)'; $json | ConvertTo-Json | Set-Content '$(VersionJsonPath)'&quot;" />
   </Target>
 </Project>
