@@ -271,13 +271,13 @@ namespace GreyHackRussianPlugin.PluginUpdater
             titleBarRect.anchoredPosition = Vector2.zero;
 
             // Текст заголовка в стиле терминала
-            CreateHackerText(titleBar, ":: SYSTEM UPDATE AVAILABLE ::", new Vector2(0, -15), 16,
+            CreateHackerText(titleBar, ":: SYSTEM UPDATE AVAILABLE ::", new Vector2(0, 0), 16,
                 TextAnchor.MiddleCenter, new Color(0.9f, 0.9f, 0.9f));
 
             // Информация о версиях в терминальном стиле
-            CreateHackerText(panel, $"> Current version: {_currentVersion}", new Vector2(-180, 60), 16,
+            CreateHackerText(panel, $"> Current version: {_currentVersion}", new Vector2(0, 60), 16,
                 TextAnchor.MiddleLeft, new Color(0.7f, 0.7f, 0.7f));
-            CreateHackerText(panel, $"> New version: {_latestVersion}", new Vector2(-180, 30), 16,
+            CreateHackerText(panel, $"> New version: {_latestVersion}", new Vector2(0, 30), 16,
                 TextAnchor.MiddleLeft, new Color(0.0f, 0.9f, 0.4f));
 
             // Информация об изменениях в стиле терминала
@@ -293,7 +293,7 @@ namespace GreyHackRussianPlugin.PluginUpdater
                 changelogRect.anchoredPosition = new Vector2(0, -60);
 
                 // Заголовок секции
-                CreateHackerText(panel, "> Changelog:", new Vector2(-180, -5), 16,
+                CreateHackerText(panel, "> Changelog:", new Vector2(-120, -5), 16,
                     TextAnchor.MiddleLeft, new Color(0.7f, 0.7f, 0.7f));
 
                 // Текст изменений в стиле консоли
